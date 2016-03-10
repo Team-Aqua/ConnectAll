@@ -99,6 +99,7 @@ class Grid
       (0..7).each { |y|
         (0..7).each { |x|
           if x < 5 and y < 5 and x > 2 and y > 2 and @grid[y][x] == 2
+            
             winstate = 1
             (1..3).each { |itr|
               if @grid[y + itr][x + itr] != 2
@@ -108,6 +109,7 @@ class Grid
             if winstate == 1
               return true
             end
+
             winstate = 1
             (1..3).each { |itr|
               if @grid[y + itr][x - itr] != 2
@@ -117,6 +119,7 @@ class Grid
             if winstate == 1
               return true
             end  
+            
             winstate = 1
             (1..3).each { |itr|
               if @grid[y - itr][x + itr] != 2
@@ -126,6 +129,7 @@ class Grid
             if winstate == 1
               return true
             end
+            
             winstate = 1
             (1..3).each { |itr|
               if @grid[y - itr][x - itr] != 2
@@ -135,6 +139,7 @@ class Grid
             if winstate == 1
               return true
             end    
+          
           end  
         }
       }
@@ -142,6 +147,7 @@ class Grid
       (0..7).each { |y|
         (0..7).each { |x|
           if x < 5 and y < 5 and x > 2 and y > 2 and @grid[y][x] == 1
+    
             winstate = 1
             (1..3).each { |itr|
               if @grid[y + itr][x + itr] != 1
@@ -151,6 +157,7 @@ class Grid
             if winstate == 1
               return true
             end
+            
             winstate = 1
             (1..3).each { |itr|
               if @grid[y + itr][x - itr] != 1
@@ -160,6 +167,7 @@ class Grid
             if winstate == 1
               return true
             end
+            
             winstate = 1
             (1..3).each { |itr|
               if @grid[y - itr][x + itr] != 1
@@ -169,6 +177,7 @@ class Grid
             if winstate == 1
               return true
             end
+            
             winstate = 1
             (1..3).each { |itr|
               if @grid[y - itr][x - itr] != 1
@@ -178,6 +187,7 @@ class Grid
             if winstate == 1
               return true
             end
+
           end  
         }
       }
