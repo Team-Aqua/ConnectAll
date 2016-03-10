@@ -44,10 +44,10 @@ class Header
     end
     if @state == 0
       @header_green.draw(@x, @y, 1)
-      @ico_two.draw(@x + 153, @y + 20, 1)
+      @ico_two.draw(@x + 128, @y + 20, 500)
     else 
       @header_purple.draw(@x, @y, 1)
-      @ico_one.draw(@x + 153, @y + 20, 1)
+      @ico_one.draw(@x + 128, @y + 20, 500)
     end
     @block_purple.draw(@x + 10, @y + 5, 1)
     @block_green.draw(@x + 10, @y + 45, 1)
