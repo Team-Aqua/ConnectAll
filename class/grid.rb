@@ -23,7 +23,7 @@ class Grid
         (0..7).each { |x|
           if y < 5 and @grid[y][x] == 2
             winstate = 1
-            (y..7).each { |yitr|
+            (y..y + 3).each { |yitr|
               if @grid[yitr][x] != 2
                 winstate = 0
               end

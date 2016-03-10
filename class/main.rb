@@ -19,6 +19,7 @@ class GameWindow < Gosu::Window
     @header = Header.new(self)
     @board = Board.new(self)
     @buttons = Buttons.new(self)
+    @win_status = 0
 	end
 
 	def win(playernum)
