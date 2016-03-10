@@ -3,9 +3,18 @@ require 'gosu'
 # require_relative 'board.rb'
 # require_relative 'buttons.rb'
 require_relative 'controllers/game_controllers/game_ctrl'
+
 require_relative 'models/game_state_model'
+require_relative 'models/grid'
+
+
 require_relative 'views/game_views/game_view'
+require_relative 'views/btn_item'
 require_relative 'views/game_views/game_grid_view'
+require_relative 'views/game_views/game_control_row_view'
+require_relative 'views/game_views/game_header_view'
+require_relative 'views/game_views/game_footer_view'
+
 class GameWindow < Gosu::Window
 
 
@@ -16,8 +25,8 @@ class GameWindow < Gosu::Window
     # @song = Gosu::Song.new(self, "assets/music/castle01.mp3")
     # @song.play(true)
 
-    @models = []
-    @controllers = [Controllers::GameCtrl.new(self, Models::GameStateModel.new), Controllers::MainMenuCtrl.new(self)]
+    @models = [Models::GameStateModel.new]
+    @controllers = [Controllers::GameCtrl.new(self, @models.first)]
     @currentCtrl = @controllers.first
 
     # @header = Header.new(self)

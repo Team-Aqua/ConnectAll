@@ -1,10 +1,9 @@
-
 module Controllers
   class GameCtrl
-    def initialize(window, model)
+    def initialize(window, game_state_model)
       @window = window
-      @model = model
-      @view = Views::GameView.new(@window, self, @model)
+      @game_state_model = game_state_model
+      @view = Views::GameView.new(@window, self, @game_state_model)
     end
 
     def draw
