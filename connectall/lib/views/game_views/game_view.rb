@@ -5,10 +5,12 @@ module Views
       @controller = controller
       @game_state_model = game_state_model
 
-      @grid = GridView.new(@window, @game_state_model.getGridModel)
-      @control = GameDropControlRowView.new(@window, @game_state_model)
-      @header = GameHeaderView.new(@window, @game_state_model)
-      @footer = GameFooterView.new(@window, @game_state_model)
+      @grid = GridView.new(@window, @controller, @game_state_model)
+      @control = GameDropControlRowView.new(@window, @controller, @game_state_model)
+      @header = GameHeaderView.new(@window, @controller, @game_state_model)
+      @footer = GameFooterView.new(@window, @controller, @game_state_model)
+      @sub_views = [@grid, @control, @header, @footer] 
+
       @state = 0
 
       @image = Gosu::Image.new("assets/images/img_grid.png", :tileable => true)
@@ -19,12 +21,11 @@ module Views
     end
 
     def draw
-      @header.draw
-      @grid.draw
-      @control.draw
-      @footer.draw
-      # @image.draw(@x, @y, 1)
-      if @state == 0
+      @sub_views.each do |view|
+        view.draw
+      end
+
+      if @game_state_model.player_turn_state == 0
         @background_image_green.draw(0, 0, 0)
       else 
         @background_image_purple.draw(0, 0, 0)
@@ -32,7 +33,16 @@ module Views
     end
 
     def update
-
+      @sub_views.each do |view|
+        view.update
+      end
     end
+
+    def clicked
+      @sub_views.each do |view|
+        view.clicked
+      end
+    end
+
   end
 end

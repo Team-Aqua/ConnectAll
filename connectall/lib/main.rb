@@ -1,19 +1,20 @@
 require 'gosu'
-# require_relative 'header.rb'
-# require_relative 'board.rb'
-# require_relative 'buttons.rb'
+
 require_relative 'controllers/game_controllers/game_ctrl'
 
 require_relative 'models/game_state_model'
-require_relative 'models/grid'
+require_relative 'models/grid_model'
+require_relative 'models/player'
 
-
-require_relative 'views/game_views/game_view'
 require_relative 'views/btn_item'
+require_relative 'views/game_views/game_view'
 require_relative 'views/game_views/game_grid_view'
 require_relative 'views/game_views/game_control_row_view'
 require_relative 'views/game_views/game_header_view'
 require_relative 'views/game_views/game_footer_view'
+
+require_relative 'views/alert_popup/help_view'
+require_relative 'views/alert_popup/popup_view'
 
 class GameWindow < Gosu::Window
 
@@ -24,61 +25,31 @@ class GameWindow < Gosu::Window
     self.caption = "ConnectAll"
     # @song = Gosu::Song.new(self, "assets/music/castle01.mp3")
     # @song.play(true)
-
     @models = [Models::GameStateModel.new]
     @controllers = [Controllers::GameCtrl.new(self, @models.first)]
     @currentCtrl = @controllers.first
-
-    # @header = Header.new(self)
-    # @board = Board.new
-    # @buttons = Buttons.new(self)
   end
 
   def needs_cursor?
     true
   end
 
-  def reset
-    # @header = Header.new(self)
-    # @board = Board.new
-    # @buttons = Buttons.new(self)
-  end
-
-
-
-  def update
-    @currentCtrl.update
-    # @header.update
-  end
-
-  # def update_grid(x)
-  #   @board.update_grid(x)
-  #   shift_team
-  # end
-
-
-  # def shift_team
-  #   @board.shift_team
-  #   @header.shift_team
-  #   # @header.draw
-  #   # @board.draw
-  # end
-
   def button_down(key)
     if key == Gosu::MsLeft then
       @currentCtrl.clicked
-        # @buttons.clicked
-        # @header.clicked
     end
   end
 
   def draw
     @currentCtrl.draw
-    # @header.draw
-    # @board.place(29, 116)
-    # @buttons.place(169, 470)
-    # @board.draw
-    # @buttons.draw
+  end
+
+  def update
+    @currentCtrl.update
+  end
+
+  def clicked
+    @currentCtrl.clicked
   end
 
 end
