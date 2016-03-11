@@ -5,7 +5,7 @@ module Models
     def initialize()
       @state = :active
       @grid = GridModel.new()
-      @game_mode = nil
+      # @game_mode = nil Controllers::Classic(self)
       @player_turn_state = 0
       @players = [Player.new(1, 'rl', 'white'), Player.new(2, 'ai', 'black')]
     end

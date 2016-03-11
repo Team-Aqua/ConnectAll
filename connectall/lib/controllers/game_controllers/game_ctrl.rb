@@ -31,9 +31,13 @@ module Controllers
 
     def control_button_click(x)
       @game_state_model::grid.add_tile(x, @game_state_model::player_turn_state)
-      #RUN GAME MODE LOGIC -> SHOULD MODIFY GAME_STATE_MODEL
-      #CHECK GAME_STATE_MODEL FOR GAME STATE (WIN LOSE DRAW ACTIVE ... )
-      #SET ALERT BASED ON GAMESTATE
+
+      # @game_state_model::game_mode.update
+      # if @game_state_model::state == :win
+      #   @alert_view = nil #WIN VIEW
+      # end
+
+
       @game_state_model.toggle_player_turn_state
     end
 
