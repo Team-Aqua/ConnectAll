@@ -14,17 +14,15 @@ module Views
       @state = 0
 
       @image = Gosu::Image.new("assets/images/img_grid.png", :tileable => true)
-      @background_image_green = Gosu::Image.new("assets/images/bg_green.png", :tileable => false)
-      @background_image_purple = Gosu::Image.new("assets/images/bg_purple.png", :tileable => false)
 
-      @backgrounds = {'green' => Gosu::Image.new("assets/images/bg_green.png"),
-            'yellow' => Gosu::Image.new("assets/images/bg_yellow.png"),
-            'orange' => Gosu::Image.new("assets/images/bg_orange.png"),
-            'red' => Gosu::Image.new("assets/images/bg_red.png"),
-            'teal' => Gosu::Image.new("assets/images/bg_teal.png"),
-            'purple' => Gosu::Image.new("assets/images/bg_purple.png"),
-            'white' => Gosu::Image.new("assets/images/bg_white.png"),
-            'black' => Gosu::Image.new("assets/images/bg_black.png")}
+      @backgrounds = {'green' => Gosu::Image.new("assets/images/bg_green.png", :tileable => false),
+            'yellow' => Gosu::Image.new("assets/images/bg_yellow.png", :tileable => false),
+            'orange' => Gosu::Image.new("assets/images/bg_orange.png", :tileable => false),
+            'pink' => Gosu::Image.new("assets/images/bg_pink.png", :tileable => false),
+            'teal' => Gosu::Image.new("assets/images/bg_teal.png", :tileable => false),
+            'purple' => Gosu::Image.new("assets/images/bg_purple.png", :tileable => false),
+            'white' => Gosu::Image.new("assets/images/bg_white.png", :tileable => false),
+            'black' => Gosu::Image.new("assets/images/bg_black.png", :tileable => false)}
 
       @x = 29.0
       @y = 116.0

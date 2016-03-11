@@ -12,7 +12,7 @@ module Views
 
       @tiles = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
                 'yellow' => Gosu::Image.new("assets/images/block_yellow.png"),
-                'red' => Gosu::Image.new("assets/images/block_red.png"),
+                'pink' => Gosu::Image.new("assets/images/block_pink.png"),
                 'teal' => Gosu::Image.new("assets/images/block_teal.png"),
                 'orange' => Gosu::Image.new("assets/images/block_orange.png"),
                 'white' => Gosu::Image.new("assets/images/block_white.png"),

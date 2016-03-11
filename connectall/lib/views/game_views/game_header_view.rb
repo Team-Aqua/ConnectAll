@@ -12,7 +12,7 @@ module Views
       @headers = {'green' => Gosu::Image.new("assets/images/header_green.png"),
                   'yellow' => Gosu::Image.new("assets/images/header_yellow.png"),
                   'orange' => Gosu::Image.new("assets/images/header_orange.png"),
-                  'red' => Gosu::Image.new("assets/images/header_red.png"),
+                  'pink' => Gosu::Image.new("assets/images/header_pink.png"),
                   'teal' => Gosu::Image.new("assets/images/header_teal.png"),
                   'purple' => Gosu::Image.new("assets/images/header_purple.png"),
                   'white' => Gosu::Image.new("assets/images/header_white.png"),
@@ -20,7 +20,7 @@ module Views
 
       @tiles = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
           'yellow' => Gosu::Image.new("assets/images/block_yellow.png"),
-          'red' => Gosu::Image.new("assets/images/block_red.png"),
+          'pink' => Gosu::Image.new("assets/images/block_pink.png"),
           'teal' => Gosu::Image.new("assets/images/block_teal.png"),
           'orange' => Gosu::Image.new("assets/images/block_orange.png"),
           'white' => Gosu::Image.new("assets/images/block_white.png"),
