@@ -11,7 +11,13 @@ module Views
       @grey_block = Gosu::Image.new("assets/images/block_grey.png")
 
       @tiles = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
-                'grey' => Gosu::Image.new("assets/images/block_green.png"),
+                'yellow' => Gosu::Image.new("assets/images/block_yellow.png"),
+                'red' => Gosu::Image.new("assets/images/block_red.png"),
+                'teal' => Gosu::Image.new("assets/images/block_teal.png"),
+                'orange' => Gosu::Image.new("assets/images/block_orange.png"),
+                'white' => Gosu::Image.new("assets/images/block_white.png"),
+                'black' => Gosu::Image.new("assets/images/block_black.png"),
+                'grey' => Gosu::Image.new("assets/images/block_grey.png"),
                 'purple' => Gosu::Image.new("assets/images/block_purple.png") }
       
       @potential_tiles = { 'green' => Gosu::Image.new("assets/images/block_green_potential.png"),

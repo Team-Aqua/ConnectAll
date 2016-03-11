@@ -9,8 +9,25 @@ module Views
       
       @header_green = Gosu::Image.new("assets/images/header_green.png")
       @header_purple = Gosu::Image.new("assets/images/header_purple.png")
-      @block_purple = Gosu::Image.new("assets/images/block_purple.png")
-      @block_green = Gosu::Image.new("assets/images/block_green.png")
+      @headers = {'green' => Gosu::Image.new("assets/images/header_green.png"),
+                  'yellow' => Gosu::Image.new("assets/images/header_yellow.png"),
+                  'orange' => Gosu::Image.new("assets/images/header_orange.png"),
+                  'red' => Gosu::Image.new("assets/images/header_red.png"),
+                  'teal' => Gosu::Image.new("assets/images/header_teal.png"),
+                  'purple' => Gosu::Image.new("assets/images/header_purple.png"),
+                  'white' => Gosu::Image.new("assets/images/header_white.png"),
+                  'black' => Gosu::Image.new("assets/images/header_black.png")}
+
+      @tiles = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
+          'yellow' => Gosu::Image.new("assets/images/block_yellow.png"),
+          'red' => Gosu::Image.new("assets/images/block_red.png"),
+          'teal' => Gosu::Image.new("assets/images/block_teal.png"),
+          'orange' => Gosu::Image.new("assets/images/block_orange.png"),
+          'white' => Gosu::Image.new("assets/images/block_white.png"),
+          'black' => Gosu::Image.new("assets/images/block_black.png"),
+          'grey' => Gosu::Image.new("assets/images/block_grey.png"),
+          'purple' => Gosu::Image.new("assets/images/block_purple.png") }
+
       @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Bold.ttf", 20)
       @question = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question_light.png"), 295, 10, 1, lambda { @controller.question_button_click }, Gosu::Image.new("assets/images/btn_question_light_click.png"))
       @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 315, 10, 1, lambda { @controller.cancel_button_click }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
@@ -29,16 +46,18 @@ module Views
       #   @cancel_dark.draw
       #   @help.draw(10, 10, 100)
       # end
+      @headers[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(@x, @y, 1)
+
       if @game_state_model.player_turn_state == 0
-        @header_green.draw(@x, @y, 1)
-        @ico_two.draw(@x + 153, @y + 20, 1)
-      else 
-        @header_purple.draw(@x, @y, 1)
         @ico_one.draw(@x + 153, @y + 20, 1)
+      else 
+        @ico_two.draw(@x + 153, @y + 20, 1)
       end
 
-      @block_purple.draw(@x + 10, @y + 5, 1)
-      @block_green.draw(@x + 10, @y + 45, 1)
+      @tiles[@game_state_model::players[0]::player_color].draw(@x + 10, @y + 5, 1)
+      @tiles[@game_state_model::players[1]::player_color].draw(@x + 10, @y + 45, 1)
+      # @block_purple.draw(@x + 10, @y + 5, 1)
+      # @block_green.draw(@x + 10, @y + 45, 1)
       @question.draw
       @cancel.draw
       @font.draw("UserOne", 50, @y + 2, 2, 1.0, 1.0, 0xff_ffffff)
