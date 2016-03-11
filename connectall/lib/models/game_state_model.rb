@@ -5,8 +5,9 @@ module Models
     def initialize()
       @state = :active
       @grid = GridModel.new()
+      @game_mode = nil
       @player_turn_state = 0
-      @players = [Player.new(1, 'rl', 'black'), Player.new(2, 'ai', 'green')]
+      @players = [Player.new(1, 'rl', 'red'), Player.new(2, 'ai', 'purple')]
     end
 
     def toggle_player_turn_state

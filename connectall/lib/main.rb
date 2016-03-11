@@ -25,13 +25,18 @@ require_relative 'views/alert_popup/popup_view'
 class GameWindow < Gosu::Window
 
 
-  def initialize
-    super 343, 568, false
+  def initialize(h, w, model: nil)
+    super w, h, false
     Gosu::enable_undocumented_retrofication
     self.caption = "ConnectAll"
     # @song = Gosu::Song.new(self, "assets/music/castle01.mp3")
     # @song.play(true)
-    @models = [Models::GameStateModel.new]
+    if model != nil
+      @models = [model]
+    else
+      @models = [Models::GameStateModel.new]
+    end
+    
     @controllers = [Controllers::MainMenuCtrl.new(self, @models.first), Controllers::GameCtrl.new(self, @models.first)]
     @currentCtrl = @controllers.first
   end
@@ -47,6 +52,7 @@ class GameWindow < Gosu::Window
   end
 
   def start_game
+    initialize(568, 343, model: @models[0])
     @currentCtrl = @controllers[1]
   end
 
@@ -64,5 +70,5 @@ class GameWindow < Gosu::Window
 
 end
 
-@window = GameWindow.new
+@window = GameWindow.new(347, 533)
 @window.show
