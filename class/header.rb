@@ -12,9 +12,20 @@ class Header
     @cancel_dark = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_dark.png"), 285, 20, 110, lambda { stop_help }, Gosu::Image.new("assets/images/btn_cancel_dark_click.png", :tileable => false))
     @ico_two = Gosu::Image.new("assets/images/ico_2.png")
     @ico_one = Gosu::Image.new("assets/images/ico_1.png")
+    @header_green_win = Gosu::Image.new("assets/images/header_green_win.png")
+    @header_purple_win = Gosu::Image.new("assets/images/header_purple_win.png")
     @x = @y = 0.0
     @state = 0
     @help_state = 0
+    @win_state = 100
+  end
+
+  def win(playernum)
+    if playernum == 0
+      @win_state = 0
+    else
+      @win_state = 1
+    end
   end
 
   def place(x, y)
@@ -38,6 +49,11 @@ class Header
   end
 
   def draw
+    if @win_state == 0
+      @header_green_win.draw(0, 0, 1000)
+    elsif @win_state == 1
+      @header_purple_win.draw(0, 0, 1000)
+    end
     if @help_state == 1
       @cancel_dark.draw
       @help.draw(10, 10, 100)
