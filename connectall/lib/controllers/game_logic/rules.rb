@@ -1,20 +1,17 @@
 module GameLogic
   class Rules
 
-    def check_winner(grid, state)
-      if grid.win(state)
-        winner(state)
-      end
+    include AbstractInterface
+  
+    needs_implementation :check_winner, :winner, :win
+    needs_implementation :addObserver, :observer
+    needs_implementation :notifyObservers
+    needs_implementation :update
+
+    @observers = []
+    def add_observer(observer)
+      self.api_not_implemented(self)
     end
 
-    def winner(playernum)
-      @window.win(playernum)
-    end
-
-    def win(state)
-      # check horizontal, vertical, diagonal
-      winstate = check_vertical(state) || check_horizontal(state) || check_diagonal(state)
-      return winstate
-    end
   end
 end

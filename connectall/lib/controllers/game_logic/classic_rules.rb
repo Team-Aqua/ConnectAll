@@ -1,5 +1,5 @@
   module GameLogic
-    class ClassicRules
+    class ClassicRules < Rules
 
     def check_winner(grid, state)
       if grid.win(state)
