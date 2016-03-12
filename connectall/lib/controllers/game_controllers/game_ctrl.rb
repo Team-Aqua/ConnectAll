@@ -31,12 +31,10 @@ module Controllers
 
     def control_button_click(x)
       @game_state_model::grid.add_tile(x, @game_state_model::player_turn_state)
-
-      @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
-      # @game_state_model::game_mode.update
-      # if @game_state_model::state == :win
-      #   @alert_view = nil #WIN VIEW
-      # end
+      @game_state_model::game_mode_logic.check_for_winner
+      if @game_state_model::state == :win
+        @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
+      end
 
 
       @game_state_model.toggle_player_turn_state

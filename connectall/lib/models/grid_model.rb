@@ -45,5 +45,17 @@ module Models
       @grid = generate_grid
     end
 
+    def print_grid
+      puts ""
+      puts ""
+      puts ""
+      puts ""
+      puts ""
+      @grid.each do |row|
+        print row
+        puts ""
+      end
+    end
+
   end
 end

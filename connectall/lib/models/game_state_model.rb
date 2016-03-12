@@ -1,9 +1,10 @@
 module Models
   class GameStateModel
-    attr_accessor :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic
+    attr_accessor :state, :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic, :winner
 
     def initialize()
       @state = :active
+      @winner = nil
       @grid = GridModel.new()
       @game_mode = nil
       @game_type = nil

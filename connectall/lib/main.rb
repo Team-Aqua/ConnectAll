@@ -33,6 +33,7 @@ require_relative 'views/menu_views/player_select_menu_view'
 
 
 require_relative 'views/alert_popup/help_view'
+require_relative 'views/alert_popup/win_view'
 require_relative 'views/alert_popup/popup_view'
 
 class GameWindow < Gosu::Window
@@ -42,7 +43,7 @@ class GameWindow < Gosu::Window
     super w, h, false
     Gosu::enable_undocumented_retrofication
     self.caption = "ConnectAll"
-    # @song = Gosu::Song.new(self, "assets/music/castle01.mp3")
+    # @song = Gosu::Song.new(self, "assets/music/background_music.mp3")
     # @song.play(true)
     if model != nil
       @models = [model]

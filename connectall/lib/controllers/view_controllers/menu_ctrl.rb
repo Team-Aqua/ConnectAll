@@ -56,11 +56,13 @@ module Controllers
 
     def classic_button_click
       @game_state_model::game_type = :classic
+      @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
       @current_view = @views[1]
     end
 
     def otto_button_click
       @game_state_model::game_type = :otto
+      @game_state_model::game_mode_logic = GameLogic::OttoRules.new(@game_state_model)
       @current_view = @views[1]
     end
 

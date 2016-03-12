@@ -3,22 +3,24 @@
 
     def initialize(game_state_model)
       @game_state_model = game_state_model
+      @grid = @game_state_model::grid.getGrid
+      @winner = nil
     end
 
-    def check_winner(grid, state)
-      if grid.win(state)
-        winner(state)
+    def check_for_winner
+      if win
+        puts "setting win state"
+        @game_state_model::state = :win
+        @game_state_model::winner = @winner
+      else
+        @game_state_model::state = :active
       end
     end
 
-    def winner(playernum)
-      @window.win(playernum)
-    end
-
-    def win(state)
+    def win
+      state = @game_state_model::player_turn_state + 1
       # check horizontal, vertical, diagonal
-      winstate = check_vertical(state) || check_horizontal(state) || check_diagonal(state)
-      return winstate
+      return ( check_vertical(state) || check_horizontal(state) || check_diagonal(state) )
     end
 
     def check_vertical(state)
@@ -34,6 +36,7 @@
                 end
               }  
               if winstate == 1
+                winner = 2
                 return true
               end
             end  
@@ -50,6 +53,7 @@
                 end
               }  
               if winstate == 1
+                @winner = 1
                 return true
               end
             end  
@@ -73,6 +77,7 @@
                 end
               }  
               if winstate == 1
+                @winner = 2
                 return true
               end
             end  
@@ -90,6 +95,7 @@
                 end
               }  
               if winstate == 1
+                @winner = 1
                 return true
               end
             end  
