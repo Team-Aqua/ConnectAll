@@ -19,13 +19,13 @@ module Views
         'orange' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_orange.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { color_swap }, Gosu::Image.new("assets/images/header_player_orange_click.png")),
         'pink' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_pink.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { color_swap }, Gosu::Image.new("assets/images/header_player_pink_click.png")),
         'white' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_white.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { color_swap }, Gosu::Image.new("assets/images/header_player_white_click.png")),
-        'green' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_green.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { @color_swap }, Gosu::Image.new("assets/images/header_player_green_click.png"))
+        'green' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_green.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { color_swap }, Gosu::Image.new("assets/images/header_player_green_click.png"))
       }
       @player2_buttons = {
         'yellow' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_yellow.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_yellow_click.png")),
         'teal' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_teal.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_teal_click.png")),
         'black' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png")),
-        'purple' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_purple.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { @color2_swap }, Gosu::Image.new("assets/images/header_player_purple_click.png")),
+        'purple' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_purple.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_purple_click.png"))
       }
 
       if (@game_state_model::game_mode == :pvp)
@@ -43,6 +43,7 @@ module Views
 
     def color_swap
       @color_selection = (@color_selection + 1) % @color_selection_wheel.count
+      puts @color_selection
       @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
     end
 
