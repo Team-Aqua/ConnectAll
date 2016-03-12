@@ -1,11 +1,11 @@
 module Views
-  class ClassicInstructionsAlertView
+  class ConnectInstructionsAlertView
 
     def initialize(window, controller)
       @window = window
       @controller = controller
       @help = Gosu::Image.new("assets/images/item_what_is_classic_mode.png", :tileable => false)
-      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_dark.png"), 290, 20, 100, lambda { @controller.alert_close }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
+      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_dark.png"), 450, 20, 100, lambda { @controller.alert_close }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
     end
 
     def draw
@@ -22,3 +22,4 @@ module Views
     end
 
   end
+end

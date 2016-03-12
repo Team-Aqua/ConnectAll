@@ -59,6 +59,22 @@ module Controllers
       @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
       @current_view = @views[1]
     end
+    
+    def question_otto_button_click
+      @alert_view = @help_view = Views::OttoInstructionsAlertView.new(@window, self)
+    end
+
+    def question_help_click
+      @alert_view = @help_view = Views::ConnectAllAlertView.new(@window, self)
+    end
+
+    def question_classic_button_click
+      @alert_view = @help_view = Views::ConnectInstructionsAlertView.new(@window, self)
+    end
+
+    def alert_close
+      @alert_view = nil
+    end
 
     def otto_button_click
       @game_state_model::game_type = :otto
