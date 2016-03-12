@@ -29,8 +29,8 @@ module Views
           'purple' => Gosu::Image.new("assets/images/block_purple.png") }
 
       @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Bold.ttf", 20)
-      @question = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question_light.png"), 295, 10, 1, lambda { @controller.question_button_click }, Gosu::Image.new("assets/images/btn_question_light_click.png"))
-      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 315, 10, 1, lambda { @controller.cancel_button_click }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
+      @question = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question_light.png"), 295, 10, 35, lambda { @controller.question_button_click }, Gosu::Image.new("assets/images/btn_question_light_click.png"))
+      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 315, 10, 35, lambda { @controller.cancel_button_click }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
       @ico_two = Gosu::Image.new("assets/images/ico_2.png")
       @ico_one = Gosu::Image.new("assets/images/ico_1.png")
       @x = @y = 0.0
@@ -46,7 +46,7 @@ module Views
       #   @cancel_dark.draw
       #   @help.draw(10, 10, 100)
       # end
-      @headers[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(@x, @y, 1)
+      @headers[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(@x, @y, 35)
 
       if @game_state_model.player_turn_state == 0
         @ico_one.draw(@x + 143, @y + 20, 1)
@@ -54,8 +54,8 @@ module Views
         @ico_two.draw(@x + 143, @y + 20, 1)
       end
 
-      @tiles[@game_state_model::players[0]::player_color].draw(@x + 10, @y + 5, 1)
-      @tiles[@game_state_model::players[1]::player_color].draw(@x + 10, @y + 45, 1)
+      @tiles[@game_state_model::players[0]::player_color].draw(@x + 10, @y + 5, 35)
+      @tiles[@game_state_model::players[1]::player_color].draw(@x + 10, @y + 45, 35)
       # @block_purple.draw(@x + 10, @y + 5, 1)
       # @block_green.draw(@x + 10, @y + 45, 1)
       @question.draw
