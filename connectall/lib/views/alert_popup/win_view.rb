@@ -10,11 +10,11 @@ module Views
         'orange' => Gosu::Image.new("assets/images/header_orange_win.png", :tileable => false),
         'pink' => Gosu::Image.new("assets/images/header_pink_win.png", :tileable => false),
         'white' => Gosu::Image.new("assets/images/header_white_win.png", :tileable => false),
-        #'green' => Gosu::Image.new("assets/images/header_green_win.png", :tileable => false),
+        'green' => Gosu::Image.new("assets/images/header_green_win.png", :tileable => false),
         'yellow' => Gosu::Image.new("assets/images/header_yellow_win.png", :tileable => false),
         'teal' => Gosu::Image.new("assets/images/header_teal_win.png", :tileable => false),
-        'black' => Gosu::Image.new("assets/images/header_black_win.png", :tileable => false)
-        # 'purple' => Gosu::Image.new("assets/images/header_purple_win.png", :tileable => false)
+        'black' => Gosu::Image.new("assets/images/header_black_win.png", :tileable => false),
+        'purple' => Gosu::Image.new("assets/images/header_purple_win.png", :tileable => false)
       }
 
       @view = @player_win_views[player_color]
