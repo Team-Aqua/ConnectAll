@@ -16,14 +16,14 @@ module Views
 
       @image = Gosu::Image.new("assets/images/img_grid.png", :tileable => true)
 
-      @backgrounds = {'green' => Gosu::Image.new("assets/images/bg_green.png", :tileable => false),
-            'yellow' => Gosu::Image.new("assets/images/bg_yellow.png", :tileable => false),
-            'orange' => Gosu::Image.new("assets/images/bg_orange.png", :tileable => false),
-            'pink' => Gosu::Image.new("assets/images/bg_pink.png", :tileable => false),
-            'teal' => Gosu::Image.new("assets/images/bg_teal.png", :tileable => false),
-            'purple' => Gosu::Image.new("assets/images/bg_purple.png", :tileable => false),
-            'white' => Gosu::Image.new("assets/images/bg_white.png", :tileable => false),
-            'black' => Gosu::Image.new("assets/images/bg_black.png", :tileable => false)}
+      @backgrounds = {'green' => Gosu::Image.new("assets/images/bg_nogrid_green.png", :tileable => false),
+            'yellow' => Gosu::Image.new("assets/images/bg_nogrid_yellow.png", :tileable => false),
+            'orange' => Gosu::Image.new("assets/images/bg_nogrid_orange.png", :tileable => false),
+            'pink' => Gosu::Image.new("assets/images/bg_nogrid_pink.png", :tileable => false),
+            'teal' => Gosu::Image.new("assets/images/bg_nogrid_teal.png", :tileable => false),
+            'purple' => Gosu::Image.new("assets/images/bg_nogrid_purple.png", :tileable => false),
+            'white' => Gosu::Image.new("assets/images/bg_nogrid_white.png", :tileable => false),
+            'black' => Gosu::Image.new("assets/images/bg_nogrid_black.png", :tileable => false)}
 
       @x = 29.0
       @y = 116.0
@@ -34,7 +34,7 @@ module Views
       @sub_views.each do |view|
         view.draw
       end
-      @backgrounds[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(0, 0, 0)
+      @backgrounds[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(0, 0, 25)
       # if @game_state_model.player_turn_state == 0
       #   @background_image_green.draw(0, 0, 0)
       # else 

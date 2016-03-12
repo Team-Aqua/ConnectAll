@@ -11,7 +11,7 @@ module Views
       @red_grid = Array.new
       original_pos = 29
       (1..8).each { |x|
-        red_button = BtnItem.new(@window, Gosu::Image.new("assets/images/block_red.png", :tileable => true), original_pos, 420, 1, lambda { @controller.control_button_click(x) }, Gosu::Image.new("assets/images/block_red_click.png", false))
+        red_button = BtnItem.new(@window, Gosu::Image.new("assets/images/block_red.png", :tileable => true), original_pos, 420, 35, lambda { @controller.control_button_click(x) }, Gosu::Image.new("assets/images/block_red_click.png", false))
         @red_grid << red_button
         original_pos = original_pos + 35.5
       }
