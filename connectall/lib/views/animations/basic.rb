@@ -35,6 +35,7 @@ module Animations
         sleep((@y_speed/@frame_rate))
       end
       @state = :dead
+      
     end
 
     def draw

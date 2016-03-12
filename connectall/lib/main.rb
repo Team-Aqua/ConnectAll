@@ -87,7 +87,7 @@ class GameWindow < Gosu::Window
   end
 
   def draw
-    fps
+    # fps
     @currentCtrl.draw
   end
 

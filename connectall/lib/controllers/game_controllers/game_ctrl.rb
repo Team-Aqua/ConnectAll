@@ -38,9 +38,9 @@ module Controllers
     def control_button_click(x)
       player_turn = @game_state_model::player_turn_state
       @game_state_model.toggle_player_turn_state
+      @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color){@game_state_model::grid.add_tile(x, player_turn)}
       
-      # @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color)
-      @game_state_model::grid.add_tile(x, player_turn)
+
     end
 
     def skip_button_click
