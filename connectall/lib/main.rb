@@ -73,6 +73,11 @@ class GameWindow < Gosu::Window
     end
   end
 
+  def start_menu
+    initialize(347, 533)
+    @currentCtrl = @controllers[0]
+  end
+
   def start_game
     initialize(568, 343, model: @models[0])
     @currentCtrl = @controllers[1]

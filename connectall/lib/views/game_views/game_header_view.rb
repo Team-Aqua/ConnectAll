@@ -49,9 +49,9 @@ module Views
       @headers[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(@x, @y, 35)
 
       if @game_state_model.player_turn_state == 0
-        @ico_one.draw(@x + 153, @y + 20, 35)
+        @ico_one.draw(@x + 143, @y + 20, 1)
       else 
-        @ico_two.draw(@x + 153, @y + 20, 35)
+        @ico_two.draw(@x + 143, @y + 20, 1)
       end
 
       @tiles[@game_state_model::players[0]::player_color].draw(@x + 10, @y + 5, 35)
@@ -60,10 +60,10 @@ module Views
       # @block_green.draw(@x + 10, @y + 45, 1)
       @question.draw
       @cancel.draw
-      @font.draw("UserOne", 50, @y + 2, 35, 1.0, 1.0, 0xff_ffffff)
-      @font.draw("Wins: 0", 50, @y + 17, 35, 1.0, 1.0, 0xff_ffffff)
-      @font.draw("UserTwo", 50, @y + 42, 35, 1.0, 1.0, 0xff_ffffff)
-      @font.draw("Wins: 1", 50, @y + 57, 35, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("Player One", 50, @y + 2, 2, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("Wins: -", 50, @y + 17, 2, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("Player Two", 50, @y + 42, 2, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("Wins: -", 50, @y + 57, 2, 1.0, 1.0, 0xff_ffffff)
     end
 
     def update
