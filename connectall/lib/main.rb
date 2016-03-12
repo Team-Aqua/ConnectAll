@@ -43,8 +43,9 @@ class GameWindow < Gosu::Window
     super w, h, false
     Gosu::enable_undocumented_retrofication
     self.caption = "ConnectAll"
-    # @song = Gosu::Song.new(self, "assets/music/background_music.mp3")
-    # @song.play(true)
+    @song = Gosu::Song.new(self, "assets/music/bitbop.mp3")
+    @song.volume = 0.5
+    @song.play(true)
     if model != nil
       @models = [model]
     else

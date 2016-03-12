@@ -5,6 +5,9 @@ module Controllers
       @game_state_model = game_state_model
       @view = Views::GameView.new(@window, self, @game_state_model)
       @alert_view = nil
+
+      @click_sound = Gosu::Sample.new(@window, "assets/sounds/quick_beat.mp3")
+      @swoosh_sound = Gosu::Sample.new(@window, "assets/sounds/fast_swish.mp3")
     end
 
     def draw
@@ -30,7 +33,9 @@ module Controllers
     end
 
     def control_button_click(x)
+      @swoosh_sound.play
       @game_state_model::grid.add_tile(x, @game_state_model::player_turn_state)
+      @click_sound.play
       @game_state_model::game_mode_logic.check_for_winner
       if @game_state_model::state == :win
         @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
