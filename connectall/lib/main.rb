@@ -33,7 +33,9 @@ require_relative 'views/menu_views/player_select_menu_view'
 
 require_relative 'views/animations/basic'
 
-
+require_relative 'views/alert_popup/connect_instructions_view'
+require_relative 'views/alert_popup/otto_instructions_view'
+require_relative 'views/alert_popup/connect_all_view'
 require_relative 'views/alert_popup/help_view'
 require_relative 'views/alert_popup/win_view'
 require_relative 'views/alert_popup/popup_view'

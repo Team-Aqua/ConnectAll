@@ -22,16 +22,16 @@ module Views
         'green' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_green.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { color_swap }, Gosu::Image.new("assets/images/header_player_green_click.png"))
       }
       @player2_buttons = {
-        'yellow' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_yellow.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_yellow_click.png")),
-        'teal' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_teal.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_teal_click.png")),
-        'black' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png")),
-        'purple' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_purple.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_purple_click.png"))
+        'yellow' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_yellow.png"), (@window.width/2)-(@button_width/2), 185, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_yellow_click.png")),
+        'teal' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_teal.png"), (@window.width/2)-(@button_width/2), 185, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_teal_click.png")),
+        'black' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), (@window.width/2)-(@button_width/2), 185, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png")),
+        'purple' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_purple.png"), (@window.width/2)-(@button_width/2), 185, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_purple_click.png"))
       }
 
       if (@game_state_model::game_mode == :pvp)
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         @button_player2 = @player2_buttons[@color2_selection_wheel[@color2_selection]]
-        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 0, 125, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player2_color: @color2_selection_wheel[@color2_selection]) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
+        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 248, 245, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player2_color: @color2_selection_wheel[@color2_selection]) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
       else
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         #Added to reduce logic complexity in draw and update. SHould be out of view tho

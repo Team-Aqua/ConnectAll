@@ -5,11 +5,12 @@ module Views
       @controller = controller
       @button_width = 235
 
-      @buttonClassic = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_classic.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { @controller.classic_button_click }, Gosu::Image.new("assets/images/btn_classic_click.png"))
-      @buttonOtto = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_otto.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { @controller.otto_button_click }, Gosu::Image.new("assets/images/btn_otto_click.png"))
+      @buttonClassic = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_classic.png"), (@window.width/2)-(@button_width/2) - 25, 125, 100, lambda { @controller.classic_button_click }, Gosu::Image.new("assets/images/btn_classic_click.png"))
+      @buttonOtto = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_otto.png"), (@window.width/2)-(@button_width/2) - 25, 195, 100, lambda { @controller.otto_button_click }, Gosu::Image.new("assets/images/btn_otto_click.png"))
+      @buttonHelp = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_help.png"), (@window.width/2)-(@button_width/2) - 25, 255, 100, lambda { @controller.question_help_click }, Gosu::Image.new("assets/images/btn_help_click.png"))
 
-      @questionOtto = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question.png"), 125, 10, 110, lambda { @controller.question_otto_button_click }, Gosu::Image.new("assets/images/btn_question_click.png"))
-      @questionClassic = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question_light.png"), 125, 70, 110, lambda { @controller.question_classic_button_click }, Gosu::Image.new("assets/images/btn_question_light_click.png"))
+      @questionClassic = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_classic_question.png"), 365, 125, 100, lambda { @controller.question_classic_button_click }, Gosu::Image.new("assets/images/btn_classic_question_click.png"))
+      @questionOtto = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question.png"), 365, 195, 100, lambda { @controller.question_otto_button_click }, Gosu::Image.new("assets/images/btn_question_click.png"))
 
       @helpOtto = Gosu::Image.new("assets/images/item_otto_mode.png", :tileable => false)
       @helpClassic = Gosu::Image.new("assets/images/item_what_is_classic_mode.png", :tileable => false)
@@ -22,6 +23,7 @@ module Views
       @buttonOtto.draw
       @questionOtto.draw
       @questionClassic.draw
+      @buttonHelp.draw
     end
 
     def update
@@ -29,6 +31,7 @@ module Views
       @buttonOtto.update
       @questionOtto.update
       @questionClassic.update
+      @buttonHelp.update
     end
 
     def clicked
@@ -37,6 +40,7 @@ module Views
       @buttonOtto.clicked
       @questionOtto.clicked
       @questionClassic.clicked
+      @buttonHelp.clicked
     end
 
   end
