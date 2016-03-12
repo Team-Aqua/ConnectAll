@@ -1,5 +1,5 @@
 module Views
-  class ClassicInstructionsAlertView
+  class ConnectInstructionsAlertView
 
     def initialize(window, controller)
       @window = window
