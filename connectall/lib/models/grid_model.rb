@@ -1,6 +1,6 @@
 module Models
   class GridModel
-    attr_accessor :setValue, :getValue
+    attr_accessor :setValue, :getValue, :column_depth
 
     def initialize(x: 8, y: 8)
       @x = x
@@ -22,6 +22,15 @@ module Models
 
     def getGrid
       @grid
+    end
+
+    def column_depth(col)
+      (0..@y).each { |row|
+        if @grid[row][col-1] > 0
+          return row-1
+        end
+      }
+      return @y-1
     end
 
     def getValue(x, y)

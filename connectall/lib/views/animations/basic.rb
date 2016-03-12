@@ -17,11 +17,11 @@ module Animations
       @image = image
       @z = z
       @frame_rate = 60.0
-      @speed = 1.0
+      @speed = 3.0
     end
 
     def accelaration
-      @speed = @speed + (@speed * 1.2)
+      @speed = (@speed * 1.05)
     end
 
     def animate
@@ -30,8 +30,8 @@ module Animations
 
     def anim
       while (@y < @y_dest)
-        @y = @y + ((@y_offset)/(@frame_rate))*@speed
-        # accelaration
+        @y = @y + @speed
+        accelaration
         sleep((@y_speed/@frame_rate))
       end
       @state = :dead

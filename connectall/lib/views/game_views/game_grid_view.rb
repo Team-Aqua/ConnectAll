@@ -36,8 +36,9 @@ module Views
 
     def animate_tile_drop(x, player_color)
       @swoosh_sound.play
+      y = @grid_ypos+((38*(@grid_model.column_depth(x)-1))+19)
       x = 29 + ((x-1)*35.5)
-      animation = Animations::Basic.new(x, @grid_ypos, x_dest: 0, y_dest: @grid_ypos+(38*7), x_speed: 0, y_speed: 0.1, image: @tiles[player_color], z: 15)
+      animation = Animations::Basic.new(x, @grid_ypos, x_dest: 0, y_dest: y, x_speed: 0, y_speed: 0.1, image: @tiles[player_color], z: 15)
       animation.animate
       @falling_tiles.push(animation)
       Thread.new{
