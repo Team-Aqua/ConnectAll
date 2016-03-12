@@ -22,7 +22,7 @@ module Views
     end
 
     def clicked
-      @menu_click_sound.play
+      @menu_click_sound.play(0.7, 1, false)
       @buttonPvAi.clicked
       @buttonPvP.clicked
     end

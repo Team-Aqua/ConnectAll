@@ -33,9 +33,9 @@ module Controllers
     end
 
     def control_button_click(x)
-      @swoosh_sound.play
+      @swoosh_sound.play(0.7, 1, false)
       @game_state_model::grid.add_tile(x, @game_state_model::player_turn_state)
-      @click_sound.play
+      @click_sound.play(0.7, 1, false)
       @game_state_model::game_mode_logic.check_for_winner
       if @game_state_model::state == :win
         @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
