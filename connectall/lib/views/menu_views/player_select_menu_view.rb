@@ -8,6 +8,8 @@ module Views
       @controller = controller
       @button_width = 235
 
+      @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
+
       @color_selection = 0
       @color2_selection = 0
       @color_selection_wheel = ['orange','pink','white']#'green']
@@ -62,6 +64,7 @@ module Views
     end
 
     def clicked
+      @menu_click_sound.play
       @button_player.clicked
       @button_player2.clicked
       @button_rdy.clicked

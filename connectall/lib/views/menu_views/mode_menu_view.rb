@@ -8,7 +8,7 @@ module Views
       @buttonPvAi = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_play_ai.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { @controller.pvai_button_click }, Gosu::Image.new("assets/images/btn_play_ai_click.png"))
       @buttonPvP = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_play_player.png"), (@window.width/2)-(@button_width/2), 200, 100, lambda { @controller.pvp_button_click }, Gosu::Image.new("assets/images/btn_play_player_click.png"))
 
-
+      @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
     end
 
     def draw
@@ -22,6 +22,7 @@ module Views
     end
 
     def clicked
+      @menu_click_sound.play
       @buttonPvAi.clicked
       @buttonPvP.clicked
     end

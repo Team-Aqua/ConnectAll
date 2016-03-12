@@ -7,8 +7,6 @@ module Controllers
       @views = [Views::TypeMenuView.new(@window, self), Views::ModeMenuView.new(@window, self)]
       @current_view = @views.first
       @alert_view = nil
-
-      @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
     end
 
     def draw
@@ -27,7 +25,6 @@ module Controllers
     end
 
     def clicked
-      @menu_click_sound.play
       if @alert_view != nil
         @alert_view.clicked
       else
