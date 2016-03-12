@@ -1,7 +1,19 @@
 require 'gosu'
 
+require_relative 'ancillaries/abstractInterface'
+
 require_relative 'controllers/game_controllers/game_ctrl'
-require_relative 'controllers/view_controllers/main_menu_ctrl'
+require_relative 'controllers/view_controllers/menu_ctrl'
+
+
+require_relative 'controllers/game_logic/rules'
+require_relative 'controllers/game_logic/classic_rules'
+require_relative 'controllers/game_logic/otto_rules'
+
+require_relative 'controllers/game_logic/AI'
+require_relative 'controllers/game_logic/classic_AI'
+require_relative 'controllers/game_logic/otto_AI'
+
 
 require_relative 'models/game_state_model'
 require_relative 'models/grid_model'
@@ -15,8 +27,9 @@ require_relative 'views/game_views/game_header_view'
 require_relative 'views/game_views/game_footer_view'
 
 require_relative 'views/menu_views/menu_view'
-require_relative 'views/menu_views/main_menu_view'
+require_relative 'views/menu_views/type_menu_view'
 require_relative 'views/menu_views/mode_menu_view'
+require_relative 'views/menu_views/player_select_menu_view'
 
 
 require_relative 'views/alert_popup/help_view'
@@ -37,7 +50,7 @@ class GameWindow < Gosu::Window
       @models = [Models::GameStateModel.new]
     end
     
-    @controllers = [Controllers::MainMenuCtrl.new(self, @models.first), Controllers::GameCtrl.new(self, @models.first)]
+    @controllers = [Controllers::MenuCtrl.new(self, @models.first), Controllers::GameCtrl.new(self, @models.first)]
     @currentCtrl = @controllers.first
   end
 

@@ -1,6 +1,10 @@
   module GameLogic
     class ClassicRules < Rules
 
+    def initialize(game_state_model)
+      @game_state_model = game_state_model
+    end
+
     def check_winner(grid, state)
       if grid.win(state)
         winner(state)

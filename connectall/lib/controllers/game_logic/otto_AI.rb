@@ -1,4 +1,4 @@
 module GameLogic
-  class ClassicAI < AI
+  class OttoAI < AI
   end
 end
