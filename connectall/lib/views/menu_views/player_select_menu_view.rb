@@ -36,7 +36,7 @@ module Views
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         #Added to reduce logic complexity in draw and update. SHould be out of view tho
         @button_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), -500, -500, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png"))
-        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 0, 125, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection]) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
+        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 248, 185, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection]) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
       end      
 
     end
