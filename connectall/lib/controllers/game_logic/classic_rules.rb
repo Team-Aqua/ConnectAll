@@ -9,7 +9,6 @@
 
     def check_for_winner
       if win
-        puts "setting win state"
         @game_state_model::state = :win
         @game_state_model::winner = @winner
       else
@@ -106,105 +105,7 @@
     end
 
     def check_diagonal(state)
-      winstate = 0
-      if state == 0 # green, 2
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if x < 5 and y < 5 and x > 2 and y > 2 and @grid[y][x] == 2
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x + itr] != 2
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                return true
-              end
-
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x - itr] != 2
-                  winstate = 0
-                end
-              }
-              if winstate == 1
-                return true
-              end  
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x + itr] != 2
-                  winstate = 0
-                end
-              }
-              if winstate == 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x - itr] != 2
-                  winstate = 0
-                end
-              }
-              if winstate == 1
-                return true
-              end    
-            
-            end  
-          }
-        }
-      else # purple, 1
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if x < 5 and y < 5 and x > 2 and y > 2 and @grid[y][x] == 1
-      
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x + itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x - itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x + itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x - itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                return true
-              end
-
-            end  
-          }
-        }
-      end
-      return false
+     
     end
 
   end # classicRules

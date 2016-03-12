@@ -31,6 +31,8 @@ require_relative 'views/menu_views/type_menu_view'
 require_relative 'views/menu_views/mode_menu_view'
 require_relative 'views/menu_views/player_select_menu_view'
 
+require_relative 'views/animations/basic'
+
 
 require_relative 'views/alert_popup/help_view'
 require_relative 'views/alert_popup/win_view'
@@ -54,6 +56,9 @@ class GameWindow < Gosu::Window
     
     @controllers = [Controllers::MenuCtrl.new(self, @models.first), Controllers::GameCtrl.new(self, @models.first)]
     @currentCtrl = @controllers.first
+
+    @fps_init = Time.now.to_f
+    @fps_counter = 0
   end
 
   def needs_cursor?
@@ -71,7 +76,18 @@ class GameWindow < Gosu::Window
     @currentCtrl = @controllers[1]
   end
 
+  def fps
+    if Time.now.to_f < (@fps_init + 1.0)
+      @fps_counter = @fps_counter + 1
+    else
+      puts @fps_counter
+      @fps_counter = 0
+      @fps_init = Time.now.to_f
+    end
+  end
+
   def draw
+    fps
     @currentCtrl.draw
   end
 

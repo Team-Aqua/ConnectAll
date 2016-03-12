@@ -1,5 +1,6 @@
 module Views
   class GameView
+    attr_accessor :grid
     def initialize(window, controller, game_state_model)
       @window = window
       @controller = controller
@@ -27,6 +28,7 @@ module Views
       @x = 29.0
       @y = 116.0
     end
+
 
     def draw
       @sub_views.each do |view|

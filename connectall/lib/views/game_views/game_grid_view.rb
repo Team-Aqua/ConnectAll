@@ -8,6 +8,8 @@ module Views
       @grid_xpos = 29
       @grid_ypos = 116
 
+      @grid_top
+
       @grey_block = Gosu::Image.new("assets/images/block_grey.png")
 
       @tiles = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
@@ -22,10 +24,21 @@ module Views
       
       @potential_tiles = { 'green' => Gosu::Image.new("assets/images/block_green_potential.png"),
                           'purple' => Gosu::Image.new("assets/images/block_purple_potential.png") }
+
+      @falling_tiles = []
+      @click_sound = Gosu::Sample.new(@window, "assets/sounds/quick_beat.mp3")
+      @swoosh_sound = Gosu::Sample.new(@window, "assets/sounds/fast_swish.mp3")
     end
 
     def getGridModelValue(x, y)
       @grid_model.getValue(x, y)
+    end
+
+    def animate_tile_drop(x, player_color)
+      @swoosh_sound.play
+      animation = Animations::Basic.new(x, @grid_ypos, x_dest: 0, y_dest: @grid_ypos+(38*7), x_speed: 0, y_speed: 0.1, image: @tiles[player_color], z: 15)
+      animation.animate
+      @falling_tiles.push(animation)
     end
 
     def draw_tiles
@@ -60,12 +73,24 @@ module Views
     end
 
     def draw
+      if @falling_tiles != []
+        @falling_tiles.each do |tile|
+          tile.draw
+        end
+      end
       draw_tiles
       draw_potentials
     end
 
     def update
-
+      if @falling_tiles != []
+        @falling_tiles.each do |tile|
+          if tile::state == :dead
+            @click_sound.play
+            @falling_tiles.delete(tile)
+          end
+        end
+      end
     end
 
     def clicked
