@@ -8,6 +8,11 @@ module Controllers
       @game_won = false
     end
 
+    def reset_match
+      alert_close
+      @game_state_model::grid.reset
+    end
+
     def draw
       @view.draw
       if @alert_view != nil
@@ -39,8 +44,6 @@ module Controllers
       player_turn = @game_state_model::player_turn_state
       @game_state_model.toggle_player_turn_state
       @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color){@game_state_model::grid.add_tile(x, player_turn)}
-      
-
     end
 
     def skip_button_click
