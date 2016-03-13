@@ -29,7 +29,6 @@ module Views
     end
     
     def update
-      puts "bill"
       @replay.update
       @return.update
     end
