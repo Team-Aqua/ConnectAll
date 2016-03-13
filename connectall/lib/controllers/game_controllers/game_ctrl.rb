@@ -4,16 +4,15 @@ module Controllers
       @window = window
       @game_state_model = game_state_model
       @view = Views::GameView.new(@window, self, @game_state_model)
+      @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
       @alert_view = nil
     end
 
     def reset_match
-      # puts "clicked"
-      # 
+      @menu_click_sound.play(0.7, 1, false)
       @game_state_model::state = :active
       @game_state_model::grid.reset
       @game_state_model::player_turn_state = 0
-    
       alert_close
     end
 
@@ -65,12 +64,15 @@ module Controllers
 
     def skip_button_click
       @game_state_model.toggle_player_turn_state
+      @menu_click_sound.play(0.7, 1, false)
     end
 
     def concede_button_click
       @game_won = true
       @game_state_model.toggle_player_turn_state
       @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::player_turn_state].player_color)
+      @game_state_model::players[@game_state_model::player_turn_state].win
+      @menu_click_sound.play(0.7, 1, false)
     end
 
     def reset_button_click
@@ -79,9 +81,11 @@ module Controllers
 
     def question_button_click
       @alert_view = @help_view = Views::HelpAlertView.new(@window, self)
+      @menu_click_sound.play(0.7, 1, false)
     end
 
     def alert_close
+      @menu_click_sound.play(0.7, 1, false)
       @alert_view = nil
     end
 
