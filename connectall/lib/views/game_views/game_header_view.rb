@@ -61,9 +61,9 @@ module Views
       @question.draw
       @cancel.draw
       @font.draw("Player One", 50, @y + 2, 35, 1.0, 1.0, 0xff_ffffff)
-      @font.draw("Wins: -", 50, @y + 17, 35, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("Wins: #{@game_state_model::players[0]::score}", 50, @y + 17, 35, 1.0, 1.0, 0xff_ffffff)
       @font.draw("Player Two", 50, @y + 42, 35, 1.0, 1.0, 0xff_ffffff)
-      @font.draw("Wins: -", 50, @y + 57, 35, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("Wins: #{@game_state_model::players[1]::score}", 50, @y + 57, 35, 1.0, 1.0, 0xff_ffffff)
     end
 
     def update

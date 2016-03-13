@@ -12,6 +12,7 @@ module Controllers
       # 
       @game_state_model::state = :active
       @game_state_model::grid.reset
+      @game_state_model::player_turn_state = 0
     
       alert_close
     end
@@ -45,9 +46,19 @@ module Controllers
     end
 
     def control_button_click(x)
+      delay = 0.1
+      if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
+        delay = 0.5
+      end
+
       player_turn = @game_state_model::player_turn_state
       @game_state_model.toggle_player_turn_state
-      @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color){@game_state_model::grid.add_tile(x, player_turn)}
+      @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color, delay){@game_state_model::grid.add_tile(x, player_turn)}
+
+
+      if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
+        control_button_click(@game_state_model::ai.choose_location)
+      end
     end
 
     def skip_button_click

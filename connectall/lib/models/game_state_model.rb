@@ -1,6 +1,6 @@
 module Models
   class GameStateModel
-    attr_accessor :state, :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic, :winner
+    attr_accessor :state, :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic, :winner, :ai
 
     def initialize()
       @state = :active
@@ -12,6 +12,7 @@ module Models
       @player_turn_state = 0
       @num_of_players = 0
       @players = []
+      @ai = nil
     end
 
     def toggle_player_turn_state
