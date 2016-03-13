@@ -24,7 +24,7 @@ module Views
             'purple' => Gosu::Image.new("assets/images/bg_nogrid_purple.png", :tileable => false),
             'white' => Gosu::Image.new("assets/images/bg_nogrid_white.png", :tileable => false),
             'black' => Gosu::Image.new("assets/images/bg_nogrid_black.png", :tileable => false)}
-
+      @grey_bg = Gosu::Image.new("assets/images/bg_grey.png", :tileable => false)
       @x = 29.0
       @y = 116.0
     end
@@ -35,6 +35,7 @@ module Views
         view.draw
       end
       @backgrounds[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(0, 0, 25)
+      @grey_bg.draw(0, 0, 0)
       # if @game_state_model.player_turn_state == 0
       #   @background_image_green.draw(0, 0, 0)
       # else 
