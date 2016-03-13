@@ -9,12 +9,9 @@ module Controllers
 
     def reset_match
       # puts "clicked"
-    
-
+      # 
       @game_state_model::state = :active
       @game_state_model::grid.reset
-
-    
     
       alert_close
     end
@@ -31,8 +28,6 @@ module Controllers
       if @alert_view != nil
         @alert_view.update
       end
-
-
       @game_state_model::game_mode_logic.check_for_winner
       if @game_state_model::state == :win
         # puts "LOL IM STILL WORKING"
@@ -57,6 +52,12 @@ module Controllers
 
     def skip_button_click
       @game_state_model.toggle_player_turn_state
+    end
+
+    def concede_button_click
+      @game_won = true
+      @game_state_model.toggle_player_turn_state
+      @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::player_turn_state].player_color)
     end
 
     def reset_button_click
