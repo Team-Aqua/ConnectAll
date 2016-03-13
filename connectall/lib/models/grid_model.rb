@@ -1,6 +1,6 @@
 module Models
   class GridModel
-    attr_accessor :setValue, :getValue, :column_depth
+    attr_accessor :setValue, :getValue, :column_depth, :grid
 
     def initialize(x: 7, y: 7)
       @x = x
