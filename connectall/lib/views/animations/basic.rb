@@ -29,7 +29,7 @@ module Animations
     end
 
     def anim
-      while (@y < @y_dest)
+      while (@y <= @y_dest)
         @y = @y + @speed
         accelaration
         sleep((@y_speed/@frame_rate))

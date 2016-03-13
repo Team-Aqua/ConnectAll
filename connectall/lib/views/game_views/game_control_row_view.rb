@@ -8,6 +8,10 @@ module Views
       @grid_ypos = 116
 
       @x = @y = 0.0
+      build_red_grid
+    end
+
+    def build_red_grid
       @red_grid = Array.new
       original_pos = 29
       (1..8).each { |x|
@@ -15,7 +19,19 @@ module Views
         @red_grid << red_button
         original_pos = original_pos + 35.5
       }
+    end
 
+    def check_available
+      original_pos = 29
+      (1..8).each { |x|
+        puts @red_grid.at(x - 1).hover_image
+        if @game_state_model::grid.column_depth(x) <= 0 and @red_grid.at(x - 1).hover_image != nil
+          red_button_disabled = BtnItem.new(@window, Gosu::Image.new("assets/images/block_red_not_available.png", :tileable => true), original_pos, 420, 35, lambda { puts "hey" })
+          @red_grid.delete_at(x - 1)
+          @red_grid.insert(x - 1, red_button_disabled)
+        end
+        original_pos = original_pos + 35.5
+      }
     end
 
     def draw

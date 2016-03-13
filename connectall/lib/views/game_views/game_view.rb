@@ -1,6 +1,6 @@
 module Views
   class GameView
-    attr_accessor :grid
+    attr_accessor :grid, :control
     def initialize(window, controller, game_state_model)
       @window = window
       @controller = controller

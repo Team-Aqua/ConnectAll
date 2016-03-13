@@ -1,5 +1,6 @@
 class BtnItem
     # code reference from: http://blog.dreasgrech.com/2010/08/simple-menu-for-gosu-game-in-ruby.html
+    attr_accessor :hover_image
     HOVER_OFFSET = 0
     def initialize (window, image, x, y, z, callback, hover_image = nil)
         @window = window

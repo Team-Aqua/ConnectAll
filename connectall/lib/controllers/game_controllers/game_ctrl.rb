@@ -13,6 +13,7 @@ module Controllers
       @game_state_model::state = :active
       @game_state_model::grid.reset
       @game_state_model::player_turn_state = 0
+      @view::control.build_red_grid
       alert_close
     end
 
@@ -55,11 +56,10 @@ module Controllers
       player_turn = @game_state_model::player_turn_state
       @game_state_model.toggle_player_turn_state
       @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color, delay){@game_state_model::grid.add_tile(x, player_turn)}
-
-
       if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
         control_button_click(@game_state_model::ai.choose_location)
       end
+      @view::control.check_available
     end
 
     def skip_button_click
@@ -77,6 +77,7 @@ module Controllers
 
     def reset_button_click
       @game_state_model::grid.reset
+      @view::control.build_red_grid
     end
 
     def question_button_click
