@@ -13,11 +13,13 @@ class BitBoardTest < Minitest::Test
   end
 
   def test_bitboard88
-    rules = GameLogic::ClassicRules.new(Models::GameStateModel.new)
+    model = Models::GameStateModel.new
+
+    rules = GameLogic::ClassicRules.new(model)
     # assert rules.has_won(0b1111000000000000000000000000000000000000000000000000000000000000)
     # assert rules.has_won(0b0000000000000000000000000000000000000000000000000000000000001111)
 
-    grid = Models::GridModel.new
+    grid = model::grid
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -29,43 +31,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
-
-    grid.grid = [ 
-      [0,0,0,0,0,0,0,1],
-      [0,0,0,0,0,0,1,0],
-      [0,0,0,0,0,1,0,0],
-      [0,0,0,0,1,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0]
-    ]
-    assert rules.win
-
-    grid.grid = [ 
-      [0,0,0,0,1,1,1,1],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0]
-    ]
-    assert rules.win
-
-    grid.grid = [ 
-      [1,1,1,1,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0]
-    ]
-    assert rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -77,7 +43,32 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [1,1,1,1,0,0,0,0]
     ]
-    assert rules.win
+    puts rules.game_state_model.grid.print_grid
+    assert rules.win(0)
+
+    grid.grid = [ 
+      [0,0,0,0,1,1,1,1],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0]
+    ]
+    assert rules.win(0)
+
+    grid.grid = [ 
+      [1,1,1,1,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0]
+    ]
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -89,7 +80,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,1,1,1,1]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -101,7 +92,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,1],
       [0,0,0,0,0,0,0,1]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,1],
@@ -113,7 +104,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [1,0,0,0,0,0,0,0],
@@ -125,7 +116,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -137,7 +128,7 @@ class BitBoardTest < Minitest::Test
       [1,0,0,0,0,0,0,0],
       [1,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -149,7 +140,7 @@ class BitBoardTest < Minitest::Test
       [1,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -161,7 +152,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -173,7 +164,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -185,7 +176,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -197,7 +188,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -209,7 +200,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,1],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -221,7 +212,7 @@ class BitBoardTest < Minitest::Test
       [0,1,0,0,0,0,0,0],
       [1,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -233,7 +224,7 @@ class BitBoardTest < Minitest::Test
       [0,0,1,0,0,0,0,0],
       [0,0,0,1,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -245,7 +236,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,1,0,0],
       [0,0,0,0,1,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -257,7 +248,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,1,0],
       [0,0,0,0,0,0,0,1]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,1],
@@ -269,7 +260,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,1,0,0,0],
@@ -281,7 +272,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,1,0,0,0,0],
@@ -293,7 +284,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [1,0,0,0,0,0,0,0],
@@ -305,7 +296,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,1,0,0,0,0,0,0],
@@ -317,7 +308,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,1,0,0,0,0,0],
@@ -329,7 +320,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,1,0,0,0,0],
@@ -341,7 +332,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,1,0],
@@ -353,7 +344,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,1,0,0],
@@ -365,7 +356,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,1,0,0,0],
@@ -377,7 +368,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -389,7 +380,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -401,7 +392,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -413,7 +404,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -425,7 +416,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -437,7 +428,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -449,7 +440,7 @@ class BitBoardTest < Minitest::Test
       [0,0,1,0,0,0,0,0],
       [0,0,1,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -461,7 +452,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -473,7 +464,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -485,7 +476,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -497,7 +488,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -509,7 +500,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -521,7 +512,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -533,7 +524,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -545,7 +536,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -557,7 +548,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -569,7 +560,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -581,7 +572,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -593,7 +584,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -605,7 +596,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -617,7 +608,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -629,7 +620,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -641,7 +632,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -653,7 +644,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,1,0,0,0],
       [0,0,0,1,0,0,0,0]
     ]
-    assert rules.win
+    assert rules.win(0)
 
     grid.grid = [ 
       [1,1,1,0,0,0,0,0],
@@ -665,7 +656,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,1,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -677,7 +668,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,1,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [1,0,0,0,0,0,0,0],
@@ -689,7 +680,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     #ADD MORE
     grid.grid = [ 
@@ -702,7 +693,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -714,7 +705,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -726,7 +717,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -738,7 +729,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -750,7 +741,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -762,7 +753,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -774,7 +765,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -786,7 +777,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -798,7 +789,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -810,7 +801,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -822,7 +813,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -834,7 +825,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -846,7 +837,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -858,7 +849,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -870,7 +861,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -882,7 +873,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -894,7 +885,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -906,7 +897,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -918,7 +909,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -930,7 +921,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -942,7 +933,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -954,7 +945,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -966,7 +957,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -978,7 +969,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -990,7 +981,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -1002,7 +993,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -1014,7 +1005,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -1026,7 +1017,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -1038,7 +1029,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [0,0,0,0,0,0,0,0],
@@ -1050,7 +1041,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
     grid.grid = [ 
       [1,1,1,0,0,1,1,1],
@@ -1062,7 +1053,7 @@ class BitBoardTest < Minitest::Test
       [1,0,1,1,1,0,0,1],
       [1,1,1,0,0,1,1,1]
     ]
-    assert !rules.win
+    assert !rules.win(0)
 
 
   end

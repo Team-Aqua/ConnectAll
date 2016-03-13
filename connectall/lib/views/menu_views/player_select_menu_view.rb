@@ -43,7 +43,6 @@ module Views
 
     def color_swap
       @color_selection = (@color_selection + 1) % @color_selection_wheel.count
-      puts @color_selection
       @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
     end
 
