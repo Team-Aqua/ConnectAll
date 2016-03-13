@@ -18,212 +18,95 @@
     end
 
     def win
-      state = @game_state_model::player_turn_state 
+      state = @game_state_model::player_turn_state
       # check horizontal, vertical, diagonal
       return ( check_vertical(state) || check_horizontal(state) || check_diagonal(state) )
     end
 
     def check_vertical(state)
-      winstate = 0
-      if state == 0 # green, 2
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if y < 5 and @grid[y][x] == 2
-              winstate = 1
-              (y..y + 3).each { |yitr|
-                if @grid[yitr][x] != 2
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 2
-                return true
-              end
-            end  
-          }
+      (0..7).each { |y|
+        (0..7).each { |x|
+          if y < 5 and @grid[y][x] == 2
+            if @grid[y + 1][x] == 2 and @grid[y + 2][x] == 2 and @grid[y + 3][x] == 2
+              @winner = 2
+              return true
+            end
+          elsif y < 5 and @grid[y][x] == 1
+            if @grid[y + 1][x] == 1 and @grid[y + 2][x] == 1 and @grid[y + 3][x] == 1
+              @winner = 1
+              return true
+            end
+          end  
         }
-      else # purple, 1
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if y < 5 and @grid[y][x] == 1
-              winstate = 1
-              (y..y + 3).each { |yitr|
-                if @grid[yitr][x] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 1
-                return true
-              end
-            end  
-          }
-        }
-      end
+      }
       return false
     end
 
     def check_horizontal(state)
-      winstate = 0
-      if state == 0 # green, 2
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if x < 5 and @grid[y][x] == 2
-              winstate = 1
-              (x..x + 3).each { |xitr|
-                if @grid[y][xitr] != 2
-                  # puts "Failed at: #{xitr} with result: #{@grid[y][xitr]}" 
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 2
-                return true
-              end
-            end  
-          }
+      (0..7).each { |y|
+        (0..7).each { |x|
+          if x < 5 and @grid[y][x] == 2
+            if @grid[y][x + 1] == 2 and @grid[y][x + 2] == 2 and @grid[y][x + 3] == 2
+              @winner = 2
+              return true
+            end
+          elsif x < 5 and @grid[y][x] == 1
+            if @grid[y][x + 1] == 1 and @grid[y][x + 2] == 1 and @grid[y][x + 3] == 1
+              @winner = 1
+              return true
+            end
+          end   
         }
-      else # purple, 1
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if x < 5 and @grid[y][x] == 1
-              winstate = 1
-              (x..x + 3).each { |xitr|
-                if @grid[y][xitr] != 1
-                  # puts "Failed at: #{xitr} with result: #{@grid[y][xitr]}" 
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 1
-                return true
-              end
-            end  
-          }
-        }
-      end
+      }
       return false
     end
 
     def check_diagonal(state)
-      winstate = 0
-      if state == 0 # green, 2
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if @grid[y][x] == 2
-              if x <= 4 and y <= 4 
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y + itr][x + itr] != 2
-                    winstate = 0
-                  end
-                }  
-                if winstate == 1
-                  @winner = 2
-                  return true
-                end
+      (0..7).each { |y|
+        (0..7).each { |x|
+          if x <= 4 and y <= 4 
+            
+            if @grid[y][x] == 2 and @grid[y + 1][x + 1] == 2 and @grid[y + 2][x + 2] == 2 and @grid[y + 3][x + 3] == 2
+              @winner = 2
+              return true
+            elsif @grid[y][x] == 1 and @grid[y + 1][x + 1] == 1 and @grid[y + 2][x + 2] == 1 and @grid[y + 3][x + 3] == 1
+              @winner = 1
+              return true
+            end 
 
-              elsif x >= 3 and y <= 4
+          elsif x >= 3 and y <= 4
 
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y + itr][x - itr] != 2
-                    winstate = 0
-                  end
-                }
-                if winstate == 1
-                  @winner = 2
-                  return true
-                end  
-
-              elsif x <= 4 and y >= 3
-                
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y - itr][x + itr] != 2
-                    winstate = 0
-                  end
-                }
-                if winstate == 1
-                  @winner = 2
-                  return true
-                end
-
-              elsif x >= 3 and y >= 3
-                
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y - itr][x - itr] != 2
-                    winstate = 0
-                  end
-                }
-                if winstate == 1
-                  @winner = 2
-                  return true
-                end   
-              end  
+            if @grid[y][x] == 2 and @grid[y + 1][x - 1] == 2 and @grid[y + 2][x - 2] == 2 and @grid[y + 3][x - 3] == 2
+              @winner = 2
+              return true
+            elsif @grid[y][x] == 1 and @grid[y + 1][x - 1] == 1 and @grid[y + 2][x - 2] == 1 and @grid[y + 3][x - 3] == 1
+              @winner = 1
+              return true
             end
-          }
+
+          elsif x <= 4 and y >= 3
+            
+            if @grid[y][x] == 2 and @grid[y - 1][x + 1] == 2 and @grid[y - 2][x + 2] == 2 and @grid[y - 3][x + 3] == 2
+              @winner = 2
+              return true
+            elsif @grid[y][x] == 1 and @grid[y - 1][x + 1] == 1 and @grid[y - 2][x + 2] == 1 and @grid[y - 3][x + 3] == 1
+              @winner = 1
+              return true
+            end 
+
+          elsif x >= 3 and y >= 3
+            
+            if @grid[y][x] == 2 and @grid[y - 1][x - 1] == 2 and @grid[y - 2][x - 2] == 2 and @grid[y - 3][x - 3] == 2
+              @winner = 2
+              return true
+            elsif @grid[y][x] == 1 and @grid[y - 1][x - 1] == 1 and @grid[y - 2][x - 2] == 1 and @grid[y - 3][x - 3] == 1
+              @winner = 1
+              return true
+            end 
+          
+          end  
         }
-      else # purple, 1
-        (0..7).each { |y|
-          (0..7).each { |x|
-            if @grid[y][x] == 1
-              if x <= 4 and y <= 4 
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y + itr][x + itr] != 1
-                    winstate = 0
-                  end
-                }  
-                if winstate == 1
-                  @winner = 1
-                  return true
-                end
-
-              elsif x >= 3 and y <= 4
-
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y + itr][x - itr] != 1
-                    winstate = 0
-                  end
-                }
-                if winstate == 1
-                  @winner = 1
-                  return true
-                end  
-
-              elsif x <= 4 and y >= 3
-                
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y - itr][x + itr] != 1
-                    winstate = 0
-                  end
-                }
-                if winstate == 1
-                  @winner = 1
-                  return true
-                end
-
-              elsif x >= 3 and y >= 3
-                
-                winstate = 1
-                (1..3).each { |itr|
-                  if @grid[y - itr][x - itr] != 1
-                    winstate = 0
-                  end
-                }
-                if winstate == 1
-                  @winner = 1
-                  return true
-                end   
-              end  
-            end
-          }
-        }
-      end
+      }
       return false
     end
 
