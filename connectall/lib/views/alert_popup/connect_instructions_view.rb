@@ -5,11 +5,11 @@ module Views
       @window = window
       @controller = controller
       @help = Gosu::Image.new("assets/images/item_what_is_classic_mode.png", :tileable => false)
-      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_dark.png"), 450, 20, 100, lambda { @controller.alert_close }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
+      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_dark.png"), 450, 35, 100, lambda { @controller.alert_close }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
     end
 
     def draw
-      @help.draw(30, 10, 100)
+      @help.draw(30, 20, 100)
       @cancel.draw
     end
     
