@@ -5,13 +5,18 @@ module Controllers
       @game_state_model = game_state_model
       @view = Views::GameView.new(@window, self, @game_state_model)
       @alert_view = nil
-      @game_won = false
     end
 
     def reset_match
+      # puts "clicked"
+    
+
+      @game_state_model::state = :active
+      @game_state_model::grid.reset
+
+    
+    
       alert_close
-      @view = Views::GameView.new(@window, self, @game_state_model)
-      @game_won = false
     end
 
     def draw
@@ -26,8 +31,11 @@ module Controllers
       if @alert_view != nil
         @alert_view.update
       end
+
+
       @game_state_model::game_mode_logic.check_for_winner
-      if @game_state_model::state == :win and @game_won == false
+      if @game_state_model::state == :win
+        # puts "LOL IM STILL WORKING"
         @game_won = true
         @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
       end
@@ -60,8 +68,6 @@ module Controllers
     end
 
     def alert_close
-      @game_state_model::grid.reset
-      @game_state_model::state = :active
       @alert_view = nil
     end
 

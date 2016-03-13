@@ -8,6 +8,7 @@
     end
 
     def check_for_winner
+      @grid = @game_state_model::grid.getGrid
       if win
         @game_state_model::state = :win
         @game_state_model::winner = @winner

@@ -12,8 +12,8 @@ module Views
 
       @color_selection = 0
       @color2_selection = 0
-      @color_selection_wheel = ['orange','pink','white','green']
-      @color2_selection_wheel = ['yellow','teal','black','purple']
+      @color_selection_wheel = ['green','orange','pink','white']
+      @color2_selection_wheel = ['teal','yellow','black','purple']
       
       @player_buttons ={
         'orange' => BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_nocolon_orange.png"), (@window.width/2)-(@button_width/2), 125, 100, lambda { color_swap }, Gosu::Image.new("assets/images/header_player_nocolon_orange_click.png")),
