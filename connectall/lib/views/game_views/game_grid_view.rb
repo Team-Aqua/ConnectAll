@@ -48,7 +48,6 @@ module Views
           sleep(0.1)
         end
         yield
-        @model::grid.print_grid
       }
     end
 

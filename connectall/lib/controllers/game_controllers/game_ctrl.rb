@@ -28,13 +28,15 @@ module Controllers
       @view.update
       if @alert_view != nil
         @alert_view.update
-      end
+      else
       @game_state_model::game_mode_logic.check_for_winner
-      if @game_state_model::state == :win
-        # puts "LOL IM STILL WORKING"
-        @game_won = true
-        @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
+        if @game_state_model::state == :win
+          # puts "LOL IM STILL WORKING"
+          @game_won = true
+          @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
+        end  
       end
+      
     end
 
     def clicked
@@ -46,7 +48,7 @@ module Controllers
     end
 
     def control_button_click(x)
-      delay = 0.1
+      delay = 0.25
       if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
         delay = 0.5
       end
