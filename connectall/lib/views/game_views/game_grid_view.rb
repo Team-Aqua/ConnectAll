@@ -7,12 +7,11 @@ module Views
       @grid_model = model::grid
       @grid_xpos = 29
       @grid_ypos = 116
-
       @grid_top
 
       @grey_block = Gosu::Image.new("assets/images/block_grey.png")
 
-      @tiles = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
+      @tilesClassic = { 'green' => Gosu::Image.new("assets/images/block_green.png"),
                 'yellow' => Gosu::Image.new("assets/images/block_yellow.png"),
                 'pink' => Gosu::Image.new("assets/images/block_pink.png"),
                 'teal' => Gosu::Image.new("assets/images/block_teal.png"),
@@ -21,13 +20,36 @@ module Views
                 'black' => Gosu::Image.new("assets/images/block_black.png"),
                 'grey' => Gosu::Image.new("assets/images/block_grey.png"),
                 'purple' => Gosu::Image.new("assets/images/block_purple.png") }
+
+      @tilesOtto = { 'green' => Gosu::Image.new("assets/images/block_green_o.png"),
+                'yellow' => Gosu::Image.new("assets/images/block_yellow_o.png"),
+                'pink' => Gosu::Image.new("assets/images/block_pink_t.png"),
+                'teal' => Gosu::Image.new("assets/images/block_teal_o.png"),
+                'orange' => Gosu::Image.new("assets/images/block_orange_t.png"),
+                'white' => Gosu::Image.new("assets/images/block_white_t.png"),
+                'black' => Gosu::Image.new("assets/images/block_black_o.png"),
+                'grey' => Gosu::Image.new("assets/images/block_grey.png"),
+                'purple' => Gosu::Image.new("assets/images/block_purple_t.png") }
       
+      @tiles = @tilesClassic
       @potential_tiles = { 'green' => Gosu::Image.new("assets/images/block_green_potential.png"),
                           'purple' => Gosu::Image.new("assets/images/block_purple_potential.png") }
 
       @falling_tiles = []
       @click_sound = Gosu::Sample.new(@window, "assets/sounds/quick_beat.mp3")
       @swoosh_sound = Gosu::Sample.new(@window, "assets/sounds/fast_swish.mp3")
+      set_tiles
+    end
+
+    def set_tiles
+      if @model::game_type == :classic
+        @tiles = @tilesClassic
+      elsif @model::game_type == :otto
+        @tiles = @tilesOtto
+      else 
+        # raise "Error: bad game mode selected"
+        # can't raise error - crashes on startup
+      end
     end
 
     def getGridModelValue(x, y)
