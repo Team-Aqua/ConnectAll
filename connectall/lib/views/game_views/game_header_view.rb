@@ -30,7 +30,7 @@ module Views
 
       @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Bold.ttf", 20)
       @question = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question_light.png"), 295, 10, 35, lambda { @controller.question_button_click }, Gosu::Image.new("assets/images/btn_question_light_click.png"))
-      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 315, 10, 35, lambda { @controller.cancel_button_click }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
+      @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 315, 10, 35, lambda { @window.start_menu }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
       @ico_two = Gosu::Image.new("assets/images/ico_2.png")
       @ico_one = Gosu::Image.new("assets/images/ico_1.png")
       @x = @y = 0.0

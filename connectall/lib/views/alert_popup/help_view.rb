@@ -9,7 +9,7 @@ module Views
     end
 
     def draw
-      @help.draw(30, 10, 100)
+      @help.draw(20, 10, 100)
       @cancel.draw
     end
     
