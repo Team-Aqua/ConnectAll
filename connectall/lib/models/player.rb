@@ -8,5 +8,9 @@ module Models
       @score = 0
     end
 
+    def win
+      @score = @score + 1
+    end
+
   end
 end

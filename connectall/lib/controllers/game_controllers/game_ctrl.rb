@@ -31,9 +31,9 @@ module Controllers
       else
       @game_state_model::game_mode_logic.check_for_winner
         if @game_state_model::state == :win
-          # puts "LOL IM STILL WORKING"
           @game_won = true
           @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
+          @game_state_model::players[@game_state_model::winner-1].win
         end  
       end
       
