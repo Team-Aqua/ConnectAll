@@ -10,7 +10,8 @@ module Controllers
 
     def reset_match
       alert_close
-      @game_state_model::grid.reset
+      @view = Views::GameView.new(@window, self, @game_state_model)
+      @game_won = false
     end
 
     def draw
