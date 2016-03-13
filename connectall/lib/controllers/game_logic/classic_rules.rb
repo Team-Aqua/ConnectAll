@@ -106,109 +106,121 @@
     end
 
     def check_diagonal(state)
-     winstate = 0
+      winstate = 0
       if state == 0 # green, 2
         (0..7).each { |y|
           (0..7).each { |x|
-            if x < 5 and y < 5 and x > 2 and y > 2 and @grid[y][x] == 2
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x + itr] != 2
-                  winstate = 0
+            if @grid[y][x] == 2
+              if x <= 4 and y <= 4 
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y + itr][x + itr] != 2
+                    winstate = 0
+                  end
+                }  
+                if winstate == 1
+                  @winner = 2
+                  return true
                 end
-              }  
-              if winstate == 1
-                @winner = 2
-                return true
-              end
 
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x - itr] != 2
-                  winstate = 0
+              elsif x >= 3 and y <= 4
+
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y + itr][x - itr] != 2
+                    winstate = 0
+                  end
+                }
+                if winstate == 1
+                  @winner = 2
+                  return true
+                end  
+
+              elsif x <= 4 and y >= 3
+                
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y - itr][x + itr] != 2
+                    winstate = 0
+                  end
+                }
+                if winstate == 1
+                  @winner = 2
+                  return true
                 end
-              }
-              if winstate == 1
-                @winner = 2
-                return true
+
+              elsif x >= 3 and y >= 3
+                
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y - itr][x - itr] != 2
+                    winstate = 0
+                  end
+                }
+                if winstate == 1
+                  @winner = 2
+                  return true
+                end   
               end  
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x + itr] != 2
-                  winstate = 0
-                end
-              }
-              if winstate == 1
-                @winner = 2
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x - itr] != 2
-                  winstate = 0
-                end
-              }
-              if winstate == 1
-                @winner = 2
-                return true
-              end    
-            
-            end  
+            end
           }
         }
       else # purple, 1
         (0..7).each { |y|
           (0..7).each { |x|
-            if x < 5 and y < 5 and x > 2 and y > 2 and @grid[y][x] == 1
-      
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x + itr] != 1
-                  winstate = 0
+            if @grid[y][x] == 1
+              if x <= 4 and y <= 4 
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y + itr][x + itr] != 1
+                    winstate = 0
+                  end
+                }  
+                if winstate == 1
+                  @winner = 1
+                  return true
                 end
-              }  
-              if winstate == 1
-                @winner = 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y + itr][x - itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x + itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 1
-                return true
-              end
-              
-              winstate = 1
-              (1..3).each { |itr|
-                if @grid[y - itr][x - itr] != 1
-                  winstate = 0
-                end
-              }  
-              if winstate == 1
-                @winner = 1
-                return true
-              end
 
-            end  
+              elsif x >= 3 and y <= 4
+
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y + itr][x - itr] != 1
+                    winstate = 0
+                  end
+                }
+                if winstate == 1
+                  @winner = 1
+                  return true
+                end  
+
+              elsif x <= 4 and y >= 3
+                
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y - itr][x + itr] != 1
+                    winstate = 0
+                  end
+                }
+                if winstate == 1
+                  @winner = 1
+                  return true
+                end
+
+              elsif x >= 3 and y >= 3
+                
+                winstate = 1
+                (1..3).each { |itr|
+                  if @grid[y - itr][x - itr] != 1
+                    winstate = 0
+                  end
+                }
+                if winstate == 1
+                  @winner = 1
+                  return true
+                end   
+              end  
+            end
           }
         }
       end
