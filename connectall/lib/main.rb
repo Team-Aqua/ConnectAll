@@ -49,7 +49,7 @@ class GameWindow < Gosu::Window
     self.caption = "ConnectAll"
     @song = Gosu::Song.new(self, "assets/music/bitbop.mp3")
     @song.volume = 0.5
-    @song.play(true)
+    # @song.play(true)
     if model != nil
       @models = [model]
     else

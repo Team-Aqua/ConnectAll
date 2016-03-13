@@ -2,7 +2,7 @@ module Models
   class GridModel
     attr_accessor :setValue, :getValue, :column_depth
 
-    def initialize(x: 8, y: 8)
+    def initialize(x: 7, y: 7)
       @x = x
       @y = y
       @grid = generate_grid
@@ -42,6 +42,7 @@ module Models
     end
 
     def add_tile(x, player_num)
+      print_grid
       for y in (7).downto(0)
         if getValue(x-1, y) == 0
           setValue(x-1, y, player_num+1)
