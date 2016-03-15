@@ -10,7 +10,7 @@ module Models
       @game_type = nil
       @game_mode_logic = nil
       @player_turn_state = 0
-      @num_of_players = 0
+      @num_of_rl_players = 0
       @players = []
       @ai = nil
     end
