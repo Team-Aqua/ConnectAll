@@ -78,7 +78,7 @@
 
     def check_for_winner
       @grid = @game_state_model::grid.getGrid
-      if win(@game_state_model::player_turn_state)
+      if win
         @game_state_model::state = :win
         @game_state_model::winner = @game_state_model::player_turn_state - 1
       else
@@ -86,14 +86,14 @@
       end
     end
 
-    def win(state)
+    def win
       # check horizontal, vertical, diagonal
-      return ( check_vertical(state) || check_horizontal(state) || check_diagonal(state) )
+      return ( check_vertical || check_horizontal || check_diagonal )
 
       # return has_won(construct_bitboard(@game_state_model::grid, state))
     end
 
-    def check_vertical(state)
+    def check_vertical
       (0..7).each { |y|
         (0..7).each { |x|
           if y < 5 and @grid[y][x] == 2
@@ -112,7 +112,7 @@
       return false
     end
 
-    def check_horizontal(state)
+    def check_horizontal
       (0..7).each { |y|
         (0..7).each { |x|
           if x < 5 and @grid[y][x] == 2
@@ -131,7 +131,7 @@
       return false
     end
 
-    def check_diagonal(state)
+    def check_diagonal
       (0..7).each { |y|
         (0..7).each { |x|
           if x <= 4 and y <= 4 
