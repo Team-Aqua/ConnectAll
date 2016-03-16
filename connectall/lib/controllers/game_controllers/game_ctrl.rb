@@ -48,9 +48,9 @@ module Controllers
     end
 
     def control_button_click(x)
-      delay = 2.0
+      delay = 0.25
       if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
-        delay = 0.5
+        delay = 2.0
       end
 
       player_turn = @game_state_model::player_turn_state

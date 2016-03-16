@@ -5,7 +5,7 @@ module Models
     def initialize()
       @state = :active
       @winner = nil
-      @grid = GridModel.new()
+      @grid = GridModel.new
       @game_mode = nil
       @game_type = nil
       @game_mode_logic = nil

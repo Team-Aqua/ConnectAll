@@ -52,7 +52,7 @@ class GameWindow < Gosu::Window
     @song.volume = 0.5
     # @song.play(true)
     if model != nil
-      @game_state_model = [model]
+      @game_state_model = model
     else
       @game_state_model = Models::GameStateModel.new
     end

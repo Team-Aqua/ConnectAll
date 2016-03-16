@@ -4,7 +4,7 @@ module Views
       @window = window
       @controller = controller
       @model = model
-      @grid_model = model::grid
+      @grid_model = @model::grid
       @grid_xpos = 29
       @grid_ypos = 116
       @grid_top
