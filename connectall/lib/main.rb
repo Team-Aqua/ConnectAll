@@ -42,6 +42,7 @@ require_relative 'views/alert_popup/popup_view'
 
 class GameWindow < Gosu::Window
 
+  attr_accessor :game_state_model, :controllers 
 
   def initialize(h, w, model: nil)
     super w, h, false
@@ -51,13 +52,14 @@ class GameWindow < Gosu::Window
     @song.volume = 0.5
     # @song.play(true)
     if model != nil
-      @models = [model]
+      @game_state_model = [model]
     else
-      @models = [Models::GameStateModel.new]
+      @game_state_model = Models::GameStateModel.new
     end
     
-    @controllers = [Controllers::MenuCtrl.new(self, @models.first), Controllers::GameCtrl.new(self, @models.first)]
-    @currentCtrl = @controllers.first
+    @controllers = {  :menu => Controllers::MenuCtrl.new(self, @game_state_model),
+                      :game => Controllers::GameCtrl.new(self, @game_state_model) }
+    @currentCtrl = @controllers[:menu]
 
     @fps_init = Time.now.to_f
     @fps_counter = 0
@@ -75,12 +77,12 @@ class GameWindow < Gosu::Window
 
   def start_menu
     initialize(347, 533)
-    @currentCtrl = @controllers[0]
+    @currentCtrl = @controllers[:menu]
   end
 
   def start_game
-    initialize(568, 343, model: @models[0])
-    @currentCtrl = @controllers[1]
+    initialize(568, 343, model: @game_state_model)
+    @currentCtrl = @controllers[:game]
   end
 
   def fps
