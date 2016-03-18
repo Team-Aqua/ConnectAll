@@ -76,23 +76,6 @@
 
     end
 
-    def check_for_winner
-      @grid = @game_state_model::grid.getGrid
-      if win
-        @game_state_model::state = :win
-        @game_state_model::winner = @game_state_model::player_turn_state - 1
-      else
-        @game_state_model::state = :active
-      end
-    end
-
-    def win
-      # check horizontal, vertical, diagonal
-      return ( check_vertical || check_horizontal || check_diagonal )
-
-      # return has_won(construct_bitboard(@game_state_model::grid, state))
-    end
-
     def check_vertical
       (0..7).each { |y|
         (0..7).each { |x|
@@ -179,8 +162,6 @@
       }
       return false
     end
-
-
 
     def has_won(board)
       # printf("Pre-Solved: %b \n", board)
