@@ -5,6 +5,7 @@ module Controllers
       @game_state_model = game_state_model
       @view = Views::GameView.new(@window, self, @game_state_model)
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
+      @win_sound = Gosu::Sample.new(@window, "assets/sounds/cheer_win.mp3")
       @alert_view = nil
 
       @player_moved = false
@@ -40,10 +41,16 @@ module Controllers
 
         @game_state_model::game_mode_logic.check_for_winner
           if @game_state_model::state == :win
+            @win_sound.play(0.7, 1, false)
             @game_won = true
             @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
-            @game_state_model::players[@game_state_model::winner-1].increment_win_score
+            @game_state_model::players[@game_state_model::winner-1].win
           end  
+          if @game_state_model::state == :tie
+            @win_sound.play(0.7, 1, false)
+            @game_won = true
+            @alert_view = Views::WinAlertView.new(@window, self, 'tie')
+          end 
       end
     end
 
