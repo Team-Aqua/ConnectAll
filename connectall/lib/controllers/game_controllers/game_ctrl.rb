@@ -6,6 +6,8 @@ module Controllers
       @view = Views::GameView.new(@window, self, @game_state_model)
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
       @alert_view = nil
+
+      @player_moved = false
     end
 
     def reset_match
@@ -29,14 +31,20 @@ module Controllers
       if @alert_view != nil
         @alert_view.update
       else
-      @game_state_model::game_mode_logic.check_for_winner
-        if @game_state_model::state == :win
-          @game_won = true
-          @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
-          @game_state_model::players[@game_state_model::winner-1].win
-        end  
+        if @player_moved == false
+          @game_state_model::players[@game_state_model::player_turn_state+1].make_move
+        else
+          @player_moved = false
+          @game_state_model.toggle_player_turn_state
+        end
+
+        @game_state_model::game_mode_logic.check_for_winner
+          if @game_state_model::state == :win
+            @game_won = true
+            @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
+            @game_state_model::players[@game_state_model::winner-1].increment_win_score
+          end  
       end
-      
     end
 
     def clicked
@@ -48,6 +56,9 @@ module Controllers
     end
 
     def control_button_click(x)
+      # if @game_state_model::player_turn_state
+
+
       delay = 0.25
       if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
         delay = 2.0

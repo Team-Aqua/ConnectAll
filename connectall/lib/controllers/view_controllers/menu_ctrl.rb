@@ -33,11 +33,15 @@ module Controllers
     end
 
     def player_rdy(color, player2_color: nil)
-      @game_state_model::players.push(Models::Player.new(1, 'rl', color))
+      @game_state_model::players.push(Models::RealPlayer.new(1, color))
       if player2_color != nil
-        @game_state_model::players.push(Models::Player.new(2, 'rl', player2_color))
+        @game_state_model::players.push(Models::RealPlayer.new(2, player2_color))
       else
-        @game_state_model::players.push(Models::Player.new(2, 'ai', 'black'))
+        if @game_state_model::game_type = :classic
+          @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::ClassicAI.new(@game_state_model)))
+        else
+          @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::OttoAI.new(@game_state_model)))
+        end
       end
       @window.start_game
     end
@@ -57,14 +61,12 @@ module Controllers
     def classic_button_click
       @game_state_model::game_type = :classic
       @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
-      @game_state_model::ai = GameLogic::ClassicAI.new(@game_state_model)
       @current_view = @views[1]
     end
     
     def otto_button_click
       @game_state_model::game_type = :otto
       @game_state_model::game_mode_logic = GameLogic::OttoRules.new(@game_state_model)
-      @game_state_model::ai = GameLogic::ClassicAI.new(@game_state_model)
       @current_view = @views[1]
     end
     
