@@ -12,4 +12,6 @@
   xcode-select --install
   ```
 
-3. sudo gem install gosu
+3. ConnectAll -> connectall: bundle install
+
+4. ConnectAll -> class: ruby main.rb (Soon to be replaced)
