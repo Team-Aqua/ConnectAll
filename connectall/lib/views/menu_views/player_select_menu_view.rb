@@ -7,7 +7,7 @@ module Views
       @game_state_model = game_state_model
       @controller = controller
       @button_width = 235
-      @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Bold.ttf", 36)
+      @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Light.ttf", 36)
 
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
       @ole_start = Gosu::Sample.new(@window, "assets/sounds/ole_start.mp3")
@@ -55,7 +55,7 @@ module Views
         @text_fields = Array.new(1) { |index| TextField.new(@window, @font, 113, 175, "Player #{index + 1}") }
         @button_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), -500, -500, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png"))        
         @name_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/input_black_name.png"), -500, -500, 100, lambda { color_swap })
-        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @ole_start.play(0.7, 1, false); @controller.player_rdy(@color_selection_wheel[@color_selection]) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
+        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @ole_start.play(0.7, 1, false); @controller.player_rdy(@color_selection_wheel[@color_selection], player1_name: @text_fields[0].get_text)}, Gosu::Image.new("assets/images/btn_start_click.png"))  
       end    
 
     end

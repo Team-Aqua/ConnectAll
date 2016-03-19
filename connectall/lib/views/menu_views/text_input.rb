@@ -65,7 +65,7 @@ class TextField < Gosu::TextInput
                         pos_x, y + height - PADDING_Y - 5, CARET_COLOR, 100)
     end
     # Finally, draw the text itself!
-    @font.draw(self.text, x, y, 120, 1, 1, 0xff_505050)
+    @font.draw(self.text, x, y, 120, 1, 1, 0xff_585858)
   end
 
   # This text field grows with the text that's being entered.
