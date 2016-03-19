@@ -51,8 +51,8 @@ class GameWindow < Gosu::Window
     Gosu::enable_undocumented_retrofication
     self.caption = "ConnectAll"
     @song = Gosu::Song.new(self, "assets/music/bitbop.mp3")
-    @song.volume = 0.5
-    # @song.play(true)
+    @song.volume = 0.2
+    @song.play(true)
     if model != nil
       @game_state_model = model
     else
