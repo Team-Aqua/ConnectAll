@@ -9,7 +9,7 @@ module Models
       if @move == nil
         return false
       else
-        yield @move, @player_num, @player_color
+        yield @move, @player_num, @player_color, 0.0
         @move = nil
         return true
       end

@@ -33,18 +33,15 @@ module Controllers
         @alert_view.update
       else
         if @player_moved == false
-          move_made = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color| @view::grid.animate_tile_drop(x, player_color){@game_state_model::grid.add_tile(x, player_num)}}
+          move_made = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color, delay| @view::grid.animate_tile_drop(x, player_color, delay){@game_state_model::grid.add_tile(x, player_num); @player_moved = false; @game_state_model.toggle_player_turn_state}}
           @player_moved = move_made
-        else
-          @player_moved = false
-          @game_state_model.toggle_player_turn_state
         end
 
         @game_state_model::game_mode_logic.check_for_winner
           if @game_state_model::state == :win
             @win_sound.play(0.7, 1, false)
             @game_won = true
-            @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
+            @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner].player_color)
             @game_state_model::players[@game_state_model::winner-1].increment_win_score
           end  
           if @game_state_model::state == :tie

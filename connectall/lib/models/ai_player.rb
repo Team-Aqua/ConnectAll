@@ -8,7 +8,7 @@ module Models
 
     def make_move
       move = @ai.choose_location
-      yield move, @player_num, @player_color
+      yield move, @player_num, @player_color, 2.0
       @move = nil
       return true
     end
