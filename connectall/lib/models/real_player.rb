@@ -1,7 +1,7 @@
 module Models
   class RealPlayer < Player
-    def initialize(player_num, player_color)
-      super(player_num, player_color)
+    def initialize(player_num, player_color, name)
+      super(player_num, player_color, name)
       @move = nil
     end
 

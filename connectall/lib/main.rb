@@ -32,6 +32,7 @@ require_relative 'views/menu_views/menu_view'
 require_relative 'views/menu_views/type_menu_view'
 require_relative 'views/menu_views/mode_menu_view'
 require_relative 'views/menu_views/player_select_menu_view'
+require_relative 'views/menu_views/text_input'
 
 require_relative 'views/animations/basic'
 
@@ -75,6 +76,7 @@ class GameWindow < Gosu::Window
     if key == Gosu::MsLeft then
       @currentCtrl.clicked
     end
+    @currentCtrl.button_down(key)
   end
 
   def start_menu

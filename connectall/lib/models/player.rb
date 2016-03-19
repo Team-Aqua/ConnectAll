@@ -1,11 +1,12 @@
 module Models
   class Player
     include AbstractInterface
-    attr_accessor :player_num, :player_color, :player_type, :score, :set_move, :make_move
+    attr_accessor :player_num, :player_color, :player_type, :score, :set_move, :make_move, :name
 
-    def initialize(player_num, player_color)
+    def initialize(player_num, player_color, name)
       @player_num  = player_num
       @player_color = player_color
+      @name = name
       @score = 0
       @move = nil
     end

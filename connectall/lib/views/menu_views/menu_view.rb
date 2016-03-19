@@ -15,6 +15,9 @@ module Views
       @background.draw(0,0,9)
     end
 
+    def button_down(key)
+    end
+
     def update
     end
 

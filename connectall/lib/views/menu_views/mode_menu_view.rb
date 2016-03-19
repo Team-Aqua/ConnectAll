@@ -27,5 +27,8 @@ module Views
       @buttonPvP.clicked
     end
 
+    def button_down(key)
+    end
+
   end
 end
