@@ -45,7 +45,7 @@ module Models
       # print_grid
       for y in (7).downto(0)
         if getValue(x-1, y) == 0
-          setValue(x-1, y, player_num+1)
+          setValue(x-1, y, player_num)
           return
         end
       end

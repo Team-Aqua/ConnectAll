@@ -33,7 +33,8 @@ module Controllers
         @alert_view.update
       else
         if @player_moved == false
-          @game_state_model::players[@game_state_model::player_turn_state+1].make_move
+          move_made = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color| @view::grid.animate_tile_drop(x, player_color){@game_state_model::grid.add_tile(x, player_num)}}
+          @player_moved = move_made
         else
           @player_moved = false
           @game_state_model.toggle_player_turn_state
@@ -44,7 +45,7 @@ module Controllers
             @win_sound.play(0.7, 1, false)
             @game_won = true
             @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner-1].player_color)
-            @game_state_model::players[@game_state_model::winner-1].win
+            @game_state_model::players[@game_state_model::winner-1].increment_win_score
           end  
           if @game_state_model::state == :tie
             @win_sound.play(0.7, 1, false)
@@ -62,21 +63,12 @@ module Controllers
       end
     end
 
-    def control_button_click(x)
-      # if @game_state_model::player_turn_state
-
-
-      delay = 0.25
-      if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
-        delay = 2.0
-      end
-
-      player_turn = @game_state_model::player_turn_state
-      @game_state_model.toggle_player_turn_state
+    def place_tile(x)
       @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color, delay){@game_state_model::grid.add_tile(x, player_turn)}
-      if ((@game_state_model::game_mode == :pvai) and (@game_state_model::player_turn_state == 1))
-        control_button_click(@game_state_model::ai.choose_location)
-      end
+    end
+
+    def control_button_click(x)
+      @game_state_model::players[@game_state_model::player_turn_state]::set_move(x)
       @view::control.check_available
     end
 
@@ -89,7 +81,7 @@ module Controllers
       @game_won = true
       @game_state_model.toggle_player_turn_state
       @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::player_turn_state].player_color)
-      @game_state_model::players[@game_state_model::player_turn_state].win
+      @game_state_model::players[@game_state_model::player_turn_state].increment_win_score
       @menu_click_sound.play(0.7, 1, false)
     end
 

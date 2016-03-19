@@ -27,7 +27,7 @@ module AbstractInterface
     def needs_implementation(name, *args)
       self.class_eval do
         define_method(name) do |*args|
-          Bicycle.api_not_implemented(self, name)
+          self.api_not_implemented(self, name)
         end
       end
     end

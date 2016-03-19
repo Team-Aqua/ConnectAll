@@ -56,9 +56,9 @@ module Views
       @grid_model.getValue(x, y)
     end
 
-    def animate_tile_drop(x, player_color, delay)
+    def animate_tile_drop(x, player_color)
       Thread.new{
-      sleep(delay)
+      sleep(0.5)
       @swoosh_sound.play
       y = @grid_ypos+((38*(@grid_model.column_depth(x)-1))+19)
       x = 29 + ((x-1)*35.5)
