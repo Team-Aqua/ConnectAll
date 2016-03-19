@@ -1,8 +1,8 @@
 module Models
   class AIPlayer < Player
 
-    def initialize(player_num, player_color, ai)
-      super(player_num, player_color)
+    def initialize(player_num, player_color, ai, name)
+      super(player_num, player_color, name)
       @ai = ai
     end
 

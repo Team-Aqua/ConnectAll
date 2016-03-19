@@ -1,5 +1,6 @@
 module Views
   class TypeMenuView
+
     def initialize(window, controller)
       @window = window
       @controller = controller
@@ -43,5 +44,7 @@ module Views
       @buttonHelp.clicked
     end
 
+    def button_down(id)
+    end
   end
 end

@@ -20,6 +20,9 @@ module Controllers
       alert_close
     end
 
+    def button_down(ip)
+    end
+
     def draw
       @view.draw
       if @alert_view != nil

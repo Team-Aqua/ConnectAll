@@ -30,6 +30,9 @@ module Controllers
       end
     end
 
+    def button_down(key)
+    end
+
     def pvp_button_click
       @game_state_model::game_mode = :pvp
       @window.start_game

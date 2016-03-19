@@ -96,9 +96,9 @@ module Views
       # @block_green.draw(@x + 10, @y + 45, 1)
       @question.draw
       @cancel.draw
-      @font.draw("Player One", 50, @y + 7, 35, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("#{@game_state_model::players[0]::name}", 50, @y + 7, 35, 1.0, 1.0, 0xff_ffffff)
       @font.draw("Wins: #{@game_state_model::players[0]::score}", 50, @y + 22, 35, 1.0, 1.0, 0xff_ffffff)
-      @font.draw("Player Two", 50, @y + 47, 35, 1.0, 1.0, 0xff_ffffff)
+      @font.draw("#{@game_state_model::players[1]::name}", 50, @y + 47, 35, 1.0, 1.0, 0xff_ffffff)
       @font.draw("Wins: #{@game_state_model::players[1]::score}", 50, @y + 62, 35, 1.0, 1.0, 0xff_ffffff)
     end
 
