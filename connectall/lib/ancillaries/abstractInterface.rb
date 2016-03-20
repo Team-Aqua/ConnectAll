@@ -1,5 +1,8 @@
 module AbstractInterface
-  #http://metabates.com/2011/02/07/building-interfaces-and-abstract-classes-in-ruby/
+
+  ##
+  # Framework for abstract interface 
+  # Code referenced from: http://metabates.com/2011/02/07/building-interfaces-and-abstract-classes-in-ruby/
 
   class InterfaceNotImplementedError < NoMethodError
   end

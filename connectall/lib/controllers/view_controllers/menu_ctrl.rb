@@ -1,5 +1,10 @@
 module Controllers
   class MenuCtrl
+
+    ##
+    # Menu controller for game state,
+    # Controls low-level logic for otto/classic and PvP/PvAI, and player colors/names
+    
     def initialize(window, game_state_model)
       @window = window
       @game_state_model = game_state_model
@@ -9,6 +14,11 @@ module Controllers
       @alert_view = nil
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
       @menu_background.draw
       @current_view.draw
@@ -17,12 +27,22 @@ module Controllers
       end
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def update
       @current_view.update
       if @alert_view != nil
         @alert_view.update
       end
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
       if @alert_view != nil
@@ -32,9 +52,19 @@ module Controllers
       end
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: key
+    # Outputs: none
+
     def button_down(key)
       @current_view.button_down(key) 
     end
+
+    ## 
+    # Setup player logic for player color and name, then starts game
+    # Inputs: player 1 color, player 2 color, player 1 name, player 2 game
+    # Outputs: none
 
     def player_rdy(color, player2_color: nil, player1_name: "Player 1", player2_name: "Player 2")
       @game_state_model::players.push(Models::RealPlayer.new(1, color, player1_name))
@@ -50,11 +80,23 @@ module Controllers
       @window.start_game
     end
 
+    ## 
+    # Setup structure for 2p game
+    # Redirects view to third menu view
+    # Inputs: none
+    # Outputs: none
+
     def pvp_button_click
       @game_state_model::game_mode = :pvp
       @game_state_model::num_of_players = 2
       @current_view = Views::PlayerMenuView.new(@window, self, @game_state_model)
     end
+
+    ## 
+    # Setup structure for 1p game
+    # Redirects view to third menu view
+    # Inputs: none
+    # Outputs: none
 
     def pvai_button_click
       @game_state_model::game_mode = :pvai
@@ -62,31 +104,61 @@ module Controllers
       @current_view = Views::PlayerMenuView.new(@window, self, @game_state_model)
     end
 
+    ## 
+    # Setup structure for classic game
+    # Redirects view to second menu view
+    # Inputs: none
+    # Outputs: none
+
     def classic_button_click
       @game_state_model::game_type = :classic
       @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
-
       @current_view = @views[1]
     end
+
+    ## 
+    # Setup structure for otto game
+    # Redirects view to second menu view
+    # Inputs: none
+    # Outputs: none
     
     def otto_button_click
-      "setting otto"
       @game_state_model::game_type = :otto
       @game_state_model::game_mode_logic = GameLogic::OttoRules.new(@game_state_model)
       @current_view = @views[1]
     end
+
+    ## 
+    # Opens AlertView for Otto mode
+    # Inputs: none
+    # Outputs: none
     
     def question_otto_button_click
       @alert_view = @help_view = Views::OttoInstructionsAlertView.new(@window, self)
     end
 
+    ## 
+    # Opens AlertView for ConnectAll
+    # Inputs: none
+    # Outputs: none
+
     def question_help_click
       @alert_view = @help_view = Views::ConnectAllAlertView.new(@window, self)
     end
 
+    ## 
+    # Opens AlertView for ConnectAll
+    # Inputs: none
+    # Outputs: none
+
     def question_classic_button_click
       @alert_view = @help_view = Views::ConnectInstructionsAlertView.new(@window, self)
     end
+
+    ## 
+    # Closes any open alertview
+    # Inputs: none
+    # Outputs: none
 
     def alert_close
       @alert_view = nil

@@ -2,6 +2,11 @@
     class ClassicRules < Rules
       attr_accessor :game_state_model
 
+      ## 
+      # Game rules for classic mode
+      # Win condition: four in a row, in any space.
+      # Dev: bitboard interaction for CPU
+
     def initialize(game_state_model)
       @game_state_model = game_state_model
       @grid = @game_state_model::grid.getGrid
@@ -76,6 +81,11 @@
 
     end
 
+    ## 
+    # Checks if player has won for any vertical
+    # Inputs: none
+    # Outputs: boolean
+
     def check_vertical
       (0..7).each { |y|
         (0..7).each { |x|
@@ -95,6 +105,11 @@
       return false
     end
 
+    ## 
+    # Checks if a player has won for any horizontal
+    # Inputs: none
+    # OutputS: boolean
+
     def check_horizontal
       (0..7).each { |y|
         (0..7).each { |x|
@@ -113,6 +128,11 @@
       }
       return false
     end
+
+    ## 
+    # Checks if a player has won for any diagonal
+    # Inputs: none
+    # Outputs: boolean
 
     def check_diagonal
       (0..7).each { |y|
@@ -163,6 +183,11 @@
       return false
     end
 
+    ## 
+    # Given the board, identifies if a player has won
+    # Inputs: bitboard
+    # Outputs: boolean
+
     def has_won(board)
       # printf("Pre-Solved: %b \n", board)
       # puts "Num: #{board}"
@@ -183,6 +208,11 @@
       # puts @game_state_model::state
       return  bitboard > 0
     end
+
+    ## 
+    # Generates bitboard for player specific interactions
+    # Inputs: grid, player (or AI)
+    # Outputs: bitboard
 
     def construct_bitboard(grid, player_num)
       board = 0b0000000000000000000000000000000000000000000000000000000000000000

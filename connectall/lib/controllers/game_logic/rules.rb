@@ -1,6 +1,10 @@
 module GameLogic
   class Rules
 
+    ## 
+    # Abstract implementation for rules
+    # Implements generic checks and win conditions
+
     include AbstractInterface
   
     needs_implementation :check_winner, :winner, :win
@@ -9,9 +13,15 @@ module GameLogic
     needs_implementation :update
 
     @observers = []
+
     def add_observer(observer)
       self.api_not_implemented(self)
     end
+
+    ##
+    # Checks if a player has won given rules, or has tied
+    # Inputs: none
+    # Outputs: none
 
     def check_for_winner
       @grid = @game_state_model::grid.getGrid
@@ -25,10 +35,21 @@ module GameLogic
       end
     end
 
+    ##
+    # Checks if a player has won with respect to vertical, horizontal, diagonal wins
+    # Specific implementation of all three, in their respective classes (otto_rules, classic_rules)
+    # Inputs: none
+    # Outputs: boolean
+
     def win
-      # check horizontal, vertical, diagonal
       return ( check_vertical || check_horizontal || check_diagonal )
     end
+
+    ##
+    # Given the grid model, checks if every space is filled
+    # If so, then the board has reached a 'tie' state and no winners are declared.
+    # Inputs: none
+    # Outputs: boolean
 
     def tie
       (0..7).each { |col|

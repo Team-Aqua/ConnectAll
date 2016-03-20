@@ -1,26 +1,21 @@
 module GameLogic
   class OttoRules < Rules
 
+    ## 
+    # Game rules for classic mode
+    # Win condition: correct tile placement for player (OTTO/TOOT), in any space.
+    # Dev: bitboard interaction for CPU
+
     def initialize(game_state_model)
       @game_state_model = game_state_model
       @grid = @game_state_model::grid.getGrid
       @winner = nil
     end
 
-    def check_for_winner
-      @grid = @game_state_model::grid.getGrid
-      if win
-        @game_state_model::state = :win
-        @game_state_model::winner = @winner
-      else
-        @game_state_model::state = :active
-      end
-    end
-
-    def win
-      # check horizontal, vertical, diagonal
-      return ( check_vertical || check_horizontal || check_diagonal )
-    end
+    ## 
+    # Checks if player has won for any vertical
+    # Inputs: none
+    # Outputs: boolean
 
     def check_vertical
       (0..7).each { |y|
@@ -41,6 +36,11 @@ module GameLogic
       return false
     end
 
+    ## 
+    # Checks if player has won for any horizontal
+    # Inputs: none
+    # Outputs: boolean
+
     def check_horizontal
       (0..7).each { |y|
         (0..7).each { |x|
@@ -59,6 +59,11 @@ module GameLogic
       }
       return false
     end
+
+    ## 
+    # Checks if player has won for any diagonal
+    # Inputs: none
+    # Outputs: boolean
 
     def check_diagonal
       (0..7).each { |y|

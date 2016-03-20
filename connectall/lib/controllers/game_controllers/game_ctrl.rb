@@ -2,6 +2,11 @@ module Controllers
   class GameCtrl
     attr_accessor :view
 
+    ## 
+    # Main controller for game interactions
+    # Uses the game_state_model as reference to 
+    # identify actions and processes to take.
+
     def initialize(window, game_state_model)
       @window = window
       @game_state_model = game_state_model
@@ -13,6 +18,12 @@ module Controllers
       @player_moved = false
     end
 
+    ## 
+    # Resets match, clears open alertviews
+    # Forces model resets before resetting game.
+    # Inputs: none
+    # Outputs: none
+
     def reset_match
       @menu_click_sound.play(0.7, 1, false)
       @game_state_model::state = :active
@@ -22,8 +33,18 @@ module Controllers
       alert_close
     end
 
-    def button_down(ip)
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
+    def button_down(key)
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def draw
       @view.draw
@@ -31,6 +52,11 @@ module Controllers
         @alert_view.draw
       end
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def update
       @view.update
@@ -43,6 +69,12 @@ module Controllers
         end
       end
     end
+
+    ##
+    # Checks for winner given game state, or for tie
+    # If winner or tie is present, handles processes
+    # Inputs: none
+    # Outputs: none
 
     def check_winner_winner
      @game_state_model::game_mode_logic.check_for_winner
@@ -60,6 +92,12 @@ module Controllers
       end 
     end
 
+    ##
+    # Gosu implementation
+    # Forces alertview check if alertview is open; prevents inputs outside of alertview if true
+    # Inputs: none
+    # Outputs: none
+
     def clicked
       if @alert_view != nil
         @alert_view.clicked
@@ -68,14 +106,32 @@ module Controllers
       end
     end
 
+    ##
+    # Places tile on grid,
+    # Handles processing up to that point.
+    # Inputs: x position
+    # Outputs: none
+
     def place_tile(x)
       @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color, delay){@game_state_model::grid.add_tile(x, player_turn)}
     end
+
+    ##
+    # Checks if block input is viable
+    # Inputs: x position
+    # Outputs: none 
 
     def control_button_click(x)
       @game_state_model::players[@game_state_model::player_turn_state]::set_move(x)
       @view::control.check_available
     end
+
+    ##
+    # Handles processing for 'skip' button clicked
+    # If skipping is available, that player's turn is skipped
+    # N/A on computer's turn
+    # Inputs: none
+    # Outputs: none
 
     def skip_button_click
       if @game_state_model::players[@game_state_model::player_turn_state].ai == nil # if it isn't an ai currently playing
@@ -83,6 +139,13 @@ module Controllers
         @menu_click_sound.play(0.7, 1, false)
       end
     end
+
+    ##
+    # Handles processing for 'concede' button clicked
+    # If conceding is available, that player loses
+    # N/A on computer's turn
+    # Inputs: none
+    # Outputs: none
 
     def concede_button_click
       if @game_state_model::players[@game_state_model::player_turn_state].ai == nil # if it isn't an ai currently playing
@@ -94,20 +157,42 @@ module Controllers
       end
     end
 
+    ##
+    # Handles processing for 'reset' button clicked
+    # Rebuilds grid and buttons
+    # Inputs: none
+    # Outputs: none
+
     def reset_button_click
       @game_state_model::grid.reset
       @view::control.build_red_grid
     end
+
+    ## 
+    # Opens help alert view for user
+    # Inputs: none
+    # Outputs: none
 
     def question_button_click
       @alert_view = @help_view = Views::HelpAlertView.new(@window, self)
       @menu_click_sound.play(0.7, 1, false)
     end
 
+    ##
+    # Closes any alert view present
+    # Inputs: none
+    # Outputs: none
+
     def alert_close
       @menu_click_sound.play(0.7, 1, false)
       @alert_view = nil
     end
+
+    ##
+    # Closes window
+    # Currently unused
+    # Inputs: none
+    # Outputs: none
 
     def cancel_button_click
       @window.close
