@@ -10,7 +10,7 @@ module Views
       @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Light.ttf", 36)
 
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
-      @ole_start = Gosu::Sample.new(@window, "assets/sounds/ole_start.mp3")
+      #@ole_start = Gosu::Sample.new(@window, "assets/sounds/ole_start.mp3")
       @color_selection = 0
       @color2_selection = 0
       @color_selection_wheel = ['green','orange','pink','white']
@@ -47,7 +47,7 @@ module Views
         @name_player = @player_name[@color_selection_wheel[@color_selection]]
         @name_player2 = @player2_name[@color2_selection_wheel[@color2_selection]]
         @text_fields = Array.new(2) { |index| TextField.new(@window, @font, 113, 175 + index * 110, "Player #{index + 1}") }
-        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @ole_start.play(0.7, 1, false); @controller.player_rdy(@color_selection_wheel[@color_selection], player2_color: @color2_selection_wheel[@color2_selection], player1_name: @text_fields[0].get_text, player2_name: @text_fields[1].get_text) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
+        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player2_color: @color2_selection_wheel[@color2_selection], player1_name: @text_fields[0].get_text, player2_name: @text_fields[1].get_text) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
       else
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         @name_player = @player_name[@color_selection_wheel[@color_selection]]
