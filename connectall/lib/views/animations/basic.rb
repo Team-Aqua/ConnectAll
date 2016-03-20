@@ -1,6 +1,10 @@
 module Animations
   class Basic
-    #BASIC Y DOWN 
+
+    ##
+    # Basic animation for falling blocks
+    # Provides the falling animation via separate thread
+    
     attr_accessor :state
 
     def initialize(x, y, x_dest: x_dest, y_dest: y_dest, x_speed: x_speed, y_speed: y_speed, image: image, z: z)
@@ -20,14 +24,32 @@ module Animations
       @speed = 3.0
     end
 
+    ## 
+    # Slowly accelerates the block as it drops
+    # Factors as 'gravity' implementation
+    # Inputs: none
+    # Outputs: none
+
     def accelaration
       @speed = (@speed * 1.05)
     end
+
+    ##
+    # Used for animation calling
+    # Immediately opens a thread to process animation
+    # Inputs: none
+    # Outputs: thread with animation
 
     def animate
       Thread.new{anim}
     end
 
+    ##
+    # Animates falling block given speed and acceleration
+    # At termination, state change lets game process return to normal state
+    # Inputs: none
+    # Outputs: final state change
+    
     def anim
       while (@y <= @y_dest)
         @y = @y + @speed
@@ -35,8 +57,12 @@ module Animations
         sleep((@y_speed/@frame_rate))
       end
       @state = :dead
-      
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def draw
       @image.draw(@x, @y, @z)

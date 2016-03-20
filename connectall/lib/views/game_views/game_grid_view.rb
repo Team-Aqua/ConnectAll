@@ -1,4 +1,9 @@
 module Views
+
+  ## 
+  # GridView holds the grid where tiles are placed.
+  # Contains player-specific tile information.
+
   class GridView
     attr_accessor :set_tiles, :tiles
 
@@ -43,20 +48,32 @@ module Views
       set_tiles
     end
 
+    ##
+    # Sets tiles depending on game type selected in menu
+    # Inputs: none
+    # Outputs: none
+    
     def set_tiles
       if @model::game_type == :classic
         @tiles = @tilesClassic
       elsif @model::game_type == :otto
         @tiles = @tilesOtto
-      else 
-        # raise "Error: bad game mode selected"
-        # can't raise error - crashes on startup
       end
     end
 
+    ##
+    # Returns the value at the grid given the x and y coordinates
+    # Inputs: X position, Y position
+    # Outputs: grid value
+    
     def getGridModelValue(x, y)
       @grid_model.getValue(x, y)
     end
+
+    ## 
+    # Animates the tile drop using the animation library.
+    # Inputs: X position, player color, delay time
+    # Outputs: none
 
     def animate_tile_drop(x, player_color, delay)
       Thread.new{
@@ -75,6 +92,13 @@ module Views
       }
     end
 
+    ##
+    # Extension of Gosu implementation,
+    # Draws tiles in relative position
+    # Currently implementing pixel-perfect position (35.5px, 38px)
+    # Inputs: none
+    # Outputs: none
+
     def draw_tiles
       ypos = @grid_ypos
       (0..7).each { |y|
@@ -91,6 +115,12 @@ module Views
       }
     end
 
+    ##
+    # Draws the potential block positions for the current player.
+    # Currently unused.
+    # Inputs: none
+    # Outputs: none
+
     def draw_potentials
       # ypos = @grid_ypos
       # (0..7).each { |y|
@@ -106,6 +136,11 @@ module Views
       # }
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
       if @falling_tiles != []
         @falling_tiles.each do |tile|
@@ -115,6 +150,11 @@ module Views
       draw_tiles
       draw_potentials
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def update
       if @falling_tiles != []
@@ -127,8 +167,12 @@ module Views
       end
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def clicked
-      
     end
 
   end

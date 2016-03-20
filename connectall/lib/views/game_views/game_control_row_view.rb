@@ -1,4 +1,10 @@
 module Views
+
+  ##
+  # GameDropControlRowView sets up the red grid responsible for player input.
+  # Users can select this row to choose where to drop down blocks at their turn.
+  # 
+
   class GameDropControlRowView
     def initialize(window, controller, game_state_model)
       @window = window
@@ -11,6 +17,11 @@ module Views
       build_red_grid
     end
 
+    ##
+    # Generates red grid at startup for game.
+    # Inputs: none
+    # Outputs: none
+
     def build_red_grid
       @red_grid = Array.new
       original_pos = 29
@@ -20,6 +31,13 @@ module Views
         original_pos = original_pos + 35.5
       }
     end
+
+    ##
+    # Checks whether or not the row can be selected for input by user.
+    # If the column is not available, the user is shown an N/A block.
+    # Inputs: game started
+    # Outputs: none
+    #
 
     def check_available
       original_pos = 29
@@ -33,17 +51,32 @@ module Views
       }
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
       @red_grid.each do |j|
         j.draw
       end
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def update
       @red_grid.each do |j|
         j.update
       end
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
       @red_grid.each do |j|

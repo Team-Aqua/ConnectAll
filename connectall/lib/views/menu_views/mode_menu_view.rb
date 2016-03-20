@@ -1,5 +1,9 @@
 module Views
   class ModeMenuView
+
+    ##
+    # View structure for P1vP2 or PvAI selection.
+
     def initialize(window, controller)
       @window = window
       @controller = controller
@@ -11,21 +15,41 @@ module Views
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
       @buttonPvAi.draw
       @buttonPvP.draw
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def update
       @buttonPvAi.update
       @buttonPvP.update
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def clicked
       @menu_click_sound.play(0.7, 1, false)
       @buttonPvAi.clicked
       @buttonPvP.clicked
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: key
+    # Outputs: none
 
     def button_down(key)
     end

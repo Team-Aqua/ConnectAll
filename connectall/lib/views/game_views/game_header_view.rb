@@ -1,5 +1,12 @@
 module Views
   class GameHeaderView
+
+    ##
+    # GameHeaderView is the header interaction in-game. 
+    # Is placed above the gameboard and records game players, 
+    # current turns and current game state. 
+    # Additionally, is used for selecting 'help' and exiting game.
+  
     def initialize(window, controller, game_state_model)
       @window = window
       @controller = controller
@@ -62,27 +69,28 @@ module Views
 
       @help = Gosu::Image.new("assets/images/item_how_to_play.png", :tileable => false)
       @cancel_dark = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_dark.png"), 285, 20, 110, lambda { stop_help }, Gosu::Image.new("assets/images/btn_cancel_dark_click.png", :tileable => false))
-    
       set_tiles
-
     end
 
+    ##
+    # Sets the tiles used for game - loaded depending on menu selection.
+    # Inputs: none
+    # Outputs: none
+    
     def set_tiles
       if @game_state_model::game_type == :classic
         @tiles = @tilesClassic
       elsif @game_state_model::game_type == :otto
         @tiles = @tilesOtto
-      else 
-        # raise "Error: bad game mode selected"
-        # can't raise error - crashes on startup
       end
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+  
     def draw
-      # if @help_state == 1
-      #   @cancel_dark.draw
-      #   @help.draw(10, 10, 100)
-      # end
       @headers[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(@x, @y, 35)
 
       if @game_state_model.player_turn_state == 0
@@ -105,16 +113,24 @@ module Views
       @font.draw("Wins: #{@game_state_model::players[1]::score}", 50, @y + 62, 35, 1.0, 1.0, 0xff_ffffff)
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def update
       @question.update
       @cancel.update
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def clicked
       @question.clicked
       @cancel.clicked
     end
-
-
   end
 end

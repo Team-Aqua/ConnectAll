@@ -5,7 +5,6 @@ require_relative 'ancillaries/abstractInterface'
 require_relative 'controllers/game_controllers/game_ctrl'
 require_relative 'controllers/view_controllers/menu_ctrl'
 
-
 require_relative 'controllers/game_logic/rules'
 require_relative 'controllers/game_logic/classic_rules'
 require_relative 'controllers/game_logic/otto_rules'
@@ -47,6 +46,11 @@ class GameWindow < Gosu::Window
 
   attr_accessor :game_state_model, :controllers 
 
+  ## 
+  # Main application portal for ConnectAll
+  # User must enter ruby main.rb to start
+  # Setup all gosu-relatead logic and high-level controller logic
+
   def initialize(h, w, model: nil)
     super w, h, false
     Gosu::enable_undocumented_retrofication
@@ -68,9 +72,20 @@ class GameWindow < Gosu::Window
     @fps_counter = 0
   end
 
+  ## 
+  # Gosu implementation for showing cursor
+  # Inputs: none
+  # Outputs: boolean
+
   def needs_cursor?
     true
   end
+
+  ##
+  # Gosu logic for button or key input 
+  # Depending on which, user interactions are called 
+  # Inputs: key or mouse input
+  # Outputs: none
 
   def button_down(key)
     if key == Gosu::MsLeft then
@@ -79,18 +94,33 @@ class GameWindow < Gosu::Window
     @currentCtrl.button_down(key)
   end
 
+  ##
+  # Starts the start menu
+  # Connect menu controller to views.
+  # Inputs: none
+  # Outputs: none
+  
   def start_menu
     initialize(347, 533)
     @currentCtrl = @controllers[:menu]
   end
 
+  ## 
+  # Starts the game based on menu selection.
+  # Connect game controller to views.
+  # Inputs: none
+  # Outputs: none
+
   def start_game
     @controllers[:game]::view::grid.set_tiles
-    puts @game_state_model::game_type
-    puts @controllers[:game]::view::grid.tiles["green"]
+    # puts @game_state_model::game_type
+    # puts @controllers[:game]::view::grid.tiles["green"]
     initialize(568, 343, model: @game_state_model)
     @currentCtrl = @controllers[:game]
   end
+
+  ##
+  # Development test for FPS
 
   def fps
     if Time.now.to_f < (@fps_init + 1.0)
@@ -102,15 +132,29 @@ class GameWindow < Gosu::Window
     end
   end
 
+  ##
+  # Gosu implementation
+  # Inputs: none
+  # Outputs: none
+
   def draw
-    # fps
     @currentCtrl.draw
   end
+
+  ##
+  # Gosu implementation
+  # Inputs: none
+  # Outputs: none
 
   def update
     @currentCtrl.update
   end
 
+  ##
+  # Gosu implementation
+  # Inputs: none
+  # Outputs: none
+    
   def clicked
     @currentCtrl.clicked
   end

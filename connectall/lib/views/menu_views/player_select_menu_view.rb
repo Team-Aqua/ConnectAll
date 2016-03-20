@@ -2,6 +2,10 @@ module Views
   class PlayerMenuView
     attr_accessor :color_swap
 
+    ##
+    # PlayerMenuView lets users select names and colours before playing.
+    # Selected after PvAI/P1vP2 selection
+
     def initialize(window, controller, game_state_model)
       @window = window
       @game_state_model = game_state_model
@@ -60,15 +64,18 @@ module Views
 
     end
 
+    ##
+    # Gosu implementation:
+    # Used for text input for names
+    # Inputs: key id 
+    # Outputs: none
+
     def button_down(id)
       if id == Gosu::KbTab then
-        # Tab key will not be 'eaten' by text fields; use for switching through
-        # text fields.
         index = @text_fields.index(@window.text_input) || -1
         @window.text_input = @text_fields[(index + 1) % @text_fields.size]
 
       elsif id == Gosu::KbEscape then
-        # Escape key will not be 'eaten' by text fields; use for deselecting.
         if @window.text_input then
           @window.text_input = nil
         else
@@ -76,12 +83,16 @@ module Views
         end
 
       elsif id == Gosu::MsLeft then
-        # Mouse click: Select text field based on mouse position.
         @window.text_input = @text_fields.find { |tf| tf.under_point?(@window.mouse_x, @window.mouse_y) }
-        # Advanced: Move caret to clicked position
         @window.text_input.move_caret(@window.mouse_x) unless @window.text_input.nil?
       end
     end
+
+    ## 
+    # Defines logic for swapping colors for player one
+    # Relected by button/name colors
+    # Inputs: none
+    # Outputs: none
 
     def color_swap
       @color_selection = (@color_selection + 1) % @color_selection_wheel.count
@@ -89,11 +100,22 @@ module Views
       @name_player = @player_name[@color_selection_wheel[@color_selection]]
     end
 
+    ## 
+    # Defines logic for swapping colors for player two
+    # Reflected by button/name colors
+    # Inputs: none
+    # Outputs: none
+
     def color2_swap
       @color2_selection = (@color2_selection + 1) % @color2_selection_wheel.count
       @button_player2 = @player2_buttons[@color2_selection_wheel[@color2_selection]]
       @name_player2 = @player2_name[@color2_selection_wheel[@color2_selection]]
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def draw
       @button_player.draw
@@ -104,11 +126,21 @@ module Views
       @text_fields.each { |tf| tf.draw }
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def update
       @button_player.update
       @button_player2.update
       @button_rdy.update
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
       @menu_click_sound.play

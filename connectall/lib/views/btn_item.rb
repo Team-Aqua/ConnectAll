@@ -1,5 +1,9 @@
 class BtnItem
-    # code reference from: http://blog.dreasgrech.com/2010/08/simple-menu-for-gosu-game-in-ruby.html
+
+    ## 
+    # Logic for buttons for Gosu.
+    # Code referenced from: http://blog.dreasgrech.com/2010/08/simple-menu-for-gosu-game-in-ruby.html
+    
     attr_accessor :hover_image
     HOVER_OFFSET = 0
     def initialize (window, image, x, y, z, callback, hover_image = nil)
@@ -13,9 +17,19 @@ class BtnItem
         @active_image = @main_image
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
         @active_image.draw(@x, @y, @z)
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def update
         if is_mouse_hovering then
@@ -32,12 +46,22 @@ class BtnItem
         end
     end
 
+    ##
+    # Identifies if the mouse is selecting the button,
+    # given window relative x, y positions.
+    # Inputs: none
+    # Outputs: boolean
+
     def is_mouse_hovering
         mx = @window.mouse_x
         my = @window.mouse_y
-
         (mx >= @x and my >= @y) and (mx <= @x + @active_image.width) and (my <= @y + @active_image.height)
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
         if is_mouse_hovering then

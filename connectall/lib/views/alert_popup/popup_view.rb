@@ -1,24 +1,37 @@
 module Views
   class AlertView
 
+    ##
+    # Generic AlertView implementation
+    # Used as framework for other alertviews
+
     def initialize(window, controller)
       @window = window
       @controller = controller
-      # @help = Gosu::Image.new("assets/images/item_how_to_play.png", :tileable => false)
-      # @cancel_dark = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 285, 20, 110, lambda { @controller.alert_close }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
-      # @cancel_dark.draw
-      # @help.draw(10, 10, 100)
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
     
     def update
-      # @cancel.update
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
     
     def clicked
-      # @cancel.clicked
     end
 
   end

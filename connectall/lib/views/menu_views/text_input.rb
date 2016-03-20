@@ -1,6 +1,11 @@
 require 'gosu'
 class TextField < Gosu::TextInput
-  # Some constants that define our appearance.
+
+  ## 
+  # TextField is a custom implementation of a text field
+  # Lets users enter in text given max size and alphanumeric characters
+  # Code referenced from: https://docs.omniref.com/ruby/gems/gosu/0.7.24/universal-darwin/files/examples/TextInput.rb
+
   INACTIVE_COLOR  = 0xcc666666
   ACTIVE_COLOR    = 0xccff6666
   SELECTION_COLOR = 0xcc0000ff
@@ -21,20 +26,36 @@ class TextField < Gosu::TextInput
     @caret_height = 25
   end
 
-  # Example filter method. You can truncate the text to employ a length limit (watch out
-  # with Ruby 1.8 and UTF-8!), limit the text to certain characters etc.
+  ##
+  # Filters text by the given parameters:
+  # Must be alphanumeric and must fit within the text box.
+  # Inputs: text character, singular
+  # Outputs: text
+  
   def filter text
     if width + @font.text_width(text) < 140
       return text.gsub(/[^A-Z0-9a-z ]/, '')
     else 
       return nil
     end
-    # text.upcase
   end
+
+  ##
+  # Returns the text currently in field.
+  # Inputs: none
+  # Outputs: text
 
   def get_text
     return self.text
   end
+
+  ## 
+  # Draws the box first,
+  # Then the caret and the text after.
+  # Layers to ensure proper printing.
+  # Gosu implementation.
+  # Inputs: none
+  # Outputs: none
 
   def draw
     # Depending on whether this is the currently selected input or not, change the
@@ -44,21 +65,9 @@ class TextField < Gosu::TextInput
     else
       @drawbox = @box_hover
     end
-    # @window.draw_quad(x - PADDING,         y - PADDING,          background_color,
-    #                  x + width + PADDING, y - PADDING,          background_color,
-    #                  x - PADDING,         y + height + PADDING, background_color,
-    #                  x + width + PADDING, y + height + PADDING, background_color, 100)
-    # Calculate the position of the caret and the selection start.
     @drawbox.draw(x - PADDING_X, y - PADDING_Y, 100)
     pos_x = x + @font.text_width(self.text[0...self.caret_pos])
-    sel_x = x + @font.text_width(self.text[0...self.selection_start])
-    # Draw the selection background, if any; if not, sel_x and pos_x will be
-    # the same value, making this quad empty.
-    # @window.draw_quad(sel_x, y,          SELECTION_COLOR,
-    #                  pos_x, y,          SELECTION_COLOR,
-    #                  sel_x, y + height, SELECTION_COLOR,
-    #                  pos_x, y + height, SELECTION_COLOR, 100)
-    
+    sel_x = x + @font.text_width(self.text[0...self.selection_start])    
     # Draw the caret; again, only if this is the currently selected field.
     if @window.text_input == self then
       @window.draw_line(pos_x, y - PADDING_Y + 5,          CARET_COLOR,
@@ -68,23 +77,40 @@ class TextField < Gosu::TextInput
     @font.draw(self.text, x, y, 120, 1, 1, 0xff_585858)
   end
 
-  # This text field grows with the text that's being entered.
-  # (Usually one would use clip_to and scroll around on the text field.)
+  ## 
+  # Returns the width of the text given the font used.
+  # Input: none
+  # Output: size in integer
+
   def width
     @font.text_width(self.text)
   end
+
+  ## 
+  # Returns the height of the text given the font used.
+  # Input: none
+  # Output: size in integer
 
   def height
     @font.height
   end
 
+  ## 
   # Hit-test for selecting a text field with the mouse.
+  # Input: mouse x, y positions
+  # Output: boolean
+  
   def under_point?(mouse_x, mouse_y)
     mouse_x > x - PADDING_X and mouse_x < x + @width + PADDING_X and
       mouse_y > y - PADDING_Y and mouse_y < y + @height + PADDING_Y
   end
 
+  ##
   # Tries to move the caret to the position specifies by mouse_x
+  # Can be selected by clicking via mouse
+  # Input: mouse x position
+  # Output: new caret position
+  
   def move_caret(mouse_x)
     # Test character by character
     1.upto(self.text.length) do |i|

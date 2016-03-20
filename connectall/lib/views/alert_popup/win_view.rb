@@ -1,6 +1,11 @@
 module Views
   class WinAlertView
 
+    ## 
+    # AlertView provided at game win 
+    # Alert is coloured by player who won
+    # Contains paths for return and replay
+
     def initialize(window, controller, player_color)
       @window = window
       @controller = controller
@@ -19,21 +24,35 @@ module Views
       }
 
       @view = @player_win_views[player_color]
-      # @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel.png"), 310, 20, 200, lambda { @controller.alert_close }, Gosu::Image.new("assets/images/btn_cancel.png", :tileable => false))
       @replay = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_replay.png"), 185, 445, 200, lambda { @controller.reset_match }, Gosu::Image.new("assets/images/btn_replay_click.png", :tileable => false))
       @return = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_return_sm.png"), 185, 485, 200, lambda { @menu_click_sound.play(0.7, 1, false); @window.start_menu }, Gosu::Image.new("assets/images/btn_return_sm_click.png", :tileable => false))
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def draw
       @view.draw(0, 0, 100)
       @replay.draw
       @return.draw
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
     
     def update
       @replay.update
       @return.update
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
     
     def clicked
       @replay.clicked

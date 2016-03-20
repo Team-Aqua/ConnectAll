@@ -1,6 +1,11 @@
 module Views
   class TypeMenuView
 
+    ##
+    # Main menu - first menu interaction view
+    # Lets users select between classic or OTTO mode,
+    # and explanations for both, as well as how to play ConnectAll.
+
     def initialize(window, controller)
       @window = window
       @controller = controller
@@ -19,6 +24,11 @@ module Views
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def draw
       @buttonClassic.draw
       @buttonOtto.draw
@@ -27,6 +37,11 @@ module Views
       @buttonHelp.draw
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def update
       @buttonClassic.update
       @buttonOtto.update
@@ -34,6 +49,11 @@ module Views
       @questionClassic.update
       @buttonHelp.update
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
       @menu_click_sound.play
@@ -44,7 +64,13 @@ module Views
       @buttonHelp.clicked
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def button_down(id)
     end
+    
   end
 end

@@ -1,4 +1,9 @@
 module Views
+
+  ## 
+  # Combines all game views into one system. 
+  # Acts as parent layer operations
+
   class GameView
     attr_accessor :grid, :control
     def initialize(window, controller, game_state_model)
@@ -29,6 +34,10 @@ module Views
       @y = 116.0
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def draw
       @sub_views.each do |view|
@@ -36,18 +45,23 @@ module Views
       end
       @backgrounds[@game_state_model::players[@game_state_model.player_turn_state]::player_color].draw(0, 0, 25)
       @grey_bg.draw(0, 0, 0)
-      # if @game_state_model.player_turn_state == 0
-      #   @background_image_green.draw(0, 0, 0)
-      # else 
-      #   @background_image_purple.draw(0, 0, 0)
-      # end
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def update
       @sub_views.each do |view|
         view.update
       end
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
       @sub_views.each do |view|

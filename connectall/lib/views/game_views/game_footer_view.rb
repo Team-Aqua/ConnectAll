@@ -1,4 +1,9 @@
 module Views
+
+  ##
+  # GameFooterView is the 'footer view' of the game menu.
+  # Contains a 'concede' and 'skip' options in-game, for the user.
+
   class GameFooterView
     def initialize(window, controller, game_state_model)
       @window = window
@@ -12,17 +17,32 @@ module Views
       @status_buttons << @concede
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+    
     def draw
       @status_buttons.each do |i|
         i.draw
       end
     end
 
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
+
     def update
       @status_buttons.each do |i|
         i.update
       end
     end
+
+    ##
+    # Gosu implementation
+    # Inputs: none
+    # Outputs: none
 
     def clicked
       @status_buttons.each do |i|
