@@ -41,7 +41,7 @@ module Controllers
       if player2_color != nil
         @game_state_model::players.push(Models::RealPlayer.new(2, player2_color, player2_name))
       else
-        if @game_state_model::game_type = :classic
+        if @game_state_model::game_type == :classic
           @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::ClassicAI.new(@game_state_model), "Roboto"))
         else
           @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::OttoAI.new(@game_state_model), "Roboto"))
@@ -65,10 +65,12 @@ module Controllers
     def classic_button_click
       @game_state_model::game_type = :classic
       @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
+
       @current_view = @views[1]
     end
     
     def otto_button_click
+      "setting otoo"
       @game_state_model::game_type = :otto
       @game_state_model::game_mode_logic = GameLogic::OttoRules.new(@game_state_model)
       @current_view = @views[1]

@@ -1,5 +1,7 @@
 module Views
   class GridView
+    attr_accessor :set_tiles, :tiles
+
     def initialize(window, controller, model)
       @window = window
       @controller = controller

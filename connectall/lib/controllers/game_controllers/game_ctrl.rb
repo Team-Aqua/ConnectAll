@@ -1,5 +1,7 @@
 module Controllers
   class GameCtrl
+    attr_accessor :view
+
     def initialize(window, game_state_model)
       @window = window
       @game_state_model = game_state_model

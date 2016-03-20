@@ -85,6 +85,9 @@ class GameWindow < Gosu::Window
   end
 
   def start_game
+    @controllers[:game]::view::grid.set_tiles
+    puts @game_state_model::game_type
+    puts @controllers[:game]::view::grid.tiles["green"]
     initialize(568, 343, model: @game_state_model)
     @currentCtrl = @controllers[:game]
   end
