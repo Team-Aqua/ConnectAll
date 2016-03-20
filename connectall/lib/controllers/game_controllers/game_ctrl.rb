@@ -77,16 +77,20 @@ module Controllers
     end
 
     def skip_button_click
-      @game_state_model.toggle_player_turn_state
-      @menu_click_sound.play(0.7, 1, false)
+      if @game_state_model::players[@game_state_model::player_turn_state].ai == nil # if it isn't an ai currently playing
+        @game_state_model.toggle_player_turn_state
+        @menu_click_sound.play(0.7, 1, false)
+      end
     end
 
     def concede_button_click
-      @game_won = true
-      @game_state_model.toggle_player_turn_state
-      @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::player_turn_state].player_color)
-      @game_state_model::players[@game_state_model::player_turn_state].increment_win_score
-      @menu_click_sound.play(0.7, 1, false)
+      if @game_state_model::players[@game_state_model::player_turn_state].ai == nil # if it isn't an ai currently playing
+        @game_won = true
+        @game_state_model.toggle_player_turn_state
+        @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::player_turn_state].player_color)
+        @game_state_model::players[@game_state_model::player_turn_state].increment_win_score
+        @menu_click_sound.play(0.7, 1, false)
+      end
     end
 
     def reset_button_click

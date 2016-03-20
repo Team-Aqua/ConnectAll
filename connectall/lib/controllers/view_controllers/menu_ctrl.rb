@@ -70,7 +70,7 @@ module Controllers
     end
     
     def otto_button_click
-      "setting otoo"
+      "setting otto"
       @game_state_model::game_type = :otto
       @game_state_model::game_mode_logic = GameLogic::OttoRules.new(@game_state_model)
       @current_view = @views[1]
