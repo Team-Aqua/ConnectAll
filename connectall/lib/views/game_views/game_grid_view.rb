@@ -39,8 +39,16 @@ module Views
                 'purple' => Gosu::Image.new("assets/images/block_purple_t.png") }
       
       @tiles = @tilesClassic
+
       @potential_tiles = { 'green' => Gosu::Image.new("assets/images/block_green_potential.png"),
-                          'purple' => Gosu::Image.new("assets/images/block_purple_potential.png") }
+                           'yellow' => Gosu::Image.new("assets/images/block_yellow_potential.png"),
+                           'pink' => Gosu::Image.new("assets/images/block_pink_potential.png"),
+                           'teal' => Gosu::Image.new("assets/images/block_teal_potential.png"),
+                           'orange' => Gosu::Image.new("assets/images/block_orange_potential.png"),
+                           'white' => Gosu::Image.new("assets/images/block_white_potential.png"),
+                           'black' => Gosu::Image.new("assets/images/block_black_potential.png"),
+                           'grey' => Gosu::Image.new("assets/images/block_grey.png"),
+                           'purple' => Gosu::Image.new("assets/images/block_purple_potential.png") }
 
       @falling_tiles = []
       @click_sound = Gosu::Sample.new(@window, "assets/sounds/quick_beat.mp3")
@@ -122,18 +130,21 @@ module Views
     # Outputs: none
 
     def draw_potentials
-      # ypos = @grid_ypos
-      # (0..7).each { |y|
-      #   xpos = @grid_xpos
-      #   (0..7).each { |x|
-      #     if @grid_model.getValue(x, y) != 0
-      #       @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos, 15)
-      #       break
-      #     end
-      #     xpos = xpos + 35.5
-      #   }
-      #   ypos = ypos + 38
-      # }
+      ypos = @grid_ypos
+      (1..7).each { |y|
+        xpos = @grid_xpos
+        (0..7).each { |x|
+          if @grid_model.getValue(x, y) != 0 and @grid_model.getValue(x, y - 1) == 0
+            # puts "#{@grid_model.getValue(x, y)}, x: #{x}, y: #{y}"
+            @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos, 15)
+          end
+          if y == 7 and @grid_model.getValue(x, y) == 0
+            @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos + 38, 15)
+          end
+          xpos = xpos + 35.5
+        }
+        ypos = ypos + 38
+      }
     end
 
     ##

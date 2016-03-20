@@ -57,7 +57,7 @@ module Views
       
       @tiles = @tilesClassic
 
-      @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Bold.ttf", 20)
+      @font = Gosu::Font.new(@window, "assets/fonts/Roboto-Bold.ttf", 18)
       @question = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_question_light.png"), 295, 10, 35, lambda { @controller.question_button_click }, Gosu::Image.new("assets/images/btn_question_light_click.png"))
       @cancel = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_cancel_light.png"), 315, 10, 35, lambda { @window.start_menu }, Gosu::Image.new("assets/images/btn_cancel_dark.png", :tileable => false))
       @ico_two = Gosu::Image.new("assets/images/ico_2.png")
@@ -96,7 +96,7 @@ module Views
       if @game_state_model.player_turn_state == 0
         @ico_one.draw(@x + 143, @y + 20, 35)
       elsif @game_state_model::players[@game_state_model.player_turn_state]::ai == nil
-        @ico_two.draw(@x + 128, @y + 20, 35)
+        @ico_two.draw(@x + 143, @y + 20, 35)
       else 
         @ico_ai.draw(@x + 143, @y + 20, 35)
       end
