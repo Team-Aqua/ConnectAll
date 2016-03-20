@@ -81,12 +81,12 @@
         (0..7).each { |x|
           if y < 5 and @grid[y][x] == 2
             if @grid[y + 1][x] == 2 and @grid[y + 2][x] == 2 and @grid[y + 3][x] == 2
-              @winner = 2
+              @winner = 1
               return true
             end
           elsif y < 5 and @grid[y][x] == 1
             if @grid[y + 1][x] == 1 and @grid[y + 2][x] == 1 and @grid[y + 3][x] == 1
-              @winner = 1
+              @winner = 0
               return true
             end
           end  
@@ -100,12 +100,12 @@
         (0..7).each { |x|
           if x < 5 and @grid[y][x] == 2
             if @grid[y][x + 1] == 2 and @grid[y][x + 2] == 2 and @grid[y][x + 3] == 2
-              @winner = 2
+              @winner = 1
               return true
             end
           elsif x < 5 and @grid[y][x] == 1
             if @grid[y][x + 1] == 1 and @grid[y][x + 2] == 1 and @grid[y][x + 3] == 1
-              @winner = 1
+              @winner = 0
               return true
             end
           end   
@@ -120,40 +120,40 @@
           if x <= 4 and y <= 4 
             
             if @grid[y][x] == 2 and @grid[y + 1][x + 1] == 2 and @grid[y + 2][x + 2] == 2 and @grid[y + 3][x + 3] == 2
-              @winner = 2
+              @winner = 1
               return true
             elsif @grid[y][x] == 1 and @grid[y + 1][x + 1] == 1 and @grid[y + 2][x + 2] == 1 and @grid[y + 3][x + 3] == 1
-              @winner = 1
+              @winner = 0
               return true
             end 
 
           elsif x >= 3 and y <= 4
 
             if @grid[y][x] == 2 and @grid[y + 1][x - 1] == 2 and @grid[y + 2][x - 2] == 2 and @grid[y + 3][x - 3] == 2
-              @winner = 2
+              @winner = 1
               return true
             elsif @grid[y][x] == 1 and @grid[y + 1][x - 1] == 1 and @grid[y + 2][x - 2] == 1 and @grid[y + 3][x - 3] == 1
-              @winner = 1
+              @winner = 0
               return true
             end
 
           elsif x <= 4 and y >= 3
             
             if @grid[y][x] == 2 and @grid[y - 1][x + 1] == 2 and @grid[y - 2][x + 2] == 2 and @grid[y - 3][x + 3] == 2
-              @winner = 2
+              @winner = 1
               return true
             elsif @grid[y][x] == 1 and @grid[y - 1][x + 1] == 1 and @grid[y - 2][x + 2] == 1 and @grid[y - 3][x + 3] == 1
-              @winner = 1
+              @winner = 0
               return true
             end 
 
           elsif x >= 3 and y >= 3
             
             if @grid[y][x] == 2 and @grid[y - 1][x - 1] == 2 and @grid[y - 2][x - 2] == 2 and @grid[y - 3][x - 3] == 2
-              @winner = 2
+              @winner = 1
               return true
             elsif @grid[y][x] == 1 and @grid[y - 1][x - 1] == 1 and @grid[y - 2][x - 2] == 1 and @grid[y - 3][x - 3] == 1
-              @winner = 1
+              @winner = 0
               return true
             end 
           

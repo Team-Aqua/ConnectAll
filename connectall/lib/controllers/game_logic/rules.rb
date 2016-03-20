@@ -17,7 +17,7 @@ module GameLogic
       @grid = @game_state_model::grid.getGrid
       if win
         @game_state_model::state = :win
-        @game_state_model::winner = @game_state_model::player_turn_state
+        @game_state_model::winner = @winner
       elsif tie
          @game_state_model::state = :tie
       else

@@ -49,6 +49,7 @@ module Controllers
       if @game_state_model::state == :win
         @win_sound.play(0.7, 1, false)
         @game_won = true
+        puts @game_state_model::winner
         @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner].player_color)
         @game_state_model::players[@game_state_model::winner].increment_win_score
       end  
