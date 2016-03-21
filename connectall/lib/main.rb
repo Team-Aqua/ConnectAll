@@ -42,6 +42,8 @@ require_relative 'views/alert_popup/help_view'
 require_relative 'views/alert_popup/win_view'
 require_relative 'views/alert_popup/popup_view'
 
+require_relative 'contracts/game_controller_contracts'
+
 class GameWindow < Gosu::Window
 
   attr_accessor :game_state_model, :controllers 
