@@ -1,6 +1,6 @@
   module GameLogic
     class ClassicRules < Rules
-      attr_accessor :game_state_model
+      attr_accessor :game_state_model, :grid
 
       ## 
       # Game rules for classic mode
@@ -81,6 +81,9 @@
 
     end
 
+    # def win
+    #   return has_won(construct_bitboard(@game_state_model::grid,1))
+    # end
     ## 
     # Checks if player has won for any vertical
     # Inputs: none
@@ -220,13 +223,13 @@
       counter = 1
       (1..8).each do |col|
         (1..8).each do |row|
-          if grid.getValue(col-1, 8-row) == player_num+1
+          if grid.getValue(col-1, 8-row) == player_num
             board =  @masks[counter] | board
           end
           counter = counter + 1
         end
       end
-      # printf("For #{player_num}: Bitboard %b \n", board)
+      printf("For #{player_num}: Bitboard %b \n", board)
       return board
     end
 
