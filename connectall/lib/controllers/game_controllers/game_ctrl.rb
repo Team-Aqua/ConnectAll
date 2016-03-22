@@ -26,14 +26,12 @@ module Controllers
 
     def reset_match
       GameControllerContracts.invariant?(self)
-
       @menu_click_sound.play(0.7, 1, false)
       @game_state_model::state = :active
       @game_state_model::grid.reset
       @game_state_model::player_turn_state = 0
       @view::control.build_red_grid
       alert_close
-
       GameControllerContracts.post_reset_match(self)
     end
 

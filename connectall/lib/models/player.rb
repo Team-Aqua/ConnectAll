@@ -1,5 +1,9 @@
 module Models
   class Player
+
+    ##
+    # Model for player
+
     include AbstractInterface
     attr_accessor :player_num, :player_color, :player_type, :score, :set_move, :make_move, :name, :ai
 
@@ -12,9 +16,21 @@ module Models
       @ai = nil
     end
 
+    ##
+    # Increments win
+    # Used for winkeeping after game ends
+    # Inputs: none
+    # Outputs: none
+
     def increment_win_score
       @score = @score + 1
     end
+
+    ##
+    # Decides move for player
+    # Used for game processes
+    # Inputs: none
+    # Outputs: none
 
     def set_move(x)
       @move = x

@@ -84,6 +84,7 @@
     # def win
     #   return has_won(construct_bitboard(@game_state_model::grid,1))
     # end
+  
     ## 
     # Checks if player has won for any vertical
     # Inputs: none
@@ -140,7 +141,8 @@
     def check_diagonal
       (0..7).each { |y|
         (0..7).each { |x|
-          if x <= 4 and y <= 4 
+
+          if y <= 4 and x <= 4
             
             if @grid[y][x] == 2 and @grid[y + 1][x + 1] == 2 and @grid[y + 2][x + 2] == 2 and @grid[y + 3][x + 3] == 2
               @winner = 1
@@ -150,7 +152,7 @@
               return true
             end 
 
-          elsif x >= 3 and y <= 4
+          elsif y <= 4 and x >= 3
 
             if @grid[y][x] == 2 and @grid[y + 1][x - 1] == 2 and @grid[y + 2][x - 2] == 2 and @grid[y + 3][x - 3] == 2
               @winner = 1
@@ -160,7 +162,7 @@
               return true
             end
 
-          elsif x <= 4 and y >= 3
+          elsif y >= 3 and x <= 4
             
             if @grid[y][x] == 2 and @grid[y - 1][x + 1] == 2 and @grid[y - 2][x + 2] == 2 and @grid[y - 3][x + 3] == 2
               @winner = 1
@@ -170,7 +172,7 @@
               return true
             end 
 
-          elsif x >= 3 and y >= 3
+          elsif y >= 3 and x >= 3
             
             if @grid[y][x] == 2 and @grid[y - 1][x - 1] == 2 and @grid[y - 2][x - 2] == 2 and @grid[y - 3][x - 3] == 2
               @winner = 1
