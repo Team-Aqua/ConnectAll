@@ -19,6 +19,7 @@ require_relative 'models/grid_model'
 require_relative 'models/player'
 require_relative 'models/ai_player'
 require_relative 'models/real_player'
+require_relative 'models/ai_level'
 
 require_relative 'views/btn_item'
 require_relative 'views/game_views/game_view'
