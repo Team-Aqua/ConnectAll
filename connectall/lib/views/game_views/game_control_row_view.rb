@@ -52,7 +52,7 @@ module Views
     end
 
     def disable_control_on_AI
-      if @game_state_model::game_type == :pvai
+      if @game_state_model::game_mode == :pvai
         original_pos = 29
         (1..8).each { |x|
           if @game_state_model::players[@game_state_model::player_turn_state].is_a?(Models::RealPlayer)
