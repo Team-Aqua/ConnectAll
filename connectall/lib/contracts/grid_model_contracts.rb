@@ -31,8 +31,8 @@ module GridModelContracsts
 
   def pre_get_value(model, x, y)
     invariant(model)
-    if x < 0 rause GridModelContractError.new, "column index must be greater than zero" end
-    if y < 0 rause GridModelContractError.new, "row index must be greater than zero" end
+    if x < 0 then raise GridModelContractError.new, "column index must be greater than zero" end
+    if y < 0 then raise GridModelContractError.new, "row index must be greater than zero" end
     if x > model.x - 1 then raise  GridModelContractError.new, "column index must be greater than grids row range" end
     if y > model.x - 1 then raise  GridModelContractError.new, "row index must be smaller than grids row range" end
   end
@@ -43,8 +43,8 @@ module GridModelContracsts
 
   def pre_set_value(model, x, y, val)
     invariant(model)
-    if x < 0 rause GridModelContractError.new, "column index must be greater than zero" end
-    if y < 0 rause GridModelContractError.new, "row index must be greater than zero" end
+    if x < 0 then raise GridModelContractError.new, "column index must be greater than zero" end
+    if y < 0 then raise GridModelContractError.new, "row index must be greater than zero" end
     if x > model.x - 1 then raise  GridModelContractError.new, "column index must be greater than grids row range" end
     if y > model.x - 1 then raise  GridModelContractError.new, "row index must be smaller than grids row range" end
     if val != 0 and val != 1 and val != 2 then raise GridModelContractError.new, "Grid Set Value Incorrect" end 
@@ -57,7 +57,7 @@ module GridModelContracsts
   end
 
   def add_tile(model, x, playernum)
-    if model.column_depth(x) == 0, then raise GridModelContractError.new, "Cannot add tile to a full column" end
+    if model.column_depth(x) == 0 then raise GridModelContractError.new, "Cannot add tile to a full column" end
     if playernum != 1 and playernum != 2 then raise GridModelContractError.new, "Playernum not within player range" end 
   end
 
