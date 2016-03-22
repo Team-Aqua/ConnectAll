@@ -29,6 +29,33 @@ module GameLogic
             return x+1
           end
         end
+        
+        # Check Horizontal
+        y = @gridModel.column_depth(x+1) + 1
+        if x < 5 and y != 8
+          if @grid[y][x+1] == 2 and @grid[y][x+2] == 2 and @grid[y][x+3] == 2
+            return x+1
+          end
+        end
+        
+        if x < 6 and x > 0 and y != 8
+          if @grid[y][x-1] == 2 and @grid[y][x+1] == 2 and @grid[y][x+2] == 2
+            return x+1
+          end
+        end
+        
+        if x < 7 and x > 1 and y != 8
+          if @grid[y][x-2] == 2 and @grid[y][x-1] == 2 and @grid[y][x+1] == 2
+            return x+1
+          end
+        end
+        
+        
+        if x > 2 and y != 8
+          if @grid[y][x-3] == 2 and @grid[y][x-2] == 2 and @grid[y][x-1] == 2
+            return x=1
+          end
+        end
       }
       
       
@@ -42,8 +69,35 @@ module GameLogic
             return x+1
           end
         end
+        
+        # Check Horizontal
+        y = @gridModel.column_depth(x+1) + 1
+        if x < 5 and y != 8
+          if @grid[y][x+1] == 1 and @grid[y][x+2] == 1 and @grid[y][x+3] == 1
+            return x+1
+          end
+        end
+        
+        if x < 6 and x > 0 and y != 8
+          if @grid[y][x-1] == 1 and @grid[y][x+1] == 1 and @grid[y][x+2] == 1
+            return x+1
+          end
+        end
+        
+        if x < 7 and x > 1 and y != 8
+          if @grid[y][x-2] == 1 and @grid[y][x-1] == 1 and @grid[y][x+1] == 1
+            return x+1
+          end
+        end
+        
+        
+        if x > 2 and y != 8
+          if @grid[y][x-3] == 1 and @grid[y][x-2] == 1 and @grid[y][x-1] == 1
+            return x=1
+          end
+        end
       }
-      puts "end"
+      #puts "end"
       
       # No Better Choice
       rando = Random.new
