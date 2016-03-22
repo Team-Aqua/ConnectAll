@@ -19,6 +19,7 @@ module GameLogic
     # Outputs: boolean
 
     def check_vertical
+      RulesContracts.otto_model(@game_state_model)
       (0..7).each { |y|
         (0..7).each { |x|
           if y < 5 and @grid[y][x] == 2
@@ -43,6 +44,7 @@ module GameLogic
     # Outputs: boolean
 
     def check_horizontal
+      RulesContracts.otto_model(@game_state_model)
       (0..7).each { |y|
         (0..7).each { |x|
           if x < 5 and @grid[y][x] == 2
@@ -67,6 +69,7 @@ module GameLogic
     # Outputs: boolean
 
     def check_diagonal
+      RulesContracts.otto_model(@game_state_model)
       (0..7).each { |y|
         (0..7).each { |x|
           if x <= 4 and y <= 4 
