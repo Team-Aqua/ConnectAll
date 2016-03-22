@@ -21,7 +21,6 @@ module Views
       else
         @anchor_reached = true
         @speed = @base_speed
-        return
       end
     end
 
