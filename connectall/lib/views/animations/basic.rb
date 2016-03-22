@@ -7,7 +7,7 @@ module Animations
     
     attr_accessor :state
 
-    def initialize(x, y, x_dest: x_dest, y_dest: y_dest, x_speed: x_speed, y_speed: y_speed, image: image, z: z)
+    def initialize(x, y, x_dest: xdest, y_dest: ydest, x_speed: xspeed, y_speed: yspeed, image: imagev, z: zv)
       @state = :alive
       @x = x.to_f
       @y = y.to_f
