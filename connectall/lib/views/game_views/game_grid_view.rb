@@ -78,6 +78,32 @@ module Views
       @grid_model.getValue(x, y)
     end
 
+
+    # def animate_tile_reset
+    #   puts "method even called?"
+    #   for row in (7).downto(0)
+    #     for column in (7).downto(0)
+    #       tile_num = getValue(column, row)
+    #       if tile_num != 0
+    #         puts "Adding tile"
+    #         animate_tile_release(column, row, @model::players[tile_num-1].player_color)
+    #       end
+    #     end
+    #   end
+    # end
+
+    # def animate_tile_release(x, y, player_color)
+    #   Thread.new{
+    #   sleep(0.1)
+    #   @swoosh_sound.play
+    #   y = @grid_ypos+((38*(y)+19))
+    #   x = 29 + ((x-1)*35.5)
+    #   animation = Animations::Basic.new(x, @grid_ypos, x_dest: 0, y_dest: 1000, x_speed: 0, y_speed: 0.1, image: @tiles[player_color], z: 15)
+    #   animation.animate
+    #   @falling_tiles.push(animation)
+    #   }
+    # end
+
     ## 
     # Animates the tile drop using the animation library.
     # Inputs: X position, player color, delay time

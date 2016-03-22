@@ -35,12 +35,15 @@ require_relative 'views/menu_views/text_input'
 
 require_relative 'views/animations/basic'
 
+
+require_relative 'views/alert_popup/alert_view'
+require_relative 'views/alert_popup/cascading_alert_view'
 require_relative 'views/alert_popup/connect_instructions_view'
 require_relative 'views/alert_popup/otto_instructions_view'
 require_relative 'views/alert_popup/connect_all_view'
 require_relative 'views/alert_popup/help_view'
 require_relative 'views/alert_popup/win_view'
-require_relative 'views/alert_popup/popup_view'
+
 
 require_relative 'contracts/game_controller_contracts'
 

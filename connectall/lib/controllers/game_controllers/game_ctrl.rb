@@ -69,7 +69,8 @@ module Controllers
           @player_moved = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color, delay|
             @view::grid.animate_tile_drop(x, player_color, delay){
               @game_state_model::grid.add_tile(x, player_num);
-              @player_moved = false; check_winner_winner;  
+              @player_moved = false; 
+              check_winner_winner;  
               @view::control.disable_control_on_AI; 
               @view::control.check_available; 
               @game_state_model.toggle_player_turn_state;
@@ -90,9 +91,10 @@ module Controllers
       if @game_state_model::state == :win
         @win_sound.play(0.7, 1, false)
         @game_won = true
-        puts @game_state_model::winner
         @alert_view = Views::WinAlertView.new(@window, self, @game_state_model::players[@game_state_model::winner].player_color)
         @game_state_model::players[@game_state_model::winner].increment_win_score
+
+        
       end  
       if @game_state_model::state == :tie
         @win_sound.play(0.7, 1, false)

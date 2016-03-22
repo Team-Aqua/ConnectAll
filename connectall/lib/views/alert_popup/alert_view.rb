@@ -1,6 +1,5 @@
 module Views
   class AlertView
-
     ##
     # Generic AlertView implementation
     # Used as framework for other alertviews
@@ -8,6 +7,7 @@ module Views
     def initialize(window, controller)
       @window = window
       @controller = controller
+      @y_anchor_pos = 0
     end
 
     ##
