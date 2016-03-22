@@ -84,6 +84,7 @@
     # def win
     #   return has_won(construct_bitboard(@game_state_model::grid,1))
     # end
+  
     ## 
     # Checks if player has won for any vertical
     # Inputs: none
@@ -111,7 +112,7 @@
     ## 
     # Checks if a player has won for any horizontal
     # Inputs: none
-    # OutputS: boolean
+    # Outputs: boolean
 
     def check_horizontal
       (0..7).each { |y|
@@ -138,10 +139,20 @@
     # Outputs: boolean
 
     def check_diagonal
+
+      # testing for bitboard errors
+      # (0..7).each { |y|
+      #  (0..7).each { |x|
+      #    if @grid[y][x] == 1 and y <= 4 and x >= 3
+      #      puts " #{x}/#{y}  #{@grid[y][x]} || #{x-1}/#{y+1}  #{@grid[y + 1][x - 1]} || #{x-2}/#{y+2} #{@grid[y + 2][x - 2]} || #{x-3}/#{y+3} #{@grid[y + 3][x - 3]}"
+      #      puts "#{@grid[y][x] == 1 and @grid[y + 1][x - 1] == 1 and @grid[y + 2][x - 2] == 1 and @grid[y + 3][x - 3] == 1}"
+      #    end
+      #  }
+      # }
+      
       (0..7).each { |y|
         (0..7).each { |x|
-          if x <= 4 and y <= 4 
-            
+          if y <= 4 and x <= 4
             if @grid[y][x] == 2 and @grid[y + 1][x + 1] == 2 and @grid[y + 2][x + 2] == 2 and @grid[y + 3][x + 3] == 2
               @winner = 1
               return true
@@ -149,9 +160,8 @@
               @winner = 0
               return true
             end 
-
-          elsif x >= 3 and y <= 4
-
+          end
+          if y <= 4 and x >= 3
             if @grid[y][x] == 2 and @grid[y + 1][x - 1] == 2 and @grid[y + 2][x - 2] == 2 and @grid[y + 3][x - 3] == 2
               @winner = 1
               return true
@@ -159,9 +169,8 @@
               @winner = 0
               return true
             end
-
-          elsif x <= 4 and y >= 3
-            
+          end
+          if y >= 3 and x <= 4
             if @grid[y][x] == 2 and @grid[y - 1][x + 1] == 2 and @grid[y - 2][x + 2] == 2 and @grid[y - 3][x + 3] == 2
               @winner = 1
               return true
@@ -169,8 +178,8 @@
               @winner = 0
               return true
             end 
-
-          elsif x >= 3 and y >= 3
+          end
+          if y >= 3 and x >= 3
             
             if @grid[y][x] == 2 and @grid[y - 1][x - 1] == 2 and @grid[y - 2][x - 2] == 2 and @grid[y - 3][x - 3] == 2
               @winner = 1

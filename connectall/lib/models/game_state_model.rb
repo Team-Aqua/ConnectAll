@@ -1,5 +1,10 @@
 module Models
   class GameStateModel
+
+    ##
+    # Generic game state model for game processes.
+    # Holds data for game
+
     attr_accessor :state, :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic, :winner, :ai
 
     def initialize()
@@ -14,6 +19,11 @@ module Models
       @players = []
       @ai = nil
     end
+
+    ##
+    # Changes turn state depending on number of players
+    # Inputs: none
+    # Outputs: none
 
     def toggle_player_turn_state
       @player_turn_state = (@player_turn_state + 1) % @players.count

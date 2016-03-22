@@ -1,5 +1,9 @@
 module Models
   class Model
+
+    ##
+    # Abstract interface for model
+
     include AbstractInterface
 
     needs_implementation :update

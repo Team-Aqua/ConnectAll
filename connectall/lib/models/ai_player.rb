@@ -1,6 +1,10 @@
 module Models
   class AIPlayer < Player
 
+    ## 
+    # Generic AI implementation for player
+    # Generates using same player structure, but references AI for decisions
+
     def initialize(player_num, player_color, ai, name)
       super(player_num, player_color, name)
       @ai = ai

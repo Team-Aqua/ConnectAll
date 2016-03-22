@@ -42,6 +42,7 @@ module GameLogic
     # Outputs: boolean
 
     def win
+      # puts "vertical: #{check_vertical} || horizontal: #{check_horizontal} || diagonal: #{check_diagonal}"
       return ( check_vertical || check_horizontal || check_diagonal )
     end
 
