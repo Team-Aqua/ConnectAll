@@ -19,7 +19,6 @@ module GameLogic
 
     ## TODO: Refractor into seperate functions.
     def choose_location
-      @gridModel.print_grid
       # Check if AI can win.
       y = 0
       (0..7).each {|x|
