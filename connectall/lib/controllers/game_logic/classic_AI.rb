@@ -31,27 +31,27 @@ module GameLogic
         end
         
         # Check Horizontal
-        y = @model::grid.column_depth(x+1) + 1
-        if x < 5 and y != 8
+        y = @model::grid.column_depth(x+1)-1
+        if x < 5 
           if @grid[y][x+1] == 2 and @grid[y][x+2] == 2 and @grid[y][x+3] == 2
             return x+1
           end
         end
         
-        if x < 6 and x > 0 and y != 8
+        if x < 6 and x > 0 
           if @grid[y][x-1] == 2 and @grid[y][x+1] == 2 and @grid[y][x+2] == 2
             return x+1
           end
         end
         
-        if x < 7 and x > 1 and y != 8
+        if x < 7 and x > 1 
           if @grid[y][x-2] == 2 and @grid[y][x-1] == 2 and @grid[y][x+1] == 2
             return x+1
           end
         end
         
         
-        if x > 2 and y != 8
+        if x > 2 
           if @grid[y][x-3] == 2 and @grid[y][x-2] == 2 and @grid[y][x-1] == 2
             return x+1
           end
@@ -64,45 +64,39 @@ module GameLogic
       (0..7).each {|x|
         y = @gridModel.column_depth(x+1)
         # Check vertical
-        #puts y
         if y <= 5
-          #puts @grid[y][x]
-          #puts @grid[y+1][x]
-          #puts @grid[y+2][x]
-          #puts "end"
           if @grid[y][x] == 1 and @grid[y+1][x] == 1 and @grid[y+2][x] == 1
             return x+1
           end
         end
         
         # Check Horizontal
-        y = @gridModel.column_depth(x+1) + 1
-        if x < 5 and y != 8
+        y = @gridModel.column_depth(x+1)-1
+        if x < 5 
           if @grid[y][x+1] == 1 and @grid[y][x+2] == 1 and @grid[y][x+3] == 1
             return x+1
           end
         end
         
-        if x < 6 and x > 0 and y != 8
+        if x < 6 and x > 0 
           if @grid[y][x-1] == 1 and @grid[y][x+1] == 1 and @grid[y][x+2] == 1
             return x+1
           end
         end
         
-        if x < 7 and x > 1 and y != 8
+        if x < 7 and x > 1 
           if @grid[y][x-2] == 1 and @grid[y][x-1] == 1 and @grid[y][x+1] == 1
             return x+1
           end
         end
         
         
-        if x > 2 and y != 8
+        if x > 2 
           if @grid[y][x-3] == 1 and @grid[y][x-2] == 1 and @grid[y][x-1] == 1
             return x+1
           end
         end
       }
-      #puts "end"
       
       # No Better Choice
       rando = Random.new
