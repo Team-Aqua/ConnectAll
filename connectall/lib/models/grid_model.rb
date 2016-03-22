@@ -50,7 +50,7 @@ module Models
           return row
         end
       }
-      return @y-1
+      return @y+1
     end
 
     ##
