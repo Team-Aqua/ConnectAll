@@ -26,6 +26,7 @@ module Models
     # Outputs: none
 
     def toggle_player_turn_state
+      # @players[@player_turn_state].move = nil
       @player_turn_state = (@player_turn_state + 1) % @players.count
     end
 

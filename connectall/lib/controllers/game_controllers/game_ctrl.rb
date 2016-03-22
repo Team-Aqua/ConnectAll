@@ -66,8 +66,15 @@ module Controllers
         @alert_view.update
       else
         if @player_moved == false
-          move_made = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color, delay| @view::grid.animate_tile_drop(x, player_color, delay){@game_state_model::grid.add_tile(x, player_num); @player_moved = false; check_winner_winner; @game_state_model.toggle_player_turn_state}}
-          @player_moved = move_made
+          @player_moved = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color, delay|
+            @view::grid.animate_tile_drop(x, player_color, delay){
+              @game_state_model::grid.add_tile(x, player_num);
+              @player_moved = false; check_winner_winner;  
+              @view::control.disable_control_on_AI; 
+              @view::control.check_available; 
+              @game_state_model.toggle_player_turn_state;
+              }
+            }
         end
       end
     end
@@ -124,6 +131,7 @@ module Controllers
     # Outputs: none 
 
     def control_button_click(x)
+      @view::control.disable_control_on_AI
       @game_state_model::players[@game_state_model::player_turn_state]::set_move(x)
       @view::control.check_available
     end
