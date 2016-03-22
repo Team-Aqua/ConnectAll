@@ -11,7 +11,7 @@ module Views
       @game_state_model = game_state_model
       @controller = controller
       @button_width = 235
-      @font = Gosu::Font.new(@window, "assets/fonts/HelveticaNeueBd.ttf", 32)
+      @font = Gosu::Font.new(@window, "assets/fonts/HN_Bd.ttf", 32)
       @ai_level = Models::AILevel.new
 
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
