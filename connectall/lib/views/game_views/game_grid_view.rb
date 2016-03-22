@@ -113,7 +113,7 @@ module Views
       Thread.new{
       sleep(delay)
       @swoosh_sound.play
-      y = @grid_ypos+((38*(@grid_model.column_depth(x)-1))+19)
+      y = @grid_ypos+((38*(@grid_model.column_depth(x)-2))+19)
       x = 29 + ((x-1)*35.5)
       animation = Animations::Basic.new(x, @grid_ypos, x_dest: 0, y_dest: y, x_speed: 0, y_speed: 0.1, image: @tiles[player_color], z: 15)
       animation.animate
@@ -162,10 +162,10 @@ module Views
         (0..7).each { |x|
           if @grid_model.getValue(x, y) != 0 and @grid_model.getValue(x, y - 1) == 0
             # puts "#{@grid_model.getValue(x, y)}, x: #{x}, y: #{y}"
-            @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos, 15)
+            @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos, 14)
           end
           if y == 7 and @grid_model.getValue(x, y) == 0
-            @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos + 38, 15)
+            @potential_tiles[@model::players[@model.player_turn_state]::player_color].draw(xpos, ypos + 38, 14)
           end
           xpos = xpos + 35.5
         }

@@ -11,7 +11,7 @@ module Views
       @game_state_model = game_state_model
       @controller = controller
       @button_width = 235
-      @font = Gosu::Font.new(@window, "assets/fonts/Lato-Light.ttf", 36)
+      @font = Gosu::Font.new(@window, "assets/fonts/Lato-Light.ttf", 32)
       @ai_level = Models::AILevel.new
 
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
@@ -67,6 +67,8 @@ module Views
       button7_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_7_empty.png", :tileable => true), 242, 280, 35, lambda { set_ai(6) }, Gosu::Image.new("assets/images/btn_ai_7_clicked.png", false))
       button8_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_8_empty.png", :tileable => true), 277.5, 280, 35, lambda { set_ai(7) }, Gosu::Image.new("assets/images/btn_ai_8_clicked.png", false))
 
+      @button_return = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_return_lg.png"), 382, 205, 100, lambda { @controller.return_to_mode_menu }, Gosu::Image.new("assets/images/btn_return_lg_click.png")) 
+
       if (@game_state_model::game_mode == :pvp)
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         @button_player2 = @player2_buttons[@color2_selection_wheel[@color2_selection]]
@@ -74,6 +76,7 @@ module Views
         @name_player2 = @player2_name[@color2_selection_wheel[@color2_selection]]
         @text_fields = Array.new(2) { |index| TextField.new(@window, @font, 113, 175 + index * 110, "Player #{index + 1}") }
         @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player2_color: @color2_selection_wheel[@color2_selection], player1_name: @text_fields[0].get_text, player2_name: @text_fields[1].get_text) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
+
       else
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         @name_player = @player_name[@color_selection_wheel[@color_selection]]
@@ -81,9 +84,10 @@ module Views
         @text_fields = Array.new(1) { |index| TextField.new(@window, @font, 113, 175, "Player #{index + 1}") }
         @button_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), -500, -500, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png"))        
         @name_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/input_black_name.png"), -500, -500, 100, lambda { color_swap })
-        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player1_name: @text_fields[0].get_text)}, Gosu::Image.new("assets/images/btn_start_click.png"))  
         @header_ai_difficulty = Gosu::Image.new("assets/images/btn_ai_difficulty.png", :tileable => false)
         @ai_bg = Gosu::Image.new("assets/images/bg_ai.png", :tileable => false)
+        @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player1_name: @text_fields[0].get_text)}, Gosu::Image.new("assets/images/btn_start_click.png"))  
+
 
         @ai_grid << button1_ai
         @ai_grid << button2_ai
@@ -106,7 +110,6 @@ module Views
       end    
 
     end
-
 
     def set_ai(id)
       @ai_level.level = id
@@ -181,6 +184,7 @@ module Views
       @name_player.draw
       @name_player2.draw
       @button_rdy.draw
+      @button_return.draw
       @text_fields.each { |tf| tf.draw }
     end
 
@@ -193,6 +197,7 @@ module Views
       @button_player.update
       @button_player2.update
       @button_rdy.update
+      @button_return.update
       if (@game_state_model::game_mode != :pvp)
         @ai_grid.each { |gv| gv.update }
         @ai_grid_empty.each { |gve| gve.update }
@@ -209,6 +214,7 @@ module Views
       @button_player.clicked
       @button_player2.clicked
       @button_rdy.clicked
+      @button_return.clicked
       if (@game_state_model::game_mode != :pvp)
         @ai_grid.each { |gv| gv.clicked }
         @ai_grid_empty.each { |gve| gve.clicked }

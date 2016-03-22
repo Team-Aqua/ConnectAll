@@ -164,5 +164,24 @@ module Controllers
       @alert_view = nil
     end
 
+    ## 
+    # Menu controller to return to 'select players' menu
+    # Inputs: none
+    # Outputs: none
+
+    def return_to_mode_menu
+      @current_view = @views[1]
+    end
+
+    ## 
+    # Menu controller to return to 'select game type' menu
+    # Inputs: none
+    # Outputs: none
+    
+    def return_menu
+      @current_view = @views[0]
+    end
+    
+
   end
 end
