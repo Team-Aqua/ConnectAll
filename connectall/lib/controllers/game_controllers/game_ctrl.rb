@@ -79,7 +79,7 @@ module Controllers
     # Outputs: none
 
     def check_winner_winner
-     @game_state_model::game_mode_logic.check_for_winner
+      @game_state_model::game_mode_logic.check_for_winner
       if @game_state_model::state == :win
         @win_sound.play(0.7, 1, false)
         @game_won = true
