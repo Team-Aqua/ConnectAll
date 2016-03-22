@@ -1,5 +1,6 @@
 module GameLogic
   class OttoRules < Rules
+    attr_accessor :game_state_model, :grid
 
     ## 
     # Game rules for classic mode
@@ -78,7 +79,8 @@ module GameLogic
               return true
             end 
 
-          elsif x >= 3 and y <= 4
+         end
+         if x >= 3 and y <= 4
 
             if @grid[y][x] == 2 and @grid[y + 1][x - 1] == 1 and @grid[y + 2][x - 2] == 1 and @grid[y + 3][x - 3] == 2
               @winner = 1
@@ -88,7 +90,8 @@ module GameLogic
               return true
             end
 
-          elsif x <= 4 and y >= 3
+          end
+          if x <= 4 and y >= 3
             
             if @grid[y][x] == 2 and @grid[y - 1][x + 1] == 1 and @grid[y - 2][x + 2] == 1 and @grid[y - 3][x + 3] == 2
               @winner = 1
@@ -98,7 +101,8 @@ module GameLogic
               return true
             end 
 
-          elsif x >= 3 and y >= 3
+          end
+          if x >= 3 and y >= 3
             
             if @grid[y][x] == 2 and @grid[y - 1][x - 1] == 1 and @grid[y - 2][x - 2] == 1 and @grid[y - 3][x - 3] == 2
               @winner = 1
