@@ -21,7 +21,7 @@ class TextField < Gosu::TextInput
     @box = Gosu::Image.new("assets/images/ip_name.png", :tileable => false)
     @box_hover = Gosu::Image.new("assets/images/ip_name_hover.png", :tileable => false)
     @drawbox
-    @width = 153
+    @width = 151
     @height = 33
     @caret_height = 25
   end
@@ -33,7 +33,7 @@ class TextField < Gosu::TextInput
   # Outputs: text
   
   def filter text
-    if width + @font.text_width(text) < 140
+    if width + @font.text_width(text) < 133
       return text.gsub(/[^A-Z0-9a-z ]/, '')
     else 
       return nil
@@ -74,7 +74,7 @@ class TextField < Gosu::TextInput
                         pos_x, y + height - PADDING_Y - 5, CARET_COLOR, 100)
     end
     # Finally, draw the text itself!
-    @font.draw(self.text, x, y, 120, 1, 1, 0xff_585858)
+    @font.draw(self.text, x, y, 120, 1, 1, 0xff_646464)
   end
 
   ## 

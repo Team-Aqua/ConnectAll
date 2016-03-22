@@ -11,7 +11,8 @@ module Views
       @game_state_model = game_state_model
       @controller = controller
       @button_width = 235
-      @font = Gosu::Font.new(@window, "assets/fonts/Lato-Light.ttf", 36)
+      @font = Gosu::Font.new(@window, "assets/fonts/HN_Bd.ttf", 32)
+      @ai_level = Models::AILevel.new
 
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
       #@ole_start = Gosu::Sample.new(@window, "assets/sounds/ole_start.mp3")
@@ -45,6 +46,29 @@ module Views
         'purple' => BtnItem.new(@window, Gosu::Image.new("assets/images/input_purple_name.png"), (@window.width/2)-(@button_width/2) - 125, 295, 100, lambda { color_swap })
       }
 
+      @ai_grid = Array.new
+      @ai_grid_empty = Array.new
+      
+      button1_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_1.png", :tileable => true), 29, 280, 35, lambda { set_ai(0) }, Gosu::Image.new("assets/images/btn_ai_1_clicked.png", false))
+      button2_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_2.png", :tileable => true), 64.5, 280, 35, lambda { set_ai(1) }, Gosu::Image.new("assets/images/btn_ai_2_clicked.png", false))
+      button3_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_3.png", :tileable => true), 100, 280, 35, lambda { set_ai(2) }, Gosu::Image.new("assets/images/btn_ai_3_clicked.png", false))
+      button4_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_4.png", :tileable => true), 135.5, 280, 35, lambda { set_ai(3) }, Gosu::Image.new("assets/images/btn_ai_4_clicked.png", false))
+      button5_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_5.png", :tileable => true), 171, 280, 35, lambda { set_ai(4) }, Gosu::Image.new("assets/images/btn_ai_5_clicked.png", false))
+      button6_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_6.png", :tileable => true), 206.5, 280, 35, lambda { set_ai(5) }, Gosu::Image.new("assets/images/btn_ai_6_clicked.png", false))
+      button7_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_7.png", :tileable => true), 242, 280, 35, lambda { set_ai(6) }, Gosu::Image.new("assets/images/btn_ai_7_clicked.png", false))
+      button8_ai = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_8.png", :tileable => true), 277.5, 280, 35, lambda { set_ai(7) }, Gosu::Image.new("assets/images/btn_ai_8_clicked.png", false))
+      
+      button1_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_1_empty.png", :tileable => true), 29, 280, 35, lambda { set_ai(0) }, Gosu::Image.new("assets/images/btn_ai_1_clicked.png", false))
+      button2_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_2_empty.png", :tileable => true), 64.5, 280, 35, lambda { set_ai(1) }, Gosu::Image.new("assets/images/btn_ai_2_clicked.png", false))
+      button3_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_3_empty.png", :tileable => true), 100, 280, 35, lambda { set_ai(2) }, Gosu::Image.new("assets/images/btn_ai_3_clicked.png", false))
+      button4_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_4_empty.png", :tileable => true), 135.5, 280, 35, lambda { set_ai(3) }, Gosu::Image.new("assets/images/btn_ai_4_clicked.png", false))
+      button5_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_5_empty.png", :tileable => true), 171, 280, 35, lambda { set_ai(4) }, Gosu::Image.new("assets/images/btn_ai_5_clicked.png", false))
+      button6_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_6_empty.png", :tileable => true), 206.5, 280, 35, lambda { set_ai(5) }, Gosu::Image.new("assets/images/btn_ai_6_clicked.png", false))
+      button7_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_7_empty.png", :tileable => true), 242, 280, 35, lambda { set_ai(6) }, Gosu::Image.new("assets/images/btn_ai_7_clicked.png", false))
+      button8_ai_empty = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_ai_8_empty.png", :tileable => true), 277.5, 280, 35, lambda { set_ai(7) }, Gosu::Image.new("assets/images/btn_ai_8_clicked.png", false))
+
+      @button_return = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_return_lg.png"), 382, 205, 100, lambda { @controller.return_to_mode_menu }, Gosu::Image.new("assets/images/btn_return_lg_click.png")) 
+
       if (@game_state_model::game_mode == :pvp)
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         @button_player2 = @player2_buttons[@color2_selection_wheel[@color2_selection]]
@@ -52,6 +76,7 @@ module Views
         @name_player2 = @player2_name[@color2_selection_wheel[@color2_selection]]
         @text_fields = Array.new(2) { |index| TextField.new(@window, @font, 113, 175 + index * 110, "Player #{index + 1}") }
         @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player2_color: @color2_selection_wheel[@color2_selection], player1_name: @text_fields[0].get_text, player2_name: @text_fields[1].get_text) }, Gosu::Image.new("assets/images/btn_start_click.png"))  
+
       else
         @button_player = @player_buttons[@color_selection_wheel[@color_selection]]
         @name_player = @player_name[@color_selection_wheel[@color_selection]]
@@ -59,9 +84,35 @@ module Views
         @text_fields = Array.new(1) { |index| TextField.new(@window, @font, 113, 175, "Player #{index + 1}") }
         @button_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/header_player_black.png"), -500, -500, 100, lambda { color2_swap }, Gosu::Image.new("assets/images/header_player_black_click.png"))        
         @name_player2 = BtnItem.new(@window, Gosu::Image.new("assets/images/input_black_name.png"), -500, -500, 100, lambda { color_swap })
+        @header_ai_difficulty = Gosu::Image.new("assets/images/btn_ai_difficulty.png", :tileable => false)
+        @ai_bg = Gosu::Image.new("assets/images/bg_ai.png", :tileable => false)
         @button_rdy = BtnItem.new(@window, Gosu::Image.new("assets/images/btn_start.png"), 382, 275, 100, lambda { @controller.player_rdy(@color_selection_wheel[@color_selection], player1_name: @text_fields[0].get_text)}, Gosu::Image.new("assets/images/btn_start_click.png"))  
+
+
+        @ai_grid << button1_ai
+        @ai_grid << button2_ai
+        @ai_grid << button3_ai
+        @ai_grid << button4_ai
+        @ai_grid << button5_ai
+        @ai_grid << button6_ai
+        @ai_grid << button7_ai
+        @ai_grid << button8_ai
+
+        @ai_grid_empty << button1_ai_empty
+        @ai_grid_empty << button2_ai_empty
+        @ai_grid_empty << button3_ai_empty
+        @ai_grid_empty << button4_ai_empty
+        @ai_grid_empty << button5_ai_empty
+        @ai_grid_empty << button6_ai_empty
+        @ai_grid_empty << button7_ai_empty
+        @ai_grid_empty << button8_ai_empty
+
       end    
 
+    end
+
+    def set_ai(id)
+      @ai_level.level = id
     end
 
     ##
@@ -118,11 +169,22 @@ module Views
     # Outputs: none
 
     def draw
+      if (@game_state_model::game_mode != :pvp)
+        @header_ai_difficulty.draw(29, 225, 100)
+        @ai_bg.draw(25, 277, 10)
+        (0..@ai_level.level).each do |x| 
+          @ai_grid[x].draw
+        end
+        (@ai_level.level + 1..7).each do |y| 
+          @ai_grid_empty[y].draw
+        end
+      end
       @button_player.draw
       @button_player2.draw
       @name_player.draw
       @name_player2.draw
       @button_rdy.draw
+      @button_return.draw
       @text_fields.each { |tf| tf.draw }
     end
 
@@ -135,6 +197,11 @@ module Views
       @button_player.update
       @button_player2.update
       @button_rdy.update
+      @button_return.update
+      if (@game_state_model::game_mode != :pvp)
+        @ai_grid.each { |gv| gv.update }
+        @ai_grid_empty.each { |gve| gve.update }
+      end
     end
 
     ##
@@ -147,6 +214,11 @@ module Views
       @button_player.clicked
       @button_player2.clicked
       @button_rdy.clicked
+      @button_return.clicked
+      if (@game_state_model::game_mode != :pvp)
+        @ai_grid.each { |gv| gv.clicked }
+        @ai_grid_empty.each { |gve| gve.clicked }
+      end
     end
 
   end

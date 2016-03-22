@@ -19,6 +19,7 @@ require_relative 'models/grid_model'
 require_relative 'models/player'
 require_relative 'models/ai_player'
 require_relative 'models/real_player'
+require_relative 'models/ai_level'
 
 require_relative 'views/btn_item'
 require_relative 'views/game_views/game_view'
@@ -35,14 +36,24 @@ require_relative 'views/menu_views/text_input'
 
 require_relative 'views/animations/basic'
 
+
+require_relative 'views/alert_popup/alert_view'
+require_relative 'views/alert_popup/cascading_alert_view'
 require_relative 'views/alert_popup/connect_instructions_view'
 require_relative 'views/alert_popup/otto_instructions_view'
 require_relative 'views/alert_popup/connect_all_view'
 require_relative 'views/alert_popup/help_view'
 require_relative 'views/alert_popup/win_view'
-require_relative 'views/alert_popup/popup_view'
 
+require_relative 'contracts/AI_contracts'
 require_relative 'contracts/game_controller_contracts'
+require_relative 'contracts/game_state_model_contracts'
+require_relative 'contracts/grid_model_contracts'
+require_relative 'contracts/main_controller_contracts'
+require_relative 'contracts/menu_controller_contracts'
+require_relative 'contracts/player_model_contracts'
+require_relative 'contracts/rules_contracts'
+
 
 class GameWindow < Gosu::Window
 

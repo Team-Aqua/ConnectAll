@@ -1,5 +1,5 @@
 module Views
-  class WinAlertView
+  class WinAlertView < CascadingAlertView
 
     ## 
     # AlertView provided at game win 
@@ -7,8 +7,8 @@ module Views
     # Contains paths for return and replay
 
     def initialize(window, controller, player_color)
-      @window = window
-      @controller = controller
+      super(window, controller)
+
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
 
       @player_win_views ={
@@ -34,9 +34,11 @@ module Views
     # Outputs: none
 
     def draw
-      @view.draw(0, 0, 100)
-      @replay.draw
-      @return.draw
+      @view.draw(0, @y_anchor_pos, 100)
+      if (@anchor_reached)
+        @replay.draw
+        @return.draw
+      end
     end
 
     ##
@@ -47,6 +49,8 @@ module Views
     def update
       @replay.update
       @return.update
+
+      slide_view
     end
 
     ##
@@ -55,8 +59,10 @@ module Views
     # Outputs: none
     
     def clicked
-      @replay.clicked
-      @return.clicked
+      if (@anchor_reached)
+        @replay.clicked
+        @return.clicked
+      end
     end
 
   end

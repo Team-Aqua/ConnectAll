@@ -6,17 +6,6 @@ module GameLogic
     # Implements generic checks and win conditions
 
     include AbstractInterface
-  
-    needs_implementation :check_winner, :winner, :win
-    needs_implementation :addObserver, :observer
-    needs_implementation :notifyObservers
-    needs_implementation :update
-
-    @observers = []
-
-    def add_observer(observer)
-      self.api_not_implemented(self)
-    end
 
     ##
     # Checks if a player has won given rules, or has tied
@@ -24,6 +13,8 @@ module GameLogic
     # Outputs: none
 
     def check_for_winner
+      # RulesContracts.invariant(@game_state_model)
+
       @grid = @game_state_model::grid.getGrid
       if win
         @game_state_model::state = :win
@@ -33,6 +24,8 @@ module GameLogic
       else
         @game_state_model::state = :active
       end
+      
+      # RulesContracts.invariant(@game_state_model)
     end
 
     ##
