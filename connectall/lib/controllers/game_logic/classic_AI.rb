@@ -1,8 +1,7 @@
 module GameLogic
-  attr_accessor :choose_location
 
   class ClassicAI < AI
-
+    attr_accessor :choose_location, :gridModel, :grid
     ##
     # Classic AI implementation
     # 
@@ -32,7 +31,7 @@ module GameLogic
         end
         
         # Check Horizontal
-        y = @gridModel.column_depth(x) + 1
+        y = @model::grid.column_depth(x+1) + 1
         if x < 5 and y != 8
           if @grid[y][x+1] == 2 and @grid[y][x+2] == 2 and @grid[y][x+3] == 2
             return x+1
@@ -65,19 +64,19 @@ module GameLogic
       (0..7).each {|x|
         y = @gridModel.column_depth(x+1)
         # Check vertical
-        puts y
+        #puts y
         if y <= 5
-          puts @grid[y][x]
-          puts @grid[y+1][x]
-          puts @grid[y+2][x]
-          puts "end"
+          #puts @grid[y][x]
+          #puts @grid[y+1][x]
+          #puts @grid[y+2][x]
+          #puts "end"
           if @grid[y][x] == 1 and @grid[y+1][x] == 1 and @grid[y+2][x] == 1
             return x+1
           end
         end
         
         # Check Horizontal
-        y = @gridModel.column_depth(x) + 1
+        y = @gridModel.column_depth(x+1) + 1
         if x < 5 and y != 8
           if @grid[y][x+1] == 1 and @grid[y][x+2] == 1 and @grid[y][x+3] == 1
             return x+1
