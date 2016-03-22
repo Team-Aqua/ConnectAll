@@ -5,7 +5,7 @@ module GameControllerContracts
     end
   end
 
-  def self.invariant?(controller)
+  def self.invariant(controller)
     if controller.window == nil then raise GameControllerContractError.new("GameCtrl must have a window") end
     if controller.game_state_model == nil then raise GameControllerContractError.new("GameCtrl must have a model") end
     if controller.window == nil then raise GameControllerContractError.new("GameCtrl must have a view") end

@@ -5,7 +5,7 @@ module GameStateModelContracts
     end
   end
 
-  def invariant?(model)
+  def self.invariant(model)
     if model.state ==:won and model.winner == nil then raise GameStateModelContractError.new("Game State won, but no winner declared") end
     if model.grid == nil then raise GameStateModelContractError.new("No grid.") end
 
