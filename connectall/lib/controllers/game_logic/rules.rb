@@ -13,7 +13,8 @@ module GameLogic
     # Outputs: none
 
     def check_for_winner
-      # RulesContracts.invariant(@game_state_model)
+      puts "checking winner"
+      RulesContracts.invariant(@game_state_model)
 
       @grid = @game_state_model::grid.getGrid
       if win
@@ -25,7 +26,7 @@ module GameLogic
         @game_state_model::state = :active
       end
       
-      # RulesContracts.invariant(@game_state_model)
+      RulesContracts.invariant(@game_state_model)
     end
 
     ##
@@ -35,6 +36,7 @@ module GameLogic
     # Outputs: boolean
 
     def win
+      RulesContracts.invariant(@game_state_model)
       # puts "vertical: #{check_vertical} || horizontal: #{check_horizontal} || diagonal: #{check_diagonal}"
       return ( check_vertical || check_horizontal || check_diagonal )
     end
@@ -46,6 +48,7 @@ module GameLogic
     # Outputs: boolean
 
     def tie
+      RulesContracts.invariant(@game_state_model)
       (0..7).each { |col|
          if (@game_state_model::grid.column_depth(col) > 0)
             return false

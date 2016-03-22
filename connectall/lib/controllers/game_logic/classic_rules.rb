@@ -91,6 +91,7 @@
     # Outputs: boolean
 
     def check_vertical
+      RulesContracts.classic_model(@game_state_model)
       (0..7).each { |y|
         (0..7).each { |x|
           if y < 5 and @grid[y][x] == 2
@@ -115,6 +116,7 @@
     # Outputs: boolean
 
     def check_horizontal
+      RulesContracts.classic_model(@game_state_model)
       (0..7).each { |y|
         (0..7).each { |x|
           if x < 5 and @grid[y][x] == 2
@@ -139,7 +141,7 @@
     # Outputs: boolean
 
     def check_diagonal
-
+      RulesContracts.classic_model(@game_state_model)
       # testing for bitboard errors
       # (0..7).each { |y|
       #  (0..7).each { |x|
