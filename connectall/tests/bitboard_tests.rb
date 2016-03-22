@@ -56,7 +56,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    # assert rules.win
+    assert rules.win
 
     rules.grid = [ 
       [1,1,1,1,0,0,0,0],
@@ -68,7 +68,7 @@ class BitBoardTest < Minitest::Test
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]
-    # assert rules.win
+    assert rules.win
 
     rules.grid = [ 
       [0,0,0,0,0,0,0,0],
