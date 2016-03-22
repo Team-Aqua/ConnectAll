@@ -13,6 +13,7 @@ class BitBoardVerboseTest < Minitest::Test
 
     rules = GameLogic::ClassicRules.new(model)
     rulesOtto = GameLogic::OttoRules.new(model)
+    
     rules.grid = [
       [1, 0, 0, 0, 0, 0, 0, 0],
       [1, 1, 0, 1, 0, 1, 0, 1],
