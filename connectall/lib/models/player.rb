@@ -23,6 +23,7 @@ module Models
     # Outputs: none
 
     def increment_win_score
+      PlayerModelContracts.invariant(self)
       @score = @score + 1
     end
 
@@ -33,6 +34,7 @@ module Models
     # Outputs: none
 
     def set_move(x)
+      PlayerModelContracts.invariant(self)
       @move = x
     end
 

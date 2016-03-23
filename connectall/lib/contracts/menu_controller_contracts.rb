@@ -5,17 +5,10 @@ module MenuControllerContracts
     end
   end
 
-  def self.invariant(game_state_model)
-    if game_state_model.player_turn_state == nil or game_state_model.player_turn_state > 2 or game_state_model.player_turn_state < 0 then raise MenuControllerContractError.new("Bad number of players") end  
-    if game_state_model.players.count < 0 then raise MenuControllerContractError.new("Bad number of players") end 
-  end
-
-  def self.post_alert_selection(alert_view)
-    if alert_view == nil then raise MenuControllerContractError.new("Alert didn't popup") end
-  end
-
-  def self.pre_alert_selection(alert_view)
-    if alert_view != nil then raise MenuControllerContractError.new("Can't double alert view") end
+  def self.invariant(ctrl)
+    if ctrl.window == nil then raise MenuControllerContractError.new("Controller requires window") end  
+    if ctrl.views == nil then raise MenuControllerContractError.new("Controller requires view") end  
+    if ctrl.game_state_model == nil then raise MenuControllerContractError.new("Controller requires game model") end  
   end
 
 end 

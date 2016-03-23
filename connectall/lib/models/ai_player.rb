@@ -11,6 +11,8 @@ module Models
     end
 
     def make_move
+      PlayerModelContracts.invariant(self)
+      PlayerModelContracts.has_ai(self)
       move = @ai.choose_location
       yield move, @player_num, @player_color, 1.0
       @move = nil

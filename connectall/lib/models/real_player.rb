@@ -16,6 +16,7 @@ module Models
     # Outputs: boolean
 
     def make_move
+      PlayerModelContracts.invariant(self)
       if @move == nil
         return false
       else
