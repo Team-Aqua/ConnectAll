@@ -11,9 +11,9 @@ require "controllers/game_logic/otto_rules"
 require "models/game_state_model"
 require "models/ai_level"
 require "models/grid_model"
+require "models/player"
 require "models/AI_player"
 require "models/real_player"
-require "models/player"
 require "ancillaries/m_contract_error"
 require "contracts/rules_contracts"
 require "contracts/AI_contracts"
@@ -29,8 +29,7 @@ class AITest < Minitest::Test
 
     ai_level = Models::AILevel.new
     ai_level.level = 7
-
-    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::AIPlayer.new(2, :black, GameLogic::ClassicAI.new(model, ai_level))]
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::AIPlayer.new(2, :black, GameLogic::ClassicAI.new(model, ai_level), "Roboto")]
     model::game_mode_logic = GameLogic::ClassicRules.new(model)
     rules = model::game_mode_logic
     
@@ -567,6 +566,21 @@ class AITest < Minitest::Test
     [0, 0, 0, 2, 1, 2, 0, 0]
     ]
     assert_equal 3, classicAI.choose_location
+
+    model = Models::GameStateModel.new
+    model::game_type = :otoo
+    model::game_mode = :pvai
+
+    ai_level = Models::AILevel.new
+    ai_level.level = 7
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::AIPlayer.new(2, :black, GameLogic::OttoAI.new(model, ai_level), "Roboto")]
+    model::game_mode_logic = GameLogic::OttoRules.new(model)
+    rules = model::game_mode_logic
+    
+    ottoAI = model::players[1]::ai
+    ottoAI.gridModel = Models::GridModel.new
+
+
 
     #Test Vertical Otto
     ottoAI.gridModel.grid =[
