@@ -110,7 +110,7 @@ module Views
     # Outputs: none
 
     def animate_tile_drop(x, player_color, delay)
-      Thread.new{
+      Thread.new {
       sleep(delay)
       @swoosh_sound.play
       y = @grid_ypos+((38*(@grid_model.column_depth(x)-2))+19)
@@ -118,11 +118,10 @@ module Views
       animation = Animations::Basic.new(x, @grid_ypos, x_dest: 0, y_dest: y, x_speed: 0, y_speed: 0.1, image: @tiles[player_color], z: 15)
       animation.animate
       @falling_tiles.push(animation)
-      
-        while @falling_tiles.include?(animation)
-          sleep(0.1)
-        end
-        yield
+      while @falling_tiles.include?(animation)
+        sleep(0.1)
+      end
+      yield
       }
     end
 
