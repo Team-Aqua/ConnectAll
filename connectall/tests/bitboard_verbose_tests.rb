@@ -10,10 +10,13 @@ class BitBoardVerboseTest < Minitest::Test
 
   def test_bitboard_verbose
     model = Models::GameStateModel.new
+    model::game_type = :classic
+    model::game_mode = :pvp
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::RealPlayer.new(2, :black, "A")]
+    model::game_mode_logic = GameLogic::ClassicRules.new(model)
+    rules = model::game_mode_logic
 
-    rules = GameLogic::ClassicRules.new(model)
-    rulesOtto = GameLogic::OttoRules.new(model)
-    
+
     rules.grid = [
       [1, 0, 0, 0, 0, 0, 0, 0],
       [1, 1, 0, 1, 0, 1, 0, 1],
@@ -36025,6 +36028,12 @@ class BitBoardVerboseTest < Minitest::Test
       [0, 1, 0, 0, 1, 1, 1, 1],
     ]
     assert rules.win
+
+    model::game_type = :otto
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::RealPlayer.new(2, :black, "A")]
+    model::game_mode_logic = GameLogic::OttoRules.new(model)
+    rulesOtto = model::game_mode_logic
+
 
     rulesOtto.grid = [
       [0, 1, 0, 1, 1, 0, 0, 0],

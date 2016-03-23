@@ -10,20 +10,29 @@ require "controllers/game_logic/classic_rules"
 require "controllers/game_logic/otto_rules"
 require "models/game_state_model"
 require "models/grid_model"
+require "models/AI_player"
+require "models/real_player"
+require "models/player"
+require "ancillaries/m_contract_error"
+require "contracts/rules_contracts"
+require "contracts/AI_contracts"
 
 class AITest < Minitest::Test
 
   def test_AI
     model = Models::GameStateModel.new
 
-    rules = GameLogic::ClassicRules.new(model)
-    rulesOtto = GameLogic::OttoRules.new(model)
+    model = Models::GameStateModel.new
+    model::game_type = :classic
+    model::game_mode = :pvai
+
+
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::AIPlayer.new(2, :black, GameLogic::ClassicAI.new(model, 7))]
+    model::game_mode_logic = GameLogic::ClassicRules.new(model)
+    rules = model::game_mode_logic
     
-    classicAI = GameLogic::ClassicAI.new(model)
+    classicAI = model::players[1]::ai
     classicAI.gridModel = Models::GridModel.new
-    
-    ottoAI = GameLogic::OttoAI.new(model)
-    ottoAI.gridModel = Models::GridModel.new
     
     #Test Vertical Classic
     classicAI.gridModel.grid =[

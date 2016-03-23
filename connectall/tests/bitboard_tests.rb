@@ -5,19 +5,27 @@ require "controllers/game_logic/classic_rules"
 require "controllers/game_logic/otto_rules"
 require "models/game_state_model"
 require "models/grid_model"
+require "models/player"
+require "models/real_player"
+require "ancillaries/m_contract_error"
+require "contracts/grid_model_contracts"
+require "contracts/rules_contracts"
+
 
 class BitBoardTest < Minitest::Test
 
-  def test_bitboard76
-    rules = GameLogic::ClassicRules.new(Models::GameStateModel.new)
-    # assert rules.haswon76(0b0101010000111111001101011101110101010011110100110)
-  end
-
   def test_bitboard88
     model = Models::GameStateModel.new
+    model::game_type = :classic
+    model::game_mode = :pvp
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::RealPlayer.new(2, :black, "A")]
+    model::game_mode_logic = GameLogic::ClassicRules.new(model)
+    rules = model::game_mode_logic
+    # rulesOtto = GameLogic::OttoRules.new(model)
 
-    rules = GameLogic::ClassicRules.new(model)
-    rulesOtto = GameLogic::OttoRules.new(model)
+
+
+
     # assert rules.has_won(0b1111000000000000000000000000000000000000000000000000000000000000)
     # assert rules.has_won(0b0000000000000000000000000000000000000000000000000000000000001111)
 
@@ -1054,6 +1062,14 @@ class BitBoardTest < Minitest::Test
       [1,1,1,0,0,1,1,1]
     ]
     assert !rules.win
+
+
+
+    model::game_type = :otto
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::RealPlayer.new(2, :black, "A")]
+    model::game_mode_logic = GameLogic::OttoRules.new(model)
+    rulesOtto = model::game_mode_logic
+
 
     # Otto Rules
     rulesOtto.grid = [
