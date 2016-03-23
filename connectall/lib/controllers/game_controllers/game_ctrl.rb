@@ -14,8 +14,8 @@ module Controllers
       @menu_click_sound = Gosu::Sample.new(@window, "assets/sounds/menu_click.mp3")
       @win_sound = Gosu::Sample.new(@window, "assets/sounds/cheer_win.mp3")
       @alert_view = nil
-
       @player_moved = false
+      GameControllerContracts.invariant(self)
     end
 
     ## 
@@ -25,7 +25,7 @@ module Controllers
     # Outputs: none
 
     def reset_match
-      GameControllerContracts.invariant?(self)
+      GameControllerContracts.invariant(self)
       @menu_click_sound.play(0.7, 1, false)
       @game_state_model::state = :active
       @game_state_model::grid.reset
@@ -124,7 +124,9 @@ module Controllers
     # Outputs: none
 
     def place_tile(x)
+      GameControllerContracts.invariant(self)
       @view::grid.animate_tile_drop(x, @game_state_model::players[player_turn].player_color, delay){@game_state_model::grid.add_tile(x, player_turn)}
+      GameControllerContracts.invariant(self)
     end
 
     ##
@@ -133,9 +135,12 @@ module Controllers
     # Outputs: none 
 
     def control_button_click(x)
+      GameControllerContracts.invariant(self)
+      GameControllerContracts.pre_button_click(self, x)
       @view::control.disable_control_on_AI
       @game_state_model::players[@game_state_model::player_turn_state]::set_move(x)
       @view::control.check_available
+      GameControllerContracts.invariant(self)
     end
 
     ##
@@ -146,10 +151,12 @@ module Controllers
     # Outputs: none
 
     def skip_button_click
+      GameControllerContracts.invariant(self)
       if @game_state_model::players[@game_state_model::player_turn_state].ai == nil # if it isn't an ai currently playing
         @game_state_model.toggle_player_turn_state
         @menu_click_sound.play(0.7, 1, false)
       end
+      GameControllerContracts.invariant(self)
     end
 
     ##
@@ -160,6 +167,7 @@ module Controllers
     # Outputs: none
 
     def concede_button_click
+      GameControllerContracts.invariant(self)
       if @game_state_model::players[@game_state_model::player_turn_state].ai == nil # if it isn't an ai currently playing
         @game_won = true
         @game_state_model.toggle_player_turn_state
@@ -167,6 +175,7 @@ module Controllers
         @game_state_model::players[@game_state_model::player_turn_state].increment_win_score
         @menu_click_sound.play(0.7, 1, false)
       end
+      GameControllerContracts.invariant(self)
     end
 
     ##
@@ -176,8 +185,10 @@ module Controllers
     # Outputs: none
 
     def reset_button_click
+      GameControllerContracts.invariant(self)
       @game_state_model::grid.reset
       @view::control.build_red_grid
+      GameControllerContracts.invariant(self)
     end
 
     ## 
@@ -186,8 +197,10 @@ module Controllers
     # Outputs: none
 
     def question_button_click
+      GameControllerContracts.invariant(self)
       @alert_view = @help_view = Views::HelpAlertView.new(@window, self)
       @menu_click_sound.play(0.7, 1, false)
+      GameControllerContracts.invariant(self)
     end
 
     ##
@@ -196,8 +209,10 @@ module Controllers
     # Outputs: none
 
     def alert_close
+      GameControllerContracts.invariant(self)
       @menu_click_sound.play(0.7, 1, false)
       @alert_view = nil
+      GameControllerContracts.invariant(self)
     end
 
     ##
@@ -207,6 +222,7 @@ module Controllers
     # Outputs: none
 
     def cancel_button_click
+      GameControllerContracts.invariant(self)
       @window.close
     end
 
