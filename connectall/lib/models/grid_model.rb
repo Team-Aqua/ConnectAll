@@ -10,6 +10,8 @@ module Models
       @x = x
       @y = y
       @grid = generate_grid
+      GridModelContracts.post_generate_grid(self)
+      GridModelContracts.invariant(self)
     end
 
     ##
@@ -18,6 +20,7 @@ module Models
     # Outputs: empty grid
 
     def generate_grid
+      GridModelContracts.pre_generate_grid(self)
       grid = []
       (0..@y).each { |y|
         row = []
@@ -44,9 +47,10 @@ module Models
     # Output: last empty row in column
 
     def column_depth(col)
+      GridModelContracts.pre_column_depth(self, col-1)
       (0..@y).each { |row|
         if @grid[row][col-1] > 0
-          # dev: replaced row-1 with row
+          GridModelContracts.post_column_depth(self, @grid[row][col-1])
           return row
         end
       }
@@ -60,6 +64,8 @@ module Models
     # Outputs: value
 
     def getValue(x, y)
+      GridModelContracts.pre_get_value(self, x, y)
+      GridModelContracts.post_get_value(self, @grid[y][x])
       return @grid[y][x]
     end
 
@@ -71,7 +77,9 @@ module Models
     # Outputs: none
 
     def setValue(x, y, val)
+      GridModelContracts.pre_set_value(self, x, y, val)
       @grid[y][x] = val
+      GridModelContracts.post_set_value(self)
     end
 
     ##
@@ -80,12 +88,14 @@ module Models
     # Outputs: none
 
     def add_tile(x, player_num)
+      GridModelContracts.pre_add_tile(self, x, player_num)
       for y in (7).downto(0)
         if getValue(x-1, y) == 0
           setValue(x-1, y, player_num)
           return
         end
       end
+      GridModelContracts.post_add_tile(self)
     end
 
     ## 
@@ -96,6 +106,7 @@ module Models
 
     def reset
       @grid = generate_grid
+      GridModelContracts.post_reset(self)
     end
 
     ##
