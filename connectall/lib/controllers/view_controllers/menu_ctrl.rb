@@ -66,15 +66,15 @@ module Controllers
     # Inputs: player 1 color, player 2 color, player 1 name, player 2 game
     # Outputs: none
 
-    def player_rdy(color, player2_color: nil, player1_name: "Player 1", player2_name: "Player 2")
+def player_rdy(color, player2_color: nil, player1_name: "Player 1", player2_name: "Player 2", ai_level:nil)
       @game_state_model::players.push(Models::RealPlayer.new(1, color, player1_name))
       if player2_color != nil
         @game_state_model::players.push(Models::RealPlayer.new(2, player2_color, player2_name))
       else
         if @game_state_model::game_type == :classic
-          @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::ClassicAI.new(@game_state_model), "Roboto"))
+          @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::ClassicAI.new(@game_state_model, ai_level), "Roboto"))
         else
-          @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::OttoAI.new(@game_state_model), "Roboto"))
+        @game_state_model::players.push(Models::AIPlayer.new(2, 'black', GameLogic::OttoAI.new(@game_state_model, ai_level), "Roboto"))
         end
       end
       @window.start_game

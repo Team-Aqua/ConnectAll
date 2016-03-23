@@ -9,6 +9,7 @@ require "controllers/game_logic/AI"
 require "controllers/game_logic/classic_rules"
 require "controllers/game_logic/otto_rules"
 require "models/game_state_model"
+require "models/ai_level"
 require "models/grid_model"
 
 class AITest < Minitest::Test
@@ -19,10 +20,13 @@ class AITest < Minitest::Test
     rules = GameLogic::ClassicRules.new(model)
     rulesOtto = GameLogic::OttoRules.new(model)
     
-    classicAI = GameLogic::ClassicAI.new(model)
+    ai_level = Models::AILevel.new
+    ai_level.level = 7
+    
+    classicAI = GameLogic::ClassicAI.new(model, ai_level)
     classicAI.gridModel = Models::GridModel.new
     
-    ottoAI = GameLogic::OttoAI.new(model)
+    ottoAI = GameLogic::OttoAI.new(model, ai_level)
     ottoAI.gridModel = Models::GridModel.new
     
     #Test Vertical Classic
