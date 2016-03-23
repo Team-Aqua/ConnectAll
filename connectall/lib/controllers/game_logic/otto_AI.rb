@@ -29,10 +29,6 @@ module GameLogic
       if @position != nil
         return  @position
       end
-      @position = check_vertical(1, 2)
-      if @position != nil
-        return  @position
-      end
       
       @position = check_horizontal(2, 1)
       if @position != nil
@@ -65,7 +61,6 @@ module GameLogic
     end
 
     def get_random_value()
-      # No Better Choice
       rando = Random.new
       return rando.rand(1..8)
     end
@@ -73,7 +68,6 @@ module GameLogic
     def check_vertical(player1Number, player2Number)
       (0..7).each {|x|
         y = @gridModel.column_depth(x+1)
-        # Check vertical
         if y <= 5
           if @grid[y][x] == player2Number and @grid[y+1][x] == player2Number and @grid[y+2][x] == player1Number
             return x+1
