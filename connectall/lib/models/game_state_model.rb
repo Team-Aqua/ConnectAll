@@ -27,7 +27,6 @@ module Models
 
     def toggle_player_turn_state
       GameStateModelContracts.invariant(self)
-      # @players[@player_turn_state].move = nil
       @player_turn_state = (@player_turn_state + 1) % @players.count
       GameStateModelContracts.invariant(self)
     end

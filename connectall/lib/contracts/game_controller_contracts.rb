@@ -9,7 +9,6 @@ module GameControllerContracts
     if controller.window == nil then raise GameControllerContractError.new("GameCtrl must have a window") end
     if controller.game_state_model == nil then raise GameControllerContractError.new("GameCtrl must have a model") end
     if controller.window == nil then raise GameControllerContractError.new("GameCtrl must have a view") end
-    # if controller.alert_view == nil and controller.game_state_model.state != :active then raise GameControllerContractError.new("Game state must be paused during alerts") end
   end
 
   def self.post_reset_match(controller)
