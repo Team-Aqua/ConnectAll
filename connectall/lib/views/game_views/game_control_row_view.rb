@@ -99,10 +99,12 @@ module Views
       if @game_state_model::game_mode == :pvp
         original_pos = 29
         (1..8).each { |x|
+          if @game_state_model::grid.column_depth(x) > 0 or @red_grid.at(x - 1).hover_image == nil
             red_button = BtnItem.new(@window, Gosu::Image.new("assets/images/block_red.png", :tileable => true), original_pos, 420, 35, lambda { @controller.control_button_click(x) }, Gosu::Image.new("assets/images/block_red_click.png", false))
             @red_grid.delete_at(x - 1)
             @red_grid.insert(x - 1, red_button)
             original_pos = original_pos + 35.5
+          end
         }
       end
     end
