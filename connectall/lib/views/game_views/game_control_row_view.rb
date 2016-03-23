@@ -95,6 +95,7 @@ module Views
     # Used to prevent sequencing errors
 
     def enable_control_on_player
+      # future development: 'smart toggling'
       if @game_state_model::game_mode == :pvp
         original_pos = 29
         (1..8).each { |x|
