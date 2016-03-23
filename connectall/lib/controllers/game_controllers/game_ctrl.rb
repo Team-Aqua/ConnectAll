@@ -67,12 +67,14 @@ module Controllers
       else
         if @player_moved == false
           @player_moved = @game_state_model::players[@game_state_model::player_turn_state].make_move{ |x, player_num, player_color, delay|
-            @view::grid.animate_tile_drop(x, player_color, delay){
+            @view::control.disable_control_on_player
+            @view::grid.animate_tile_drop(x, player_color, delay) {
+              @view::control.enable_control_on_player
               @game_state_model::grid.add_tile(x, player_num);
               check_winner_winner;  
               @view::control.disable_control_on_AI;
-              @view::control.check_available; 
               @game_state_model.toggle_player_turn_state;
+              @view::control.check_available; 
               @player_moved = false; 
               }
             }
