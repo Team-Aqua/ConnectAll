@@ -90,6 +90,10 @@ module Views
       end
     end
 
+    ##
+    # Reenables player tile selection on tile drop
+    # Used to prevent sequencing errors
+
     def enable_control_on_player
       if @game_state_model::game_mode == :pvp
         original_pos = 29
