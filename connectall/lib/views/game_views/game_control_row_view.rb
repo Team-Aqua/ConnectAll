@@ -51,6 +51,11 @@ module Views
       }
     end
 
+    ## 
+    # Disables player tile selection on AI's turn
+    # Inputs: none
+    # Outputs: none
+
     def disable_control_on_AI
       if @game_state_model::game_mode == :pvai
         original_pos = 29
@@ -67,19 +72,32 @@ module Views
           original_pos = original_pos + 35.5
         }
       end
+    end
+
+    ##
+    # Disables player tile selection on tile drop
+    # Used to prevent sequencing errors
+
+    def disable_control_on_player
       if @game_state_model::game_mode == :pvp
         original_pos = 29
         (1..8).each { |x|
-          if @game_state_model::players[@game_state_model::player_turn_state].is_a?(Models::RealPlayer)
             red_button_disabled = BtnItem.new(@window, Gosu::Image.new("assets/images/block_red_not_available.png", :tileable => true), original_pos, 420, 35, lambda { })
             @red_grid.delete_at(x - 1)
             @red_grid.insert(x - 1, red_button_disabled)
-          else
+            original_pos = original_pos + 35.5
+        }
+      end
+    end
+
+    def enable_control_on_player
+      if @game_state_model::game_mode == :pvp
+        original_pos = 29
+        (1..8).each { |x|
             red_button = BtnItem.new(@window, Gosu::Image.new("assets/images/block_red.png", :tileable => true), original_pos, 420, 35, lambda { @controller.control_button_click(x) }, Gosu::Image.new("assets/images/block_red_click.png", false))
             @red_grid.delete_at(x - 1)
             @red_grid.insert(x - 1, red_button)
-          end
-          original_pos = original_pos + 35.5
+            original_pos = original_pos + 35.5
         }
       end
     end

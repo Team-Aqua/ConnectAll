@@ -9,6 +9,7 @@ require "controllers/game_logic/AI"
 require "controllers/game_logic/classic_rules"
 require "controllers/game_logic/otto_rules"
 require "models/game_state_model"
+require "models/ai_level"
 require "models/grid_model"
 require "models/AI_player"
 require "models/real_player"
@@ -26,8 +27,10 @@ class AITest < Minitest::Test
     model::game_type = :classic
     model::game_mode = :pvai
 
+    ai_level = Models::AILevel.new
+    ai_level.level = 7
 
-    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::AIPlayer.new(2, :black, GameLogic::ClassicAI.new(model, 7))]
+    model::players = [Models::RealPlayer.new(1, :green, "Q"), Models::AIPlayer.new(2, :black, GameLogic::ClassicAI.new(model, ai_level))]
     model::game_mode_logic = GameLogic::ClassicRules.new(model)
     rules = model::game_mode_logic
     

@@ -13,7 +13,6 @@ module GameLogic
     # Outputs: none
 
     def check_for_winner
-      puts "checking winner"
       RulesContracts.invariant(@game_state_model)
 
       @grid = @game_state_model::grid.getGrid

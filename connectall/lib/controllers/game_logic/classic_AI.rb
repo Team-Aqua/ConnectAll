@@ -1,17 +1,17 @@
 module GameLogic
 
   class ClassicAI < AI
-    attr_accessor :choose_location, :gridModel, :grid, :position
+    attr_accessor :choose_location, :gridModel, :grid
     ##
     # Classic AI implementation
     # 
 
-    def initialize(model)
+    def initialize(model, ai_level)
       @model = model
       @gridModel = @model::grid
       @grid = @gridModel.getGrid
       @position = nil
-      #@level = Models::AILevel::level
+      @ai_level = ai_level
     end
 
     ##
@@ -20,6 +20,11 @@ module GameLogic
     # Outputs: x  @position
 
     def choose_location
+      # Ai returns random depending on dificulty.
+      if (@ai_level.level/7) < Random.rand()
+        return get_random_value
+      end
+      
       # Check if AI can win.
       @position = check_vertical(2)
       if @position != nil
@@ -52,6 +57,11 @@ module GameLogic
         return  @position
       end
       
+      # No Better Choice
+      return get_random_value
+    end
+    
+    def get_random_value()
       # No Better Choice
       rando = Random.new
       return rando.rand(1..8)
