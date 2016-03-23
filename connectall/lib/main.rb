@@ -59,7 +59,7 @@ require_relative 'contracts/rules_contracts'
 
 class GameWindow < Gosu::Window
 
-  attr_accessor :game_state_model, :controllers 
+  attr_accessor :game_state_model, :controllers
 
   ## 
   # Main application portal for ConnectAll
@@ -103,10 +103,12 @@ class GameWindow < Gosu::Window
   # Outputs: none
 
   def button_down(key)
+    MainControllerContracts.invariant(self)
     if key == Gosu::MsLeft then
       @currentCtrl.clicked
     end
     @currentCtrl.button_down(key)
+    MainControllerContracts.invariant(self)
   end
 
   ##
@@ -116,8 +118,10 @@ class GameWindow < Gosu::Window
   # Outputs: none
   
   def start_menu
+    MainControllerContracts.invariant(self)
     initialize(347, 533)
     @currentCtrl = @controllers[:menu]
+    MainControllerContracts.invariant(self)
   end
 
   ## 
@@ -127,9 +131,8 @@ class GameWindow < Gosu::Window
   # Outputs: none
 
   def start_game
+
     @controllers[:game]::view::grid.set_tiles
-    # puts @game_state_model::game_type
-    # puts @controllers[:game]::view::grid.tiles["green"]
     initialize(568, 343, model: @game_state_model)
     @currentCtrl = @controllers[:game]
   end

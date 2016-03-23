@@ -1,6 +1,6 @@
 module Controllers
   class MenuCtrl
-
+    attr_reader :game_state_model, :window, :views 
     ##
     # Menu controller for game state,
     # Controls low-level logic for otto/classic and PvP/PvAI, and player colors/names
@@ -58,7 +58,9 @@ module Controllers
     # Outputs: none
 
     def button_down(key)
-      @current_view.button_down(key) 
+      MenuControllerContracts.invariant(self)
+      @current_view.button_down(key)
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -67,6 +69,7 @@ module Controllers
     # Outputs: none
 
     def player_rdy(color, player2_color: nil, player1_name: "Player 1", player2_name: "Player 2")
+      MenuControllerContracts.invariant(self)
       @game_state_model::players.push(Models::RealPlayer.new(1, color, player1_name))
       if player2_color != nil
         @game_state_model::players.push(Models::RealPlayer.new(2, player2_color, player2_name))
@@ -78,6 +81,7 @@ module Controllers
         end
       end
       @window.start_game
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -87,9 +91,11 @@ module Controllers
     # Outputs: none
 
     def pvp_button_click
+      MenuControllerContracts.invariant(self)
       @game_state_model::game_mode = :pvp
       @game_state_model::num_of_players = 2
       @current_view = Views::PlayerMenuView.new(@window, self, @game_state_model)
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -99,9 +105,11 @@ module Controllers
     # Outputs: none
 
     def pvai_button_click
+      MenuControllerContracts.invariant(self)
       @game_state_model::game_mode = :pvai
       @game_state_model::num_of_players = 1
       @current_view = Views::PlayerMenuView.new(@window, self, @game_state_model)
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -111,9 +119,11 @@ module Controllers
     # Outputs: none
 
     def classic_button_click
+      MenuControllerContracts.invariant(self)
       @game_state_model::game_type = :classic
       @game_state_model::game_mode_logic = GameLogic::ClassicRules.new(@game_state_model)
       @current_view = @views[1]
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -123,9 +133,11 @@ module Controllers
     # Outputs: none
     
     def otto_button_click
+      MenuControllerContracts.invariant(self)
       @game_state_model::game_type = :otto
       @game_state_model::game_mode_logic = GameLogic::OttoRules.new(@game_state_model)
       @current_view = @views[1]
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -134,7 +146,9 @@ module Controllers
     # Outputs: none
     
     def question_otto_button_click
+      MenuControllerContracts.invariant(self)
       @alert_view = @help_view = Views::OttoInstructionsAlertView.new(@window, self)
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -143,7 +157,9 @@ module Controllers
     # Outputs: none
 
     def question_help_click
+      MenuControllerContracts.invariant(self)
       @alert_view = @help_view = Views::ConnectAllAlertView.new(@window, self)
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -152,7 +168,9 @@ module Controllers
     # Outputs: none
 
     def question_classic_button_click
+      MenuControllerContracts.invariant(self)
       @alert_view = @help_view = Views::ConnectInstructionsAlertView.new(@window, self)
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -161,7 +179,9 @@ module Controllers
     # Outputs: none
 
     def alert_close
+      MenuControllerContracts.invariant(self)
       @alert_view = nil
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -170,7 +190,9 @@ module Controllers
     # Outputs: none
 
     def return_to_mode_menu
+      MenuControllerContracts.invariant(self)
       @current_view = @views[1]
+      MenuControllerContracts.invariant(self)
     end
 
     ## 
@@ -179,7 +201,9 @@ module Controllers
     # Outputs: none
     
     def return_menu
+      MenuControllerContracts.invariant(self)
       @current_view = @views[0]
+      MenuControllerContracts.invariant(self)
     end
     
 

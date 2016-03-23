@@ -5,7 +5,7 @@ module Models
     # Generic game state model for game processes.
     # Holds data for game
 
-    attr_accessor :state, :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic, :winner, :ai
+    attr_accessor :state, :player_turn_state, :grid, :players, :game_mode, :game_type, :num_of_players, :game_mode_logic, :winner, :ai, :num_of_rl_players
 
     def initialize()
       @state = :active
@@ -26,8 +26,10 @@ module Models
     # Outputs: none
 
     def toggle_player_turn_state
+      GameStateModelContracts.invariant(self)
       # @players[@player_turn_state].move = nil
       @player_turn_state = (@player_turn_state + 1) % @players.count
+      GameStateModelContracts.invariant(self)
     end
 
   end
